@@ -29,3 +29,19 @@ class Group(models.Model):
 
     class Meta:
         ordering = ('name',)
+
+class Timeline(models.Model):
+    sun_average = models.DurationField()
+    sun_count = models.PositiveIntegerField()
+    mon_average = models.DurationField()
+    mon_count = models.PositiveIntegerField()
+    tue_average = models.DurationField()
+    tue_count = models.PositiveIntegerField()
+    wed_average = models.DurationField()
+    wed_count = models.PositiveIntegerField()
+    thu_average = models.DurationField()
+    thu_count = models.PositiveIntegerField()
+    fri_average = models.DurationField()
+    fri_count = models.PositiveIntegerField()
+    sat_average = models.DurationField()
+    sat_count = models.PositiveIntegerField()
