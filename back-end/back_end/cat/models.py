@@ -25,7 +25,7 @@ class CatUser(models.Model):
 class Group(models.Model):
     name = models.CharField(blank = True, max_length = 30)
     description = TextField(blank = True)
-    members = models.ManyToManyField(User, through = 'Join')
+    members = models.ManyToManyField(CatUser, through = 'Join')
 
     class Meta:
         ordering = ('name',)
@@ -50,3 +50,10 @@ class Setting(models.Model):
     alert_start_time = models.DurationField()
     alert_interval = models.DurationField()
 
+class Join(models.Model):
+    catuser = models.ForeignKey(CatUser, on_delete = models.CASCADE)
+    group = models.ForeignKey(Group, on_delete = models.CASCADE)
+    date_join = models.DateTimeField(auto_now_add = True)
+
+    class Meta:
+        ordering = ('date_join',)
