@@ -14,8 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.conf.urls import url
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
+    url(r'^sign_in/$', ),   # sign in page
+    url(r'^sign_up/$', ),   # sign up page
+    url(r'^main/$', ),  # main page
+    url(r'^group/$', ), # group list page
+    url(r'^group/(?P<pk>[0-9]+)/$', ),  # group detail page
+    url(r'^group/join/$', ),    # group join page
+    url(r'^group/create/$', ),  # group create page
+    url(r'^stats/$', ), # statistics page
+    url(r'^settings/$', ),   #settings page
 ]
