@@ -45,3 +45,8 @@ class Timeline(models.Model):
     fri_count = models.PositiveIntegerField()
     sat_average = models.DurationField()
     sat_count = models.PositiveIntegerField()
+
+class Setting(models.Model):
+    alert_start_time = models.DurationField()
+    alert_interval = models.DurationField()
+
