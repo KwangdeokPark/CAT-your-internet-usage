@@ -10,25 +10,9 @@ AGE_CHOICE = (
     ('40', '40~')
 )
 
-class CatUser(models.Model):
-    user = models.OneToOneField(User, on_delete = models.CASCADE)
-    age = models.CharField(choices=AGE_CHOICE, max_length = 100)
-    today_spent_time = models.DurationField()
-    now_start_time = models.DateTimeField()
-    last_record_time = models.DataTimeField()
-    setting = models.OneToOneField(Setting, on_delete = models.CASCADE)
-    timeline = models.OneToOneField(Timeline, on_delete = models.CASCADE)
-
-    class Meta:
-        ordering = ('user',)
-
-class Group(models.Model):
-    name = models.CharField(blank = True, max_length = 30)
-    description = TextField(blank = True)
-    members = models.ManyToManyField(CatUser, through = 'Join')
-
-    class Meta:
-        ordering = ('name',)
+class Setting(models.Model):
+    alert_start_time = models.DurationField()
+    alert_interval = models.DurationField()
 
 class Timeline(models.Model):
     sun_average = models.DurationField()
@@ -46,9 +30,25 @@ class Timeline(models.Model):
     sat_average = models.DurationField()
     sat_count = models.PositiveIntegerField()
 
-class Setting(models.Model):
-    alert_start_time = models.DurationField()
-    alert_interval = models.DurationField()
+class CatUser(models.Model):
+    user = models.OneToOneField(User, on_delete = models.CASCADE)
+    age = models.CharField(choices=AGE_CHOICE, max_length = 100)
+    today_spent_time = models.DurationField()
+    now_start_time = models.DateTimeField()
+    last_record_time = models.DataTimeField()
+    setting = models.OneToOneField(Setting, on_delete = models.CASCADE)
+    timeline = models.OneToOneField(Timeline, on_delete = models.CASCADE)
+
+    class Meta:
+        ordering = ('user',)
+
+class Group(models.Model):
+    name = models.CharField(blank = True, max_length = 30)
+    description = models.TextField(blank = True)
+    members = models.ManyToManyField(CatUser, through = 'Join')
+
+    class Meta:
+        ordering = ('name',)
 
 class Join(models.Model):
     catuser = models.ForeignKey(CatUser, on_delete = models.CASCADE)
