@@ -21,3 +21,11 @@ class CatUser(models.Model):
 
     class Meta:
         ordering = ('user',)
+
+class Group(models.Model):
+    name = models.CharField(blank = True, max_length = 30)
+    description = TextField(blank = True)
+    members = models.ManyToManyField(User, through = 'Join')
+
+    class Meta:
+        ordering = ('name',)
