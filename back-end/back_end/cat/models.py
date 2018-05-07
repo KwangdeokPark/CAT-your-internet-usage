@@ -35,7 +35,7 @@ class CatUser(models.Model):
     age = models.CharField(choices=AGE_CHOICE, max_length = 100)
     today_spent_time = models.DurationField()
     now_start_time = models.DateTimeField()
-    last_record_time = models.DataTimeField()
+    last_record_time = models.DateTimeField()
     setting = models.OneToOneField(Setting, on_delete = models.CASCADE)
     timeline = models.OneToOneField(Timeline, on_delete = models.CASCADE)
 
