@@ -5,12 +5,13 @@ class CatUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CatUser
         fields = ('id',
-                  'username',
-                  'password',
+                  'user',
                   'age',
                   'today_spent_time',
                   'now_spent_time',
-                  'last_record_date',)
+                  'last_record_date',
+                  'setting',
+                  'timeline',)
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
