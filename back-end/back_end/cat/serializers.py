@@ -44,3 +44,11 @@ class SettingSerializer(serializers.ModelSerializer):
        fields = ('id',
                  'alert_start_time',
                  'alert_interval',)
+
+class JoinSerializer(serializers.ModelSerializer):
+    catuser = serializers.ReadOnlyField(source='catuser.id')
+    group = serializers.ReadOnlyField(source='group.id')
+    class Meta:
+        model = Join
+        fields = ('catuser',
+                  'group',)
