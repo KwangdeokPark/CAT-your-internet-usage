@@ -31,29 +31,29 @@ class Timeline(models.Model):
     sat_count = models.PositiveIntegerField()
 
 class CatUser(models.Model):
-    user = models.OneToOneField(User, on_delete = models.CASCADE)
-    age = models.CharField(choices=AGE_CHOICE, max_length = 100)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    age = models.CharField(choices=AGE_CHOICE, max_length=100)
     today_spent_time = models.DurationField()
     now_start_time = models.DateTimeField()
     last_record_time = models.DateTimeField()
-    setting = models.OneToOneField(Setting, on_delete = models.CASCADE)
-    timeline = models.OneToOneField(Timeline, on_delete = models.CASCADE)
+    setting = models.OneToOneField(Setting, on_delete=models.CASCADE)
+    timeline = models.OneToOneField(Timeline, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('user',)
 
 class Group(models.Model):
-    name = models.CharField(blank = True, max_length = 30)
-    description = models.TextField(blank = True)
-    members = models.ManyToManyField(CatUser, through = 'Join')
+    name = models.CharField(blank=True, max_length=30)
+    description = models.TextField(blank=True)
+    members = models.ManyToManyField(CatUser, through='Join')
 
     class Meta:
         ordering = ('name',)
 
 class Join(models.Model):
-    catuser = models.ForeignKey(CatUser, on_delete = models.CASCADE)
-    group = models.ForeignKey(Group, on_delete = models.CASCADE)
-    date_join = models.DateTimeField(auto_now_add = True)
+    catuser = models.ForeignKey(CatUser, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    date_join = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ('date_join',)
