@@ -1,5 +1,5 @@
 import React from 'react';
-
+import classnames from 'classnames';
 
 class SignupForm extends React.Component{
   constructor(props){
@@ -10,7 +10,8 @@ class SignupForm extends React.Component{
       passwordConfirmation:'',
       age:'',
       alertStartTime:'',
-      alertInterval:''
+      alertInterval:'',
+      errors:{}
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -21,20 +22,23 @@ class SignupForm extends React.Component{
   }
 
   onSubmit(e){
+    this.setState({ errors: {} });
     e.preventDefault();
-    this.props.userSignupRequest(this.state);
+    this.props.userSignupRequest(this.state).then(
+      () => {},
+      ({ data }) => this.setState({ errors:data })
+    );
     //console.log(this.state);
     //axios.post('/api/users',{user: this.state });
   }
 
-
-
   render(){
+    const { errors }=this.state;
     return(
       <form onSubmit={this.onSubmit}>
         <h1>Join us!</h1>
 
-        <div className="form-group">
+        <div className={classnames("form-group", {'has-error':errors.username})}>
           <label className="control-label">Username</label>
           <input
             value={this.state.username}
@@ -43,9 +47,10 @@ class SignupForm extends React.Component{
             name="username"
             className="form-control"
           />
+          {errors.username && <span className="help-block">{errors.username}</span>}
         </div>
 
-        <div className="form-group">
+        <div className={classnames("form-group", {'has-error':errors.password})}>
           <label className="control-label">Password</label>
           <input
             value={this.state.password}
@@ -54,9 +59,10 @@ class SignupForm extends React.Component{
             name="password"
             className="form-control"
           />
+          {errors.password && <span className="help-block">{errors.password}</span>}
         </div>
 
-        <div className="form-group">
+        <div className={classnames("form-group", {'has-error':errors.passwordConfirmation})}>
           <label className="control-label">Password Confirmation</label>
           <input
             value={this.state.passwordConfirmation}
@@ -65,9 +71,10 @@ class SignupForm extends React.Component{
             name="passwordConfirmation"
             className="form-control"
           />
+          {errors.passwordConfirmation && <span className="help-block">{errors.passwordConfirmation}</span>}
         </div>
 
-<       div className="form-group">
+        <div className={classnames("form-group", {'has-error':errors.age})}>
         <label className="control-label">Age</label>
         <select
           value={this.state.age}
@@ -87,9 +94,10 @@ class SignupForm extends React.Component{
           <option value="5">90~99</option>
           <option value="6">100~</option>
           </select>
+          {errors.age && <span className="help-block">{errors.age}</span>}
         </div>
 
-        <div className="form-group">
+        <div className={classnames("form-group", {'has-error':errors.alertStartTime})}>
           <label className="control-label">Alert Start Time</label>
           <select
             value={this.state.alertStartTime}
@@ -101,9 +109,10 @@ class SignupForm extends React.Component{
             <option value="2">After 2 hours</option>
             <option value="3">After 3 hours</option>
           </select>
+          {errors.alertStartTime && <span className="help-block">{errors.alertStartTime}</span>}
         </div>
 
-        <div className="form-group">
+        <div className={classnames("form-group", {'has-error':errors.alertInterval})}>
           <label className="control-label">Alert Interval</label>
           <select
             value={this.state.alertInterval}
@@ -115,6 +124,7 @@ class SignupForm extends React.Component{
             <option value="2">15 minutes</option>
             <option value="3">30 minutes</option>
           </select>
+          {errors.alertInterval && <span className="help-block">{errors.alertInterval}</span>}
         </div>
 
         <div className="form-group">
