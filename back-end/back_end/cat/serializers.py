@@ -37,3 +37,10 @@ class TimelineSerializer(serializers.ModelSerializer):
                   'fri_count',
                   'sat_average',
                   'sat_count',)
+
+class SettingSerializer(serializers.ModelSerializer):
+   class Meta:
+       model = Setting
+       fields = ('id',
+                 'alert_start_time',
+                 'alert_interval',)
