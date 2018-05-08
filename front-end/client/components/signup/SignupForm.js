@@ -1,5 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
+import validateInput from '../../../server/shared/validations/signup';
+import TextFieldGroup from '../common/TextFieldGroup';
 
 class SignupForm extends React.Component{
   constructor(props){
@@ -11,7 +13,8 @@ class SignupForm extends React.Component{
       age:'',
       alertStartTime:'',
       alertInterval:'',
-      errors:{}
+      errors:{},
+      isLoading: false
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -21,13 +24,25 @@ class SignupForm extends React.Component{
       this.setState({ [e.target.name]: e.target.value });
   }
 
+  isValid(){
+    const {errors, isValid } = validateInput(this.state);
+
+    if(!isValid){
+      this.setState({errors});
+    }
+    return isValid;
+  }
+
   onSubmit(e){
-    this.setState({ errors: {} });
     e.preventDefault();
-    this.props.userSignupRequest(this.state).then(
-      () => {},
-      ({ data }) => this.setState({ errors:data })
-    );
+
+    if(this.isValid()) {
+      this.setState({ errors: {}, isLoading: true });
+      this.props.userSignupRequest(this.state).then(
+        () => {},
+        ({ data }) => this.setState({ errors:data, isLoading:false })
+      );
+    }
     //console.log(this.state);
     //axios.post('/api/users',{user: this.state });
   }
@@ -38,42 +53,33 @@ class SignupForm extends React.Component{
       <form onSubmit={this.onSubmit}>
         <h1>Join us!</h1>
 
-        <div className={classnames("form-group", {'has-error':errors.username})}>
-          <label className="control-label">Username</label>
-          <input
-            value={this.state.username}
-            onChange={this.onChange}
-            type="text"
-            name="username"
-            className="form-control"
-          />
-          {errors.username && <span className="help-block">{errors.username}</span>}
-        </div>
+        <TextFieldGroup
+          error={errors.username}
+          label="Username"
+          onChange={this.onChange}
+          value={this.state.username}
+          field="username"
+        />
 
-        <div className={classnames("form-group", {'has-error':errors.password})}>
-          <label className="control-label">Password</label>
-          <input
-            value={this.state.password}
-            onChange={this.onChange}
-            type="password"
-            name="password"
-            className="form-control"
-          />
-          {errors.password && <span className="help-block">{errors.password}</span>}
-        </div>
+        <TextFieldGroup
+          error={errors.password}
+          label="Password"
+          onChange={this.onChange}
+          value={this.state.password}
+          field="username"
+          type="password"
+        />
 
-        <div className={classnames("form-group", {'has-error':errors.passwordConfirmation})}>
-          <label className="control-label">Password Confirmation</label>
-          <input
-            value={this.state.passwordConfirmation}
-            onChange={this.onChange}
-            type="password"
-            name="passwordConfirmation"
-            className="form-control"
-          />
-          {errors.passwordConfirmation && <span className="help-block">{errors.passwordConfirmation}</span>}
-        </div>
+        <TextFieldGroup
+          error={errors.passwordConfirmation}
+          label="Password Confirmation"
+          onChange={this.onChange}
+          value={this.state.passwordConfirmation}
+          field="passwordConfirmation"
+          type="password"
+        />
 
+      
         <div className={classnames("form-group", {'has-error':errors.age})}>
         <label className="control-label">Age</label>
         <select
@@ -128,7 +134,7 @@ class SignupForm extends React.Component{
         </div>
 
         <div className="form-group">
-          <button className="btn btn-primary btn-lg">
+          <button disabled={this.state.isLoading} className="btn btn-primary btn-lg">
             Sign up
           </button>
         </div>
