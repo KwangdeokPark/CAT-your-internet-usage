@@ -18,3 +18,22 @@ class GroupSerializer(serializers.ModelSerializer):
         fields = ('id',
                   'group_name',
                   'description',)
+
+class TimelineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Timeline
+        fields = ('id',
+                  'sun_average',
+                  'sun_count',
+                  'mon_average',
+                  'mon_count',
+                  'tue_average',
+                  'tue_count',
+                  'wed_average',
+                  'wed_count',
+                  'thu_average',
+                  'thu_count',
+                  'fri_average',
+                  'fri_count',
+                  'sat_average',
+                  'sat_count',)
