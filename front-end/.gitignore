@@ -1,7 +1,4 @@
-.DS_Store
-.happypack
-dist
-*.log
-node_modules
-coverage
-webpack/webpack-assets.json
+*.sqlite3
+back-end/back_end/cat/__pycache__/
+back-end/back_end/cat/migrations/
+back-end/back_end/back_end/__pycache__/
