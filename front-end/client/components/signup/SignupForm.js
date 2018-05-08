@@ -2,6 +2,7 @@ import React from 'react';
 import classnames from 'classnames';
 import validateInput from '../../../server/shared/validations/signup';
 import TextFieldGroup from '../common/TextFieldGroup';
+import { browserHistory } from 'react-router';
 
 class SignupForm extends React.Component{
   constructor(props){
@@ -39,7 +40,9 @@ class SignupForm extends React.Component{
     if(this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
       this.props.userSignupRequest(this.state).then(
-        () => {},
+        () => {
+          browserHistory.push('/');
+        },
         ({ data }) => this.setState({ errors:data, isLoading:false })
       );
     }
@@ -66,7 +69,7 @@ class SignupForm extends React.Component{
           label="Password"
           onChange={this.onChange}
           value={this.state.password}
-          field="username"
+          field="password"
           type="password"
         />
 
@@ -79,7 +82,7 @@ class SignupForm extends React.Component{
           type="password"
         />
 
-      
+
         <div className={classnames("form-group", {'has-error':errors.age})}>
         <label className="control-label">Age</label>
         <select
