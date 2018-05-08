@@ -18,7 +18,8 @@ class GroupSerializer(serializers.ModelSerializer):
         model = Group
         fields = ('id',
                   'group_name',
-                  'description',)
+                  'description',
+                  'members',)
 
 class TimelineSerializer(serializers.ModelSerializer):
     class Meta:
