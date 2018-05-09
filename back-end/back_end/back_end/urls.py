@@ -20,9 +20,9 @@ from cat.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^sign_in/$', SignIn),   # sign in page
+    url(r'^sign_in/$', signin, name='signin'),   # sign in page
     url(r'^sign_up/$', signup, name='signup'),   # sign up page
-    #url(r'^main/$', ),  # main page
+    url(r'^main/$', mainview.as_view(), name='main'),  # main page
     #url(r'^group/$', ), # group list page
     #url(r'^group/(?P<pk>[0-9]+)/$', ),  # group detail page
     #url(r'^group/join/$', ),    # group join page

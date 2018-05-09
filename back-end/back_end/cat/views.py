@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from rest_framework.exceptions import ValidationError
 from datetime import datetime, timedelta
 
-
+'''
 class SingUp(generics.ListCreateAPIView):
     queryset = CatUser.objects.all()
     serializer_class = CatUserSerializer
@@ -14,7 +14,7 @@ class SingUp(generics.ListCreateAPIView):
 class SignIn(generics.ListAPIView):
     queryset = CatUser.objects.all()
     serializer_class = CatUserSerializer
-
+'''
 
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
@@ -22,7 +22,14 @@ import datetime
 from django.utils import timezone
 
 
-from cat.forms import SignUpForm
+from cat.forms import SignUpForm, SignInForm
+
+from django.views.generic.base import TemplateView
+
+from django.http import HttpResponse
+
+class mainview(TemplateView):
+    template_name = 'main.html'
 
 def signup(request):
     if request.method == 'POST':
@@ -61,7 +68,24 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user1 = authenticate(username=username, password=raw_password)
             login(request, user1)
-            return redirect('signup')
+
+            return redirect('signin')
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+
+def signin(request):
+    if request.method == "POST":
+        form = SignInForm(request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        #print(CatUser.objects.get(user=User.objects.get(username=username)))
+        if user is not None:
+            login(request, user)
+            return redirect('main')
+        else:
+            return HttpResponse('로그인 실패. 다시 시도 해보세요.')
+    else:
+        form = SignInForm()
+        return render(request, 'signin.html', {'form': form})
