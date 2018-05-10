@@ -42,6 +42,8 @@ def signup(request):
             user1 = authenticate(username=username, password=raw_password)
             '''
             user.catuser.age = form.cleaned_data.get('age')
+            print(form.cleaned_data.get('age'))
+            print(request.POST['age'])
             user.catuser.today_spent_time = datetime.timedelta(minutes=0)
             user.catuser.now_start_time = timezone.now()
             user.catuser.last_record_time = timezone.now()
@@ -80,7 +82,7 @@ def signin(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username=username, password=password)
-        #print(CatUser.objects.get(user=User.objects.get(username=username)))
+        print(CatUser.objects.get(user=User.objects.get(username=username)).age)
         if user is not None:
             login(request, user)
             return redirect('main')
