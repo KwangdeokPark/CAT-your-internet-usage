@@ -40,8 +40,9 @@ class mainview(TemplateView):
 @csrf_exempt
 def signup(request):
     if request.method == 'POST':
-        print(request.POST)
-        form = SignUpForm(request.POST)
+        print(request.data)
+        form = SignUpForm(request.data)
+        print(form)
         if form.is_valid():
             user = form.save()
             '''
