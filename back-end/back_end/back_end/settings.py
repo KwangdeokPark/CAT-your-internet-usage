@@ -62,6 +62,7 @@ MIDDLEWARE = [
     'back_end.middleware.MyMiddleware',
 ]
 
+
 ROOT_URLCONF = 'back_end.urls'
 
 TEMPLATES = [

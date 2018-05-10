@@ -28,11 +28,19 @@ from django.views.generic.base import TemplateView
 
 from django.http import HttpResponse
 
+#from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.decorators import api_view
+
 class mainview(TemplateView):
     template_name = 'main.html'
 
+#@ensure_csrf_cookie
+@api_view(['POST'])
+@csrf_exempt
 def signup(request):
     if request.method == 'POST':
+        print(request.POST)
         form = SignUpForm(request.POST)
         if form.is_valid():
             user = form.save()
