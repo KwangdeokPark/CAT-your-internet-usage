@@ -9,11 +9,11 @@ class SignupForm extends React.Component{
     super(props);
     this.state = {
       username: '',
-      password:'',
-      passwordConfirmation:'',
+      password1:'',
+      password2:'',
       age:'',
-      alertStartTime:'',
-      alertInterval:'',
+      alert_start_time:'',
+      alert_interval:'',
       errors:{},
       isLoading: false
     }
@@ -69,20 +69,20 @@ class SignupForm extends React.Component{
         />
 
         <TextFieldGroup
-          error={errors.password}
+          error={errors.password1}
           label="Password"
           onChange={this.onChange}
-          value={this.state.password}
-          field="password"
+          value={this.state.password1}
+          field="password1"
           type="password"
         />
 
         <TextFieldGroup
-          error={errors.passwordConfirmation}
+          error={errors.password2}
           label="Password Confirmation"
           onChange={this.onChange}
-          value={this.state.passwordConfirmation}
-          field="passwordConfirmation"
+          value={this.state.password2}
+          field="password2"
           type="password"
         />
 
@@ -95,49 +95,49 @@ class SignupForm extends React.Component{
           name="age"
           className="form-control">
           <option value="" disabled>Set age group.</option>
-          <option value="1">0~9</option>
-          <option value="2">10~19</option>
-          <option value="3">20~29</option>
-          <option value="4">30~39</option>
-          <option value="5">40~49</option>
-          <option value="6">50~59</option>
-          <option value="2">60~69</option>
-          <option value="3">70~79</option>
-          <option value="4">80~89</option>
-          <option value="5">90~99</option>
-          <option value="6">100~</option>
+          <option value="0">0~9</option>
+          <option value="10">10~19</option>
+          <option value="20">20~29</option>
+          <option value="30">30~39</option>
+          <option value="40">40~49</option>
+          <option value="50">50~59</option>
+          <option value="60">60~69</option>
+          <option value="70">70~79</option>
+          <option value="80">80~89</option>
+          <option value="90">90~99</option>
+          <option value="100">100~</option>
           </select>
           {errors.age && <span className="help-block">{errors.age}</span>}
         </div>
 
-        <div className={classnames("form-group", {'has-error':errors.alertStartTime})}>
+        <div className={classnames("form-group", {'has-error':errors.alert_start_time})}>
           <label className="control-label">Alert Start Time</label>
           <select
-            value={this.state.alertStartTime}
+            value={this.state.alert_start_time}
             onChange={this.onChange}
-            name="alertStartTime"
+            name="alert_start_time"
             className="form-control">
             <option value="" disabled>Set alert start time.</option>
             <option value="1">After 1 hour</option>
             <option value="2">After 2 hours</option>
             <option value="3">After 3 hours</option>
           </select>
-          {errors.alertStartTime && <span className="help-block">{errors.alertStartTime}</span>}
+          {errors.alert_start_time && <span className="help-block">{errors.alert_start_time}</span>}
         </div>
 
-        <div className={classnames("form-group", {'has-error':errors.alertInterval})}>
+        <div className={classnames("form-group", {'has-error':errors.alert_interval})}>
           <label className="control-label">Alert Interval</label>
           <select
-            value={this.state.alertInterval}
+            value={this.state.alert_interval}
             onChange={this.onChange}
-            name="alertInterval"
+            name="alert_interval"
             className="form-control">
             <option value="" disabled>Set alert interval.</option>
-            <option value="1">5 minutes</option>
-            <option value="2">15 minutes</option>
-            <option value="3">30 minutes</option>
+            <option value="5">5 minutes</option>
+            <option value="15">15 minutes</option>
+            <option value="30">30 minutes</option>
           </select>
-          {errors.alertInterval && <span className="help-block">{errors.alertInterval}</span>}
+          {errors.alert_interval && <span className="help-block">{errors.alert_interval}</span>}
         </div>
 
         <div className="form-group">
