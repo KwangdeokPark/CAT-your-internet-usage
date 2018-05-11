@@ -20,13 +20,13 @@ app.use('/api/auth', auth);
 const compiler = webpack(webpackConfig);
 
 app.use(webpackMiddleware(compiler, {
-  hot:true,
+  hot: true,
   publicPath: webpackConfig.output.publicPath,
   noInfo: true
 }));
 app.use(webpackHotMiddleware(compiler));
 
-app.get('/*', (req, res) =>{
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, './index.html'));
 });
 

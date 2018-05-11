@@ -1,18 +1,19 @@
 import React from 'react';
 import TextFieldGroup from '../common/TextFieldGroup';
 import validateInput from '../../../server/shared/validations/login';
-import { connect }  from 'react-redux';
-import { login } from '../../actions/login';
+import { connect } from 'react-redux';
+import { login } from '../../actions/authActions';
 
 class LoginForm extends React.Component {
-  constructor(props)  {
+  constructor(props) {
     super(props);
     this.state = {
-      identifier:'',
-      password:'',
+      identifier: '',
+      password: '',
       errors: {},
       isLoading: false
     };
+
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
@@ -20,35 +21,36 @@ class LoginForm extends React.Component {
   isValid() {
     const { errors, isValid } = validateInput(this.state);
 
-    if(!isValid){
+    if (!isValid) {
       this.setState({ errors });
     }
+
     return isValid;
   }
 
-  onSubmit(e){
+  onSubmit(e) {
     e.preventDefault();
-    if(this.isValid()){
-      this.setState({errors: {}, isLoading:true});
+    if (this.isValid()) {
+      this.setState({ errors: {}, isLoading: true });
       this.props.login(this.state).then(
-        (res) =>this.contet.router.push('/'),
-        (err) =>this.setState({ errors: err.data.errors, isLoading:false })
+        (res) => this.context.router.push('/'),
+        (err) => this.setState({ errors: err.response.data.errors, isLoading: false })
       );
     }
   }
 
-  onChange(e){
+  onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   render() {
-      const {errors, identifier, password, isLoading } = this.state;
+    const { errors, identifier, password, isLoading } = this.state;
 
-      return(
+    return (
       <form onSubmit={this.onSubmit}>
         <h1>Login</h1>
 
-        {errors.form && <div className="alert alert-danger">{errors.form}</div>}
+        { errors.form && <div className="alert alert-danger">{errors.form}</div> }
 
         <TextFieldGroup
           field="identifier"
@@ -73,13 +75,12 @@ class LoginForm extends React.Component {
   }
 }
 
-
-LoginForm.propTypes ={
+LoginForm.propTypes = {
   login: React.PropTypes.func.isRequired
 }
 
-LoginForn.contextTypes ={
-  router:React.PropTypes.object.isRequired
+LoginForm.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
-export default connect(null,{login})(LoginForm);
+export default connect(null, { login })(LoginForm);
