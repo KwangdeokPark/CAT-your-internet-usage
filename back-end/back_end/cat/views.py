@@ -21,21 +21,22 @@ from django.shortcuts import render, redirect
 import datetime
 from django.utils import timezone
 
-
 from cat.forms import SignUpForm, SignInForm
 
 from django.views.generic.base import TemplateView
 
 from django.http import HttpResponse
 
-#from django.views.decorators.csrf import ensure_csrf_cookie
+# from django.views.decorators.csrf import ensure_csrf_cookie
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
+
 
 class mainview(TemplateView):
     template_name = 'main.html'
 
-#@ensure_csrf_cookie
+
+# @ensure_csrf_cookie
 @api_view(['POST'])
 @csrf_exempt
 def signup(request):
@@ -51,14 +52,25 @@ def signup(request):
             user1 = authenticate(username=username, password=raw_password)
             '''
             user.catuser.age = form.cleaned_data.get('age')
-            print(form.cleaned_data.get('age'))
-            print(request.POST['age'])
+            # print(form.cleaned_data.get('age'))
+            # print(request.POST['age'])
             user.catuser.today_spent_time = datetime.timedelta(minutes=0)
-            user.catuser.now_start_time = timezone.now()
-            user.catuser.last_record_time = timezone.now()
-            user.catuser.timeline = Timeline.objects.create(sun_average=timedelta(), mon_average=timedelta(), tue_average=timedelta(), wed_average=timedelta(), thu_average=timedelta(), fri_average=timedelta(), sat_average=timedelta(),
-                                                            sun_count=0, mon_count=0, tue_count=0, wed_count=0, thu_count=0, fri_count=0, sat_count=0)
-            user.catuser.setting = Setting.objects.create(alert_start_time=datetime.timedelta(hours=form.cleaned_data.get('alert_start_time')), alert_interval=datetime.timedelta(minutes=form.cleaned_data.get('alert_interval')))
+            print(user.catuser.today_spent_time)
+            user.catuser.now_start_time = timezone.localtime()
+            print(user.catuser.now_start_time)
+            user.catuser.last_record_time = timezone.localtime()
+            print(user.catuser.last_record_time)
+            user.catuser.timeline = Timeline.objects.create(sun_average=timedelta(), mon_average=timedelta(),
+                                                            tue_average=timedelta(), wed_average=timedelta(),
+                                                            thu_average=timedelta(), fri_average=timedelta(),
+                                                            sat_average=timedelta(),
+                                                            sun_count=0, mon_count=0, tue_count=0, wed_count=0,
+                                                            thu_count=0, fri_count=0, sat_count=0)
+            print(user.catuser.timeline)
+            user.catuser.setting = Setting.objects.create(
+                alert_start_time=datetime.timedelta(hours=form.cleaned_data.get('alert_start_time')),
+                alert_interval=datetime.timedelta(minutes=form.cleaned_data.get('alert_interval')))
+            print(user.catuser.setting)
             user.catuser.save()
             '''
             age = form.cleaned_data.get('age')
@@ -72,7 +84,7 @@ def signup(request):
                                              timeline=Timeline.objects.create(sun_average=timedelta(), mon_average=timedelta(), tue_average=timedelta(), wed_average=timedelta(), thu_average=timedelta(), fri_average=timedelta(), sat_average=timedelta(),
                                                                               sun_count=0, mon_count=0, tue_count=0, wed_count=0, thu_count=0, fri_count=0, sat_count=0),
                                              setting=Setting.objects.create(alert_start_time=datetime.timedelta(hours=alert_start_time), alert_interval=datetime.timedelta(minutes=alert_interval)))
-                                             
+
             catuser.save()
             '''
             username = form.cleaned_data.get('username')
@@ -85,13 +97,19 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
+
+@api_view(['POST'])
+@csrf_exempt
 def signin(request):
     if request.method == "POST":
-        form = SignInForm(request.POST)
-        username = request.POST['username']
-        password = request.POST['password']
+        print(request.data)
+        form = SignInForm(request.data)
+        print(form)
+        username = request.data['identifier']
+        password = request.data['password']
         user = authenticate(username=username, password=password)
-        print(CatUser.objects.get(user=User.objects.get(username=username)).age)
+        print(user)
+        print(CatUser.objects.get(user=User.objects.get(username=username)))
         if user is not None:
             login(request, user)
             return redirect('main')
@@ -100,3 +118,4 @@ def signin(request):
     else:
         form = SignInForm()
         return render(request, 'signin.html', {'form': form})
+

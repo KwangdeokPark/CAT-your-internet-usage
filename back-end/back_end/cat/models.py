@@ -48,6 +48,7 @@ from django.dispatch import receiver
 @receiver(post_save, sender=User)
 def update_catuser(sender, instance, created, **kwargs):
     if created:
+        print(instance)
         CatUser.objects.create(user=instance)
     instance.catuser.save()
 
