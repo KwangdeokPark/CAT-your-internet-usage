@@ -52,8 +52,7 @@ def signup(request):
             user1 = authenticate(username=username, password=raw_password)
             '''
             user.catuser.age = form.cleaned_data.get('age')
-            # print(form.cleaned_data.get('age'))
-            # print(request.POST['age'])
+            print(user.catuser.age)
             user.catuser.today_spent_time = datetime.timedelta(minutes=0)
             print(user.catuser.today_spent_time)
             user.catuser.now_start_time = timezone.localtime()
