@@ -8,7 +8,7 @@ class LoginForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      identifier: '',
+      username: '',
       password: '',
       errors: {},
       isLoading: false
@@ -44,7 +44,7 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    const { errors, identifier, password, isLoading } = this.state;
+    const { errors, username, password, isLoading } = this.state;
 
     return (
       <form onSubmit={this.onSubmit}>
@@ -53,10 +53,10 @@ class LoginForm extends React.Component {
         { errors.form && <div className="alert alert-danger">{errors.form}</div> }
 
         <TextFieldGroup
-          field="identifier"
+          field="username"
           label="Username"
-          value={identifier}
-          error={errors.identifier}
+          value={username}
+          error={errors.username}
           onChange={this.onChange}
         />
 

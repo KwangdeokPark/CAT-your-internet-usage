@@ -84,6 +84,7 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
+
 def signin(request):
     if request.method == "POST":
         form = SignInForm(request.POST)
