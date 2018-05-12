@@ -37,6 +37,18 @@ DEBUG = True
 
 ALLOWED_HOSTS = '*'
 
+#LOGIN_REDIRECT_URL = '/main'
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
 
 # Application definition
 
@@ -49,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'cat.apps.CatConfig',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
