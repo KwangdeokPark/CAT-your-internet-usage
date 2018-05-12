@@ -10,13 +10,75 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/back_end$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1526101826630" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/back_end$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1526132782680" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FileEditorManager">
+<<<<<<< HEAD
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+=======
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cat/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="376">
+              <caret line="94" column="47" lean-forward="true" selection-start-line="94" selection-start-column="47" selection-end-line="94" selection-end-column="47" />
+              <folding>
+                <element signature="e#0#62#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="serializers.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cat/serializers.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="34" lean-forward="true" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/back_end/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="248">
+              <caret line="34" column="46" lean-forward="true" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/back_end/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="75">
+              <caret line="5" column="14" lean-forward="true" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+              <folding>
+                <element signature="e#632#664#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cat/models.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="201">
+              <caret line="16" column="17" lean-forward="true" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+>>>>>>> db366162334b370e0c7b2ce192f28b81761ce2f6
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -28,7 +90,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/cat/serializers.py" />
         <option value="$PROJECT_DIR$/cat/templates/signup.html.py" />
         <option value="$PROJECT_DIR$/cat/templates/base.html" />
         <option value="$PROJECT_DIR$/cat/templates/adduser.html" />
@@ -36,14 +97,19 @@
         <option value="$PROJECT_DIR$/cat/templates/registration/signup_ok.html" />
         <option value="$PROJECT_DIR$/cat/templates/registration/login.html" />
         <option value="$PROJECT_DIR$/cat/templates/signup.html" />
-        <option value="$PROJECT_DIR$/cat/models.py" />
         <option value="$PROJECT_DIR$/cat/templates/main.html" />
         <option value="$PROJECT_DIR$/cat/templates/login.html" />
-        <option value="$PROJECT_DIR$/back_end/urls.py" />
         <option value="$PROJECT_DIR$/back_end/middleware.py" />
         <option value="$PROJECT_DIR$/cat/forms.py" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/back_end/settings.py" />
+=======
+        <option value="$PROJECT_DIR$/cat/serializers.py" />
+>>>>>>> db366162334b370e0c7b2ce192f28b81761ce2f6
         <option value="$PROJECT_DIR$/cat/views.py" />
+        <option value="$PROJECT_DIR$/cat/models.py" />
+        <option value="$PROJECT_DIR$/back_end/settings.py" />
+        <option value="$PROJECT_DIR$/back_end/urls.py" />
       </list>
     </option>
   </component>
@@ -64,6 +130,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -75,7 +142,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -171,7 +237,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< HEAD
     <frame x="649" y="23" width="840" height="797" extended-state="0" />
+=======
+    <frame x="840" y="22" width="840" height="1028" extended-state="0" />
+>>>>>>> db366162334b370e0c7b2ce192f28b81761ce2f6
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32975295" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -179,8 +249,14 @@
       <window_info anchor="bottom" id="Run" order="2" weight="0.32975295" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32975295" />
+<<<<<<< HEAD
       <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.31714284" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26817042" />
+=======
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32975295" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32975295" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2744361" />
+>>>>>>> db366162334b370e0c7b2ce192f28b81761ce2f6
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -261,10 +337,9 @@
     <entry file="file://$PROJECT_DIR$/cat/templates/main.html" />
     <entry file="file://$PROJECT_DIR$/cat/apps.py" />
     <entry file="file://$PROJECT_DIR$/cat/templates/signup.html" />
-    <entry file="file://$PROJECT_DIR$/cat/serializers.py" />
-    <entry file="file://$PROJECT_DIR$/cat/models.py" />
     <entry file="file://$PROJECT_DIR$/back_end/middleware.py" />
     <entry file="file://$PROJECT_DIR$/cat/forms.py" />
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/back_end/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="103">
@@ -276,15 +351,56 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="317">
           <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
+=======
+    <entry file="file://$PROJECT_DIR$/cat/serializers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="34" lean-forward="true" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cat/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="16" column="17" lean-forward="true" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+>>>>>>> db366162334b370e0c7b2ce192f28b81761ce2f6
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cat/views.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="268">
           <caret line="72" column="19" lean-forward="true" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
+=======
+        <state relative-caret-position="376">
+          <caret line="94" column="47" lean-forward="true" selection-start-line="94" selection-start-column="47" selection-end-line="94" selection-end-column="47" />
+>>>>>>> db366162334b370e0c7b2ce192f28b81761ce2f6
           <folding>
             <element signature="e#0#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/back_end/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="34" column="46" lean-forward="true" selection-start-line="34" selection-start-column="46" selection-end-line="34" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/back_end/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="14" lean-forward="true" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+          <folding>
+            <element signature="e#632#664#0" expanded="true" />
           </folding>
         </state>
       </provider>

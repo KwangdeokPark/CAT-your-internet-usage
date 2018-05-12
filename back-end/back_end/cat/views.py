@@ -1,5 +1,5 @@
 from cat.models import CatUser, Group, Setting, Timeline, Join
-from cat.serializers import CatUserSerializer, GroupSerializer, SettingSerializer, TimelineSerializer, JoinSerializer
+from cat.serializers import *
 from rest_framework import generics, permissions
 from django.contrib.auth.models import User
 from rest_framework.exceptions import ValidationError
@@ -18,6 +18,7 @@ from django.http import HttpResponse
 
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
+from django.contrib.auth import views
 
 
 class mainview(TemplateView):
@@ -63,27 +64,89 @@ def signup(request):
     return redirect('signin')
     #return render(request, 'signup.html', {'form': form})
 
+from rest_framework.response import Response
+import jwt,json
 
+<<<<<<< HEAD
+=======
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+#class MyTokenObtainPairView(TokenObtainPairView):
+    #serializer_class = MyTokenObtainPairSerializer
+
+from rest_framework_jwt.settings import api_settings
+
+>>>>>>> db366162334b370e0c7b2ce192f28b81761ce2f6
 @api_view(['POST', 'GET'])
 @csrf_exempt
 def signin(request):
     if request.method == "POST":
         print(request.data)
-        form = SignInForm(request.data)
-        print(form)
+        #form = SignInForm(request.data)
+        #print(form)
         username = request.data['username']
         password = request.data['password']
         user = authenticate(username=username, password=password)
         print(user)
 
         if user is not None:
+            '''
             print(CatUser.objects.get(user=User.objects.get(username=username)).age)
             login(request, user)
-            return redirect('main')
+            return redirect('signin')'''
+            jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+            jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+
+            payload = jwt_payload_handler(user)
+            token = jwt_encode_handler(payload)
+            return HttpResponse(token)
+
         else:
-            return redirect('signin')
+            return Response(
+                json.dumps({'Error': "Invalid credentials"}),
+                status=400,
+                content_type="application/json"
+            )
+            #return Response({'Error': "Invalid username/password"}, status="400")
+            #return redirect('signin')
             #return HttpResponse('로그인 실패. 다시 시도 해보세요.')
     else:
         form = SignInForm()
         return render(request, 'signin.html', {'form': form})
 
+'''
+import jwt,json
+from rest_framework import views
+from rest_framework.response import Response
+
+@csrf_exempt
+class signin(views.APIView):
+    def post(self, request, *args, **kwargs):
+        print(request.data)
+        if not request.data:
+            return Response({'Error': "Please provide username/password"}, status="400")
+        print(request.data)
+        username = request.data['username']
+        password = request.data['password']
+        try:
+            user = User.objects.get(username=username, password=password)
+        except User.DoesNotExist:
+            return Response({'Error': "Invalid username/password"}, status="400")
+        if user:
+            payload = {
+                'id': user.id,
+                'email': user.email,
+            }
+            jwt_token = {'token': jwt.encode(payload, "SECRET_KEY")}
+
+            return HttpResponse(
+                json.dumps(jwt_token),
+                status=200,
+                content_type="application/json"
+                )
+        else:
+            return Response(
+                json.dumps({'Error': "Invalid credentials"}),
+                status=400,
+                content_type="application/json"
+            )'''

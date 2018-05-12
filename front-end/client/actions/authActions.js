@@ -21,12 +21,19 @@ export function logout(){
 
 export function login(data){
   return dispatch =>{
+<<<<<<< HEAD
     return axios.get('http://127.0.0.1:8000/sign_in/',data).then(res=> {
+=======
+    return axios.post('http://127.0.0.1:8000/sign_in/',data).then(res=> {
+>>>>>>> db366162334b370e0c7b2ce192f28b81761ce2f6
       const token = res.data.token;
       localStorage.setItem('jwtToken', token);
       setAuthorizationToken(token);
       dispatch(setCurrentUser(jwt.decode(token)));
+<<<<<<< HEAD
 
+=======
+>>>>>>> db366162334b370e0c7b2ce192f28b81761ce2f6
     });
   }
 }
