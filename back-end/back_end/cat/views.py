@@ -64,7 +64,7 @@ def signup(request):
     #return render(request, 'signup.html', {'form': form})
 
 
-@api_view(['POST'])
+@api_view(['POST', 'GET'])
 @csrf_exempt
 def signin(request):
     if request.method == "POST":
