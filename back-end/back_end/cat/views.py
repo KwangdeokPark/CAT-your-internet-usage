@@ -1,6 +1,6 @@
 from cat.models import CatUser, Group, Setting, Timeline, Join
 from cat.serializers import *
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, status
 from django.contrib.auth.models import User
 from rest_framework.exceptions import ValidationError
 from datetime import datetime, timedelta
@@ -19,7 +19,6 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from django.contrib.auth import views
-
 
 class mainview(TemplateView):
     template_name = 'main.html'
@@ -66,21 +65,18 @@ def signup(request):
 
 @api_view(['POST'])
 def user_test(request):
-    
-    permission_classes = (permissions.AllowAny, )
-    
     if request.method == 'POST':
         serializer = UserTestSerializer(data=request.data)
-        if Serializer.is_valid():
+        if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'PUT'])
-def user_detail_test(request):
+def user_detail_test(request, pk):
     try:
-        user_test = UserTest.objects.get(pk = pk)
-    except UsetTest.DoesNotExist:
+        user_test = UserTest.objects.get(pk=pk)
+    except UserTest.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'PUT':
@@ -91,8 +87,8 @@ def user_detail_test(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     elif request.method == 'GET':
-        serializer = UserDetailTestSerializer(user_Test)
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer = UserDetailTestSerializer(user_test)
+        return Response(serializer.data)
 
 
 from rest_framework.response import Response

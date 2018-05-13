@@ -73,8 +73,8 @@ class UserTestSerializer(serializers.ModelSerializer):
         fields = ('id', 'username')
 
 class UserDetailTestSerializer(serializers.ModelSerializer):
-    username = serializers.ReadOnlyField(source = 'username')
+    username = serializers.ReadOnlyField()
 
     class Meta:
         model = UserTest
-        fields = ('id', 'username', 'today_spent_time', 'last_record_time', 'now_spent_time')
+        fields = ('id', 'username', 'today_spent_time', 'last_record_time', 'now_start_time')

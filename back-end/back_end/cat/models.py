@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import timedelta
+from datetime import datetime
 
 
 from django.conf import settings
@@ -83,7 +84,7 @@ class Join(models.Model):
 
 class UserTest(models.Model):
     username = models.CharField(max_length=20)
-    today_spent_time = models.DurationField(null=True, default=0)
-    now_start_time = models.DateTimeField(null=True, default=0)
-    last_record_time = models.DateTimeField(null=True, default=0)
+    today_spent_time = models.DurationField(default=timedelta(microseconds=0))
+    now_start_time = models.DateTimeField(default=datetime.now())
+    last_record_time = models.DateTimeField(default=datetime.now())
 
