@@ -18,7 +18,7 @@ export function logoutTest(){
   };
 }
 
-export function userTestLogin(id){
+export function loginTest(id){
 
   let url = `${userTestUrl}${id}/`;
 

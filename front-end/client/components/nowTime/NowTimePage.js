@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NowTimeForm from './NowTimeForm'
-import { userTestLogin, logoutTest } from '../../actions/userTest';
+import { loginTest, logoutTest } from '../../actions/userTest';
 
 class NowTimePage extends React.Component {
   render() {
@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onLogin: (id) => {
-      dispatch(userTestLogin(id))
+      dispatch(loginTest(id))
     },
     onLogout: () => {
       dispatch(logoutTest())
