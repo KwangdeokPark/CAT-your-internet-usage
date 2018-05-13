@@ -64,6 +64,37 @@ def signup(request):
     return redirect('signin')
     #return render(request, 'signup.html', {'form': form})
 
+@api_view(['POST'])
+def user_test(request):
+    
+    permission_classes = (permissions.AllowAny, )
+    
+    if request.method == 'POST':
+        serializer = UserTestSerializer(data=request.data)
+        if Serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET', 'PUT'])
+def user_detail_test(request):
+    try:
+        user_test = UserTest.objects.get(pk = pk)
+    except UsetTest.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'PUT':
+        serializer = UserDetailTestSerializer(user_test, data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    elif request.method == 'GET':
+        serializer = UserDetailTestSerializer(user_Test)
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+
 from rest_framework.response import Response
 import jwt,json
 
@@ -110,15 +141,6 @@ def signin(request):
     else:
         form = SignInForm()
         return render(request, 'signin.html', {'form': form})
-
-@api_view(['POST'])
-def user_test(request):
-    if request.method == 'POST':
-        serializer = UserTestSerializer(data=request.data)
-        if Serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_$))_BAD_REQUEST)
 
 '''
 import jwt,json

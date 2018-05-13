@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from cat.models import CatUser, Group, Timeline, Setting, Join
+from cat.models import CatUser, Group, Timeline, Setting, Join, UserTest
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -67,7 +67,14 @@ class JoinSerializer(serializers.ModelSerializer):
         fields = ('catuser',
                   'group',)
 
-class UserTestSerializer(serializers.Modelserializer):
+class UserTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserTest
         fields = ('id', 'username')
+
+class UserDetailTestSerializer(serializers.ModelSerializer):
+    username = serializers.ReadOnlyField(source = 'username')
+
+    class Meta:
+        model = UserTest
+        fields = ('id', 'username', 'today_spent_time', 'last_record_time', 'now_spent_time')
