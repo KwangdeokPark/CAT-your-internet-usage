@@ -12,5 +12,6 @@ export default (
     <IndexRoute component={Greetings}/>
     <Route path ="sign_up" component={SignupPage}/>
     <Route path ="sign_in" component={LoginPage}/>
+    <Route path = "now_time" component={NowTime}/>
   </Route>
 )
