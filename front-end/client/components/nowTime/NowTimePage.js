@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NowTimeForm from './NowTimeForm'
-import { loginTest, logoutTest } from '../../actions/userTest';
+import { loginTest, putLast, putToday } from '../../actions/userTest';
 
 class NowTimePage extends React.Component {
   render() {
     return (
-      <NowTimeForm stateUser={this.props.stateUser} onLogin={this.props.onLogin} onLogout={this.props.onLogout} />
+      <NowTimeForm stateUser={this.props.stateUser} onLogin={this.props.onLogin} onLogout={this.props.onLogout} onPutLast={this.props.onPutLast} onPutToday={this.props.onPutToday}/>
     )
   }
 }
@@ -22,8 +22,11 @@ const mapDispatchToProps = (dispatch) => {
     onLogin: (id) => {
       dispatch(loginTest(id))
     },
-    onLogout: () => {
-      dispatch(logoutTest())
+    onPutLast: (id, lastTime, logOut) => {
+      dispatch(putLast(id, lastTime, logOut))
+    },
+    onPutToday: (id, todayTime, nowTime) => { 
+      dispatch(putToday(id, todayTime, nowTime))
     }
   }
 }

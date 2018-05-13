@@ -4,7 +4,6 @@ const initialState = {
   today_spent_time: '',
   last_record_time: '',
   now_start_time: '',
-  login_flag: false
 };
 
 export default (state = initialState, action) => {
@@ -16,7 +15,6 @@ export default (state = initialState, action) => {
         today_spent_time: action.user_test.today_spent_time,
         last_record_time: action.user_test.last_record_time,
         now_start_time: action.user_test.now_start_time,
-        login_flag: action.login_flag
       }
     
     case 'LOGOUT_TEST':
