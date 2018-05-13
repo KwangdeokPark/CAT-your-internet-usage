@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^sign_in/$', obtain_jwt_token),
     url(r'^sign_up/$', signup, name='signup'),   # sign up page
     url(r'^main/$', mainview.as_view(), name='main'),  # main page
+    url(r'^user/$', 
     #url(r'^group/$', ), # group list page
     #url(r'^group/(?P<pk>[0-9]+)/$', ),  # group detail page
     #url(r'^group/join/$', ),    # group join page

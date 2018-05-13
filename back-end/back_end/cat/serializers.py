@@ -66,3 +66,8 @@ class JoinSerializer(serializers.ModelSerializer):
         model = Join
         fields = ('catuser',
                   'group',)
+
+class UserTestSerializer(serializers.Modelserializer):
+    class Meta:
+        model = UserTest
+        fields = ('id', 'username')

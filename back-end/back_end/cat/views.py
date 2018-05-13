@@ -111,6 +111,15 @@ def signin(request):
         form = SignInForm()
         return render(request, 'signin.html', {'form': form})
 
+@api_view(['POST'])
+def user_test(request):
+    if request.method == 'POST':
+        serializer = UserTestSerializer(data=request.data)
+        if Serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_$))_BAD_REQUEST)
+
 '''
 import jwt,json
 from rest_framework import views

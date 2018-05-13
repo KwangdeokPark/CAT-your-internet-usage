@@ -79,3 +79,11 @@ class Join(models.Model):
 
     class Meta:
         ordering = ('date_join',)
+
+
+class UserTest(models.Model):
+    username = models.CharField(max_length=20)
+    today_spent_time = models.DurationField(null=True, default=0)
+    now_start_time = models.DateTimeField(null=True, default=0)
+    last_record_time = models.DateTimeField(null=True, default=0)
+
