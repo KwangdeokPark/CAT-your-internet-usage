@@ -84,7 +84,7 @@ class Join(models.Model):
 
 class UserTest(models.Model):
     username = models.CharField(max_length=20)
-    today_spent_time = models.DurationField(default=timedelta(microseconds=0))
+    today_spent_time = models.BigIntegerField(default=0)
     now_start_time = models.DateTimeField(default=datetime.now())
     last_record_time = models.DateTimeField(default=datetime.now())
 
