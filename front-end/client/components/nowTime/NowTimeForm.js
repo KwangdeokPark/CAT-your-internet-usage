@@ -18,6 +18,16 @@ class NowTimeForm extends React.Component {
   }
  
   componentDidMount() {
+    console.log(new Date());
+    console.log(new Date().toDateString());
+    console.log(new Date().toGMTString());
+    console.log(new Date().toISOString());
+    console.log(new Date().toString());
+
+
+
+
+
     this.interval = setInterval(() => {this.setState({nowTime: new Date()});}, 500);
   }
 
