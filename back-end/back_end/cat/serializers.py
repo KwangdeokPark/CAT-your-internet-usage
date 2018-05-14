@@ -20,8 +20,8 @@ class CatUserSerializer(serializers.ModelSerializer):
                   'user',
                   'age',
                   'today_spent_time',
-                  'now_spent_time',
-                  'last_record_date',
+                  'now_start_time',
+                  'last_record_time',
                   'setting',
                   'timeline',)
 

@@ -16,11 +16,11 @@ AGE_CHOICE = (
     ('30', '30~39'),
     ('40', '40~')
 )
-
+'''
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
-        Token.objects.create(user=instance)
+        Token.objects.create(user=instance)'''
 
 class Setting(models.Model):
     alert_start_time = models.DurationField()

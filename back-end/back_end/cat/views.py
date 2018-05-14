@@ -21,9 +21,26 @@ from rest_framework.decorators import api_view
 from django.contrib.auth import views
 from rest_framework.response import Response
 
+class UserDetail(generics.RetrieveAPIView):
+    queryset = CatUser.objects.all()
+    serializer_class = CatUserSerializer
 
-class mainview(TemplateView):
-    template_name = 'main.html'
+    def post(self, request, *args, **kwargs):
+        user = User.objects.get(username=self.request.data.get('username'))
+        catuser = CatUser.objects.get(user=user)
+        #catuser.user = {'username': catuser.user}
+        #CatUserSerializer(instance=catuser).data['user']
+        print({'username': catuser.user})
+        print(SettingSerializer(instance=catuser.setting).data)
+        print(TimelineSerializer(instance=catuser.timeline).data)
+        print(CatUserSerializer(instance=catuser).data)
+        serialized = CatUserSerializer(instance=catuser).data
+        serialized['user'] = {'username': catuser.user.username}
+        serialized['setting'] = SettingSerializer(instance=catuser.setting).data
+        serialized['timeline'] = TimelineSerializer(instance=catuser.timeline).data
+        print(serialized)
+        return Response(serialized, status=200)
+
 
 @api_view(['POST'])
 @csrf_exempt
@@ -67,7 +84,7 @@ def signup(request):
         return Response(status=400)
     #return Response(status=200)
     #return render(request, 'signup.html', {'form': form})
-'''
+
 from rest_framework.response import Response
 import jwt,json
 
@@ -84,33 +101,20 @@ def signin(request):
     print(request.data)
     if request.method == "POST":
         print(request.data)
-        #form = SignInForm(request.data)
-        #print(form)
         username = request.data['username']
         password = request.data['password']
         user = authenticate(username=username, password=password)
         print(user)
 
         if user is not None:
-            jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
-            jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
-
-            payload = jwt_payload_handler(user)
-            token = jwt_encode_handler(payload)
-            return Response(token)
+            encoded_token = jwt.encode({'username':username, 'password':password}, 'SECRET', algorithm='HS256')
+            print(encoded_token)
+            return Response({'token': encoded_token}, status=200)
 
         else:
-            return Response(
-                json.dumps({'Error': "Invalid credentials"}),
-                status=400,
-                content_type="application/json"
-            )
-            #return Response({'Error': "Invalid username/password"}, status="400")
-            #return redirect('signin')
-            #return HttpResponse('로그인 실패. 다시 시도 해보세요.')
+            return Response(status=400)
     else:
-        form = SignInForm()
-        return render(request, 'signin.html', {'form': form})'''
+        return Response(status=400)
 '''
 import jwt,json
 from rest_framework import views
