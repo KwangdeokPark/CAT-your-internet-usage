@@ -18,7 +18,8 @@ class NowTimeForm extends React.Component {
   }
 
   isLogin(prop) {
-    return !(prop.stateUser.id === '')
+    if(prop.stateUser === undefined) return false;
+    return !(prop.stateUser.id === '');
   }
 
   checkRecord(prop) {
