@@ -6,7 +6,7 @@ import { loginTest, putLast, putToday } from '../../actions/userTest';
 class NowTimePage extends React.Component {
   render() {
     return (
-      <NowTimeForm stateUser={this.props.stateUser} onLogin={this.props.onLogin} onLogout={this.props.onLogout} onPutLast={this.props.onPutLast} onPutToday={this.props.onPutToday}/>
+      <NowTimeForm stateUser={this.props.stateUser} onLogin={this.props.onLogin} onPutLast={this.props.onPutLast} onPutToday={this.props.onPutToday}/>
     )
   }
 }
