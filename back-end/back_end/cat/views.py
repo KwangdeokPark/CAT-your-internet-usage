@@ -19,6 +19,7 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from django.contrib.auth import views
+from rest_framework.response import Response
 
 
 class mainview(TemplateView):
@@ -47,23 +48,26 @@ def signup(request):
                                                             sat_average=timedelta(),
                                                             sun_count=0, mon_count=0, tue_count=0, wed_count=0,
                                                             thu_count=0, fri_count=0, sat_count=0)
-            print(user.catuser.timeline)
+            print(user.catuser.timeline.fri_average)
             user.catuser.setting = Setting.objects.create(
                 alert_start_time=datetime.timedelta(hours=form.cleaned_data.get('alert_start_time')),
                 alert_interval=datetime.timedelta(minutes=form.cleaned_data.get('alert_interval')))
-            print(user.catuser.setting)
+            print(user.catuser.setting.alert_interval)
             user.catuser.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user1 = authenticate(username=username, password=raw_password)
             login(request, user1)
-
-            return redirect('signin')
+            #return redirect('main')
+            return Response(status=200)
+        else:
+            return Response(status=400)
     else:
-        form = SignUpForm()
-    return redirect('signin')
+        #form = SignUpForm()
+        return Response(status=400)
+    #return Response(status=200)
     #return render(request, 'signup.html', {'form': form})
-
+'''
 from rest_framework.response import Response
 import jwt,json
 
@@ -77,6 +81,7 @@ from rest_framework_jwt.settings import api_settings
 @api_view(['POST', 'GET'])
 @csrf_exempt
 def signin(request):
+    print(request.data)
     if request.method == "POST":
         print(request.data)
         #form = SignInForm(request.data)
@@ -87,16 +92,12 @@ def signin(request):
         print(user)
 
         if user is not None:
-            '''
-            print(CatUser.objects.get(user=User.objects.get(username=username)).age)
-            login(request, user)
-            return redirect('signin')'''
             jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
             jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
 
             payload = jwt_payload_handler(user)
             token = jwt_encode_handler(payload)
-            return HttpResponse(token)
+            return Response(token)
 
         else:
             return Response(
@@ -109,8 +110,7 @@ def signin(request):
             #return HttpResponse('로그인 실패. 다시 시도 해보세요.')
     else:
         form = SignInForm()
-        return render(request, 'signin.html', {'form': form})
-
+        return render(request, 'signin.html', {'form': form})'''
 '''
 import jwt,json
 from rest_framework import views

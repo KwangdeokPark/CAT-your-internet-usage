@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     #url(r'^sign_in/$', signin, name='signin'),   # sign in page
     url(r'^sign_out/$', refresh_jwt_token),
-    url(r'^sign_in/$', obtain_jwt_token),
+    url(r'^sign_in/$', obtain_jwt_token, name='signin'),
     url(r'^sign_up/$', signup, name='signup'),   # sign up page
     url(r'^main/$', mainview.as_view(), name='main'),  # main page
     #url(r'^group/$', ), # group list page
