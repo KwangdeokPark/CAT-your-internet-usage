@@ -3,10 +3,11 @@ import NavigationBar from './NavigationBar';
 import FlashMessagesList from './flash/FlashMessagesList';
 
 class App extends React.Component {
-  render(){
+  render() {
     return (
       <div className="container">
-        <NavigationBar/>
+        <NavigationBar />
+        <FlashMessagesList />
         {this.props.children}
       </div>
     );

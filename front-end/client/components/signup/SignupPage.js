@@ -2,7 +2,7 @@ import React from 'react';
 import SignupForm from './SignupForm';
 import { connect } from 'react-redux';
 import { userSignupRequest } from '../../actions/signupActions';
-import { addFlashMessage } from '../../actions/flashMessages.js';
+import { addFlashMessage } from '../../actions/flashMessages';
 
 class SignupPage extends React.Component{
   render(){

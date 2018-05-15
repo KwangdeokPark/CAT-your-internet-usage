@@ -34,10 +34,10 @@ class SignupForm extends React.Component{
     return isValid;
   }
 
-  onSubmit(e){
+  onSubmit(e) {
     e.preventDefault();
 
-    if(this.isValid()) {
+    if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
       this.props.userSignupRequest(this.state).then(
         () => {
@@ -47,7 +47,7 @@ class SignupForm extends React.Component{
           });
           this.context.router.push('/');
         },
-        ({ data }) => this.setState({ errors:data, isLoading:false })
+        (err) => this.setState({ errors: err.response.data, isLoading: false })
       );
     }
   }
