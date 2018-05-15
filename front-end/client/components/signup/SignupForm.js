@@ -50,8 +50,6 @@ class SignupForm extends React.Component{
         ({ data }) => this.setState({ errors:data, isLoading:false })
       );
     }
-    //console.log(this.state);
-    //axios.post('/api/users',{user: this.state });
   }
 
   render(){
@@ -153,6 +151,10 @@ class SignupForm extends React.Component{
 SignupForm.propTypes = {
   userSignupRequest: React.PropTypes.func.isRequired,
   addFlashMessage: React.PropTypes.func.isRequired
+}
+
+SignupForm.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 export default SignupForm;

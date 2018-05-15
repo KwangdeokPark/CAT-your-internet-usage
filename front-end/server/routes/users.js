@@ -3,7 +3,7 @@ import validateInput from '../shared/validations/signup';
 
 let router = express.Router();
 
-router.post('/', (req, res) =>{
+router.post('/', (req, res) => {
   const { errors, isValid } = validateInput(req.body);
 
   if(isValid){
@@ -11,7 +11,6 @@ router.post('/', (req, res) =>{
   }else{
     res.status(400).json(errors);
   }
-  //console.log(req.body);
 });
 
 export default router;
