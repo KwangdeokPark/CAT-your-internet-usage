@@ -1,4 +1,4 @@
-import { SET_CURRENT_USER } from '../actions/types';
+import { SET_CURRENT_USER, LOGOUT } from '../actions/types';
 import isEmpty from 'lodash/isEmpty';
 
 const initialState = {
@@ -9,6 +9,8 @@ const initialState = {
     today_spent_time: '',
     last_record_time: '',
     now_start_time: '',
+    setting_id: '',
+    timeline_id: '',
   }
 };
 
