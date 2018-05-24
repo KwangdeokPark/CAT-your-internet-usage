@@ -56,7 +56,7 @@ def signup(request):
             print(user.catuser.timeline.fri_average)
             user.catuser.setting = Setting.objects.create(
                 alert_start_time=(form.cleaned_data.get('alert_start_time'))*1000*60*60,
-                alert_interval=form.cleaned_data.get('alert_interval'))*1000*60
+                alert_interval=(form.cleaned_data.get('alert_interval'))*1000*60)
             print(user.catuser.setting.alert_interval)
             user.catuser.save()
             username = form.cleaned_data.get('username')
