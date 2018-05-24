@@ -39,7 +39,7 @@ class LoginForm extends React.Component {
             type: 'success',
             text: 'You signed in successfully. Hi!'
           });
-          this.context.router.push('/');
+          this.context.router.push('/main');
         },
         (err) => {
           this.props.addFlashMessage({

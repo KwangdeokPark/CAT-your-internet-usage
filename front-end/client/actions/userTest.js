@@ -12,23 +12,6 @@ export function setCurrentUserTest(user_test){
   };
 }
 
-export function logoutTest(){
-  return {
-    type: LOGOUT_TEST
-  };
-}
-
-export function loginTest(id){
-
-  let url = `${userTestUrl}${id}/`;
-
-  return dispatch => {
-    return axios.get(url).then(res => {
-      dispatch(setCurrentUserTest(res.data));
-    });
-  }
-}
-
 export function putLast(id, lastTime, logOut){
   let url = `${userTestUrl}${id}/`;
 
