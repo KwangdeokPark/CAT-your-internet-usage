@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import timedelta
+from datetime import datetime
 
 
 from django.conf import settings
@@ -27,27 +28,37 @@ class Setting(models.Model):
     alert_interval = models.DurationField()
 
 class Timeline(models.Model):
-    sun_average = models.DurationField(default=timedelta())
+    #sun_average = models.DurationField(default=timedelta())
+    sun_average = models.BigIntegerField(default=0)
     sun_count = models.PositiveIntegerField(default=0)
-    mon_average = models.DurationField(default=timedelta())
+    #mon_average = models.DurationField(default=timedelta())
+    mon_average = models.BigIntegerField(default=0)
     mon_count = models.PositiveIntegerField(default=0)
-    tue_average = models.DurationField(default=timedelta())
+    #tue_average = models.DurationField(default=timedelta())
+    tue_average = models.BigIntegerField(default=0)
     tue_count = models.PositiveIntegerField(default=0)
-    wed_average = models.DurationField(default=timedelta())
+    #wed_average = models.DurationField(default=timedelta())
+    wed_average = models.BigIntegerField(default=0)
     wed_count = models.PositiveIntegerField(default=0)
-    thu_average = models.DurationField(default=timedelta())
+    #thu_average = models.DurationField(default=timedelta())
+    thu_average = models.BigIntegerField(default=0)
     thu_count = models.PositiveIntegerField(default=0)
-    fri_average = models.DurationField(default=timedelta())
+    #fri_average = models.DurationField(default=timedelta())
+    fri_average = models.BigIntegerField(default=0)
     fri_count = models.PositiveIntegerField(default=0)
-    sat_average = models.DurationField(default=timedelta())
+    #sat_average = models.DurationField(default=timedelta())
+    sat_average = models.BigIntegerField(default=0)
     sat_count = models.PositiveIntegerField(default=0)
 
 class CatUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     age = models.CharField(choices=AGE_CHOICE, max_length=100)
-    today_spent_time = models.DurationField(null=True)
-    now_start_time = models.DateTimeField(null=True)
-    last_record_time = models.DateTimeField(null=True)
+    #today_spent_time = models.DurationField(null=True)
+    today_spent_time = models.BigIntegerField(default=0)
+    #now_start_time = models.DateTimeField(null=True)
+    now_start_time = models.DateTimeField(default=datetime.now())
+    #last_record_time = models.DateTimeField(null=True)
+    last_record_time = models.DateTimeField(default=datetime.now())
     setting = models.OneToOneField(Setting, null=True, on_delete=models.CASCADE)
     timeline = models.OneToOneField(Timeline, null=True, on_delete=models.CASCADE)
 
@@ -79,3 +90,4 @@ class Join(models.Model):
 
     class Meta:
         ordering = ('date_join',)
+
