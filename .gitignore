@@ -2,5 +2,9 @@
 back-end/back_end/cat/__pycache__/
 back-end/back_end/cat/migrations/
 back-end/back_end/back_end/__pycache__/
+<<<<<<< HEAD
 back-end/env/
 back-end/back_end/.idea/workspace.xml
+=======
+back-end/back_end/db.sqlite3*
+>>>>>>> 968af65ce9d550fc081d629b9f9573a604dfcfa8

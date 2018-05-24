@@ -3,6 +3,7 @@ import TextFieldGroup from '../common/TextFieldGroup';
 import validateInput from '../../../server/shared/validations/login';
 import { connect } from 'react-redux';
 import { login } from '../../actions/authActions';
+import { addFlashMessage } from '../../actions/flashMessages';
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -33,8 +34,20 @@ class LoginForm extends React.Component {
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
       this.props.login(this.state).then(
-        (res) => this.context.router.push('/'),
-        (err) => this.setState({ errors: err.response.data.errors, isLoading: false })
+        () => {
+          this.props.addFlashMessage({
+            type: 'success',
+            text: 'You signed in successfully. Hi!'
+          });
+          this.context.router.push('/');
+        },
+        (err) => {
+          this.props.addFlashMessage({
+            type: 'error',
+            text: 'Try Again!'
+          });
+          this.setState({ errors: err.response.data, isLoading: false })
+        }
       );
     }
   }
@@ -69,18 +82,19 @@ class LoginForm extends React.Component {
           type="password"
         />
 
-        <div className="form-group"><button className="btn btn-primary btn-lg" disabled={isLoading}>Login</button></div>
+        <div className="form-group"><button className="btn btn-primary btn-lg" >Login</button></div>
       </form>
     );
   }
 }
 
 LoginForm.propTypes = {
-  login: React.PropTypes.func.isRequired
+  login: React.PropTypes.func.isRequired,
+  addFlashMessage: React.PropTypes.func.isRequired
 }
 
 LoginForm.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-export default connect(null, { login })(LoginForm);
+export default connect(null, { login, addFlashMessage })(LoginForm);
