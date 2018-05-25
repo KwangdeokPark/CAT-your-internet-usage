@@ -93,10 +93,12 @@ def signin(request):
             print(TimelineSerializer(instance=catuser.timeline).data)
             print(CatUserSerializer(instance=catuser).data)
             serialized = CatUserSerializer(instance=catuser).data
+            serialized['username'] = username
             serialized['user'] = {'username': catuser.user.username}
-            serialized['setting'] = SettingSerializer(instance=catuser.setting).data
-            serialized['timeline'] = TimelineSerializer(instance=catuser.timeline).data
+            serialized['setting_id'] = SettingSerializer(instance=catuser.setting).data['id']
+            serialized['timeline_id'] = TimelineSerializer(instance=catuser.timeline).data['id']
             print(serialized)
+            print({'user': serialized, 'token': encoded_token})
             return Response({'user': serialized, 'token': encoded_token}, status=200)
 
         else:
