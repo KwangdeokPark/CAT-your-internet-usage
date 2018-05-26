@@ -49,6 +49,7 @@ class Timeline(models.Model):
     #sat_average = models.DurationField(default=timedelta())
     sat_average = models.BigIntegerField(default=0)
     sat_count = models.PositiveIntegerField(default=0)
+    total_average = models.BigIntegerField(default=0)
 
 class CatUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

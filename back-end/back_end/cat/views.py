@@ -111,9 +111,7 @@ def signin(request):
 def timeline_total(request, user_id):
     print(request.data)
     if request.method == "GET":
-        user = User.objects.get(id=user_id)
-        timeline = CatUser.objects.get(user=user).timeline
-        average = (timeline.mon_average + timeline.tue_average + timeline.wed_average +timeline.thu_average + timeline.fri_average + timeline.sat_average + timeline.sun_average)/7
+        average = CatUser.objects.get(user=User.objects.get(id=user_id)).timeline.total_average
         return Response({'average': average}, status=200)
 
 @api_view(['GET'])
