@@ -106,3 +106,19 @@ def signin(request):
     else:
         return Response(status=400)
 
+@api_view(['GET'])
+@csrf_exempt
+def timeline_total(request, user_id):
+    print(request.data)
+    if request.method == "GET":
+        user = User.objects.get(id=user_id)
+        timeline = CatUser.objects.get(user=user).timeline
+        average = (timeline.mon_average + timeline.tue_average + timeline.wed_average +timeline.thu_average + timeline.fri_average + timeline.sat_average + timeline.sun_average)/7
+        return Response({'average': average}, status=200)
+
+@api_view(['GET'])
+@csrf_exempt
+def timeline_detail(request, user_id, group_id):
+    if request.method == "GET":
+        print(request.data)
+

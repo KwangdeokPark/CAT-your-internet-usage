@@ -24,6 +24,8 @@ urlpatterns = [
     url(r'^sign_in/$', signin, name='signin'),   # sign in page
     #url(r'^sign_in/$', obtain_jwt_token, name='signin'),
     url(r'^sign_up/$', signup, name='signup'),   # sign up page
+    url(r'^timeline/(?P<user_id>[0-9]+)/$', timeline_total),
+    url(r'^timeline/(?P<user_id>[0-9]+)/group/(?P<group_id>[0-9]+)/$', timeline_detail),
     #url(r'^main/$', , name='main'),  # main page
     #url(r'^group/$', ), # group list page
     #url(r'^group/(?P<pk>[0-9]+)/$', ),  # group detail page
