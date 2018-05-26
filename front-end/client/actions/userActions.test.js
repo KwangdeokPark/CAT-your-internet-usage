@@ -1,4 +1,4 @@
-import * as actions from './authActions';
+import * as actions from './userActions';
 import * as types from './types';
 
 describe('actions', () =>{

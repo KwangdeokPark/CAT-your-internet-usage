@@ -31,7 +31,7 @@ class SettingsForm extends React.Component{
         </div>
 
         <div >
-          <label className="control-label" size="10">Alert Interval</label>
+          <label className="control-label" >Alert Interval</label>
         </div>
 
         <div className="form-group">

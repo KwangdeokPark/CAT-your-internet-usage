@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { logout } from '../actions/authActions';
+import { logout } from '../actions/userActions';
 
 class NavigationBar extends React.Component {
   logout(e){
@@ -10,7 +10,7 @@ class NavigationBar extends React.Component {
   }
 
   render() {
-    const { isAuthenticated } = this.props.auth;
+    const { isAuthenticated } = this.props.user;
 
     const userLinks = (
       <ul className="nav navbar-nav navbar-right">
@@ -43,13 +43,13 @@ class NavigationBar extends React.Component {
 }
 
 NavigationBar.propTypes = {
-  auth: React.PropTypes.object.isRequired,
+  user: React.PropTypes.object.isRequired,
   logout: React.PropTypes.object.isRequired
 }
 
 function mapStateToProps(state){
   return{
-    auth: state.auth
+    user: state.user
   };
 }
 
