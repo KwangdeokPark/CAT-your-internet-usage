@@ -13,60 +13,29 @@ class SettingsForm extends React.Component{
       errors:{},
       isLoading: false
     }
-    this.onChange = this.onChange.bind(this);
+    this.onClickButton = this.onClickButton.bind(this);
   }
 
-  onChange(e) {
-      this.setState({ [e.target.name]: e.target.value });
-  }
-
-  isValid(){
-    const {errors, isValid } = validateInput(this.state);
-
-    if(!isValid){
-      this.setState({errors});
-    }
-    return isValid;
+  onClickButton(){
+    this.context.router.push('/settingsEdit');
   }
 
   render(){
     const { errors }=this.state;
     return(
       <form>
-        <h1>Edit Settings</h1>
+        <h1>Settings</h1>
 
-        <div className={classnames("form-group", {'has-error':errors.alert_start_time})}>
+        <div >
           <label className="control-label">Alert Start Time</label>
-          <select
-            value={this.state.alert_start_time}
-            onChange={this.onChange}
-            name="alert_start_time"
-            className="form-control">
-            <option value="" disabled>Set alert start time.</option>
-            <option value="1">After 1 hour</option>
-            <option value="2">After 2 hours</option>
-            <option value="3">After 3 hours</option>
-          </select>
-          {errors.alert_start_time && <span className="help-block">{errors.alert_start_time}</span>}
         </div>
 
-        <div className={classnames("form-group", {'has-error':errors.alert_interval})}>
-          <label className="control-label">Alert Interval</label>
-          <select
-            value={this.state.alert_interval}
-            onChange={this.onChange}
-            name="alert_interval"
-            className="form-control">
-            <option value="" disabled>Set alert interval.</option>
-            <option value="5">5 minutes</option>
-            <option value="15">15 minutes</option>
-            <option value="30">30 minutes</option>
-          </select>
-          {errors.alert_interval && <span className="help-block">{errors.alert_interval}</span>}
+        <div >
+          <label className="control-label" size="10">Alert Interval</label>
         </div>
 
         <div className="form-group">
-          <button  className="btn btn-primary btn-lg">
+          <button  className="btn btn-primary btn-lg" onClick={this.onClickButton}>
             Edit
           </button>
         </div>
