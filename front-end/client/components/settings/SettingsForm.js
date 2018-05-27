@@ -20,11 +20,12 @@ class SettingsForm extends React.Component{
     this.onClickButton = this.onClickButton.bind(this);
   }
 
-  componentDidMount() {
-    axios.get(`http://127.0.0.1:8000/users/`)
+  componentWillMount() {
+
+    axios.post('http://127.0.0.1:8000/users/',this.state)
          .then(response => this.setState({
-           alert_start_time: response.data.alert_start_time,
-           alert_interval: response.data.alert_interval
+           alert_start_time: response.data.setting.alert_start_time/3600000,
+           alert_interval: response.data.setting.alert_interval/60000
          }))
          .catch(err => console.log(err))
   }
@@ -40,15 +41,15 @@ class SettingsForm extends React.Component{
         <h1>Settings</h1>
 
         <div >
-          <label className="control-label">Alert Start Time:  {this.state.alert_start_time}</label>
+          <label className="control-label">Alert Start Time:  After {this.state.alert_start_time} hours</label>
         </div>
 
         <div >
-          <label className="control-label" >Alert Interval: {this.state.alert_interval}</label>
+          <label className="control-label" >Alert Interval: Every {this.state.alert_interval} minute</label>
         </div>
 
         <div className="form-group">
-          <button  className="btn btn-primary btn-lg" onClick={this.onClickButton}>
+          <button type="button" className="btn btn-primary btn-lg" onClick={this.onClickButton}>
             Edit
           </button>
         </div>
