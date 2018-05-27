@@ -1,4 +1,5 @@
 import React from 'react';
+
 import classnames from 'classnames';
 import validateInput from '../../../server/shared/validations/settings';
 import TextFieldGroup from '../common/TextFieldGroup';
@@ -8,6 +9,7 @@ class SettingsForm extends React.Component{
   constructor(props){
     super(props);
     this.state = {
+      id:'',
       alert_start_time:'',
       alert_interval:'',
       errors:{},
@@ -27,11 +29,11 @@ class SettingsForm extends React.Component{
         <h1>Settings</h1>
 
         <div >
-          <label className="control-label">Alert Start Time</label>
+          <label className="control-label">Alert Start Time:  {this.alert_start_time}</label>
         </div>
 
         <div >
-          <label className="control-label" >Alert Interval</label>
+          <label className="control-label" >Alert Interval: {this.alert_interval}</label>
         </div>
 
         <div className="form-group">

@@ -12,6 +12,7 @@ export function setCurrentUserTest(user_test){
   };
 }
 
+
 export function putLast(id, lastTime, logOut){
   let url = `${userTestUrl}${id}/`;
 

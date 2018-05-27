@@ -7,6 +7,7 @@ import { SET_CURRENT_USER_SETTING } from './types';
 
 const signinUrl = 'http://127.0.0.1:8000/sign_in/'
 const userUrl = 'http://127.0.0.1:8000/users/'
+const settingUrl = 'http://127.0.0.1:8000/settings/'
 
 export function setCurrentUser(user){
   return {
@@ -78,6 +79,19 @@ export function putToday(id, todayTime, nowTime){
       now_start_time: nowTime
     }).then(res => {
       dispatch(setCurrentUserTest(res.data));
+    });
+  }
+}
+
+export function putSetting(id, alertStartTime, alertInterval){
+  let url = `${settingUrl}${id}/`;
+
+  return dispatch => {
+    return axios.put(url, {
+      alert_start_time: alertStartTime,
+      alert_interval: alertInterval
+    }).then(res => {
+      dispatch(setCurrentUserSetting(res.data));
     });
   }
 }

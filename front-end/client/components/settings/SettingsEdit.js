@@ -8,16 +8,42 @@ class SettingsEdit extends React.Component{
   constructor(props){
     super(props);
     this.state = {
+      id:'',
       alert_start_time:'',
       alert_interval:'',
       errors:{},
       isLoading: false
     }
     this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   onChange(e) {
       this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    if (this.isValid()) {
+      this.setState({ errors: {}, isLoading: true });
+      this.props.putSetting(this.state).then(
+        () => {
+          this.props.addFlashMessage({
+            type: 'success',
+            text: 'Succeffully changed setting!'
+          });
+          this.context.router.push('/main');
+        },
+        (err) => {
+          this.props.addFlashMessage({
+            type: 'error',
+            text: 'Sorry. Try Again!'
+          });
+          this.setState({ errors: err.response.data, isLoading: false })
+        }
+      );
+    }
   }
 
   isValid(){
@@ -32,7 +58,7 @@ class SettingsEdit extends React.Component{
   render(){
     const { errors }=this.state;
     return(
-      <form>
+      <form onSubmit={this.onSubmit}>
         <h1>Edit Settings</h1>
 
         <div className={classnames("form-group", {'has-error':errors.alert_start_time})}>
