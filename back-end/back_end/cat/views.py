@@ -122,7 +122,8 @@ def timeline_detail(request, user_id, group_id):
         #CatUser.objects.filter(user=User.objects.get(id=user_id)).order_by()
         user = User.objects.get(id=user_id)
         group = Group.objects.get(id=group_id)
-        all_user = list(CatUser.objects.filter(group=group).order_by('timeline__total_average'))
+        #all_user = list(CatUser.objects.filter(group=group).order_by('timeline__total_average'))
+        all_user = list(group.members.order_by('timeline__total_average'))
         min_time = all_user[0].timeline['total_average']
         max_time = all_user[-1].timeline['total_average']
         step = (max_time - min_time) / 10
