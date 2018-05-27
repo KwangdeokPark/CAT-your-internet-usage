@@ -113,7 +113,27 @@ def timeline_total(request, user_id):
     if request.method == "GET":
         serialized = TimelineSerializer(instance=CatUser.objects.get(user=User.objects.get(id=user_id)).timeline).data
         return Response(serialized, status=200)
-
+    elif request.method == "PUT":
+        timeline = CatUser.objects.get(user=User.objects.get(id=user_id)).timeline
+        timeline.sun_average = request.data['sun_average']
+        timeline.mon_average = request.data['mon_average']
+        timeline.tue_average = request.data['tue_average']
+        timeline.wed_average = request.data['wed_average']
+        timeline.thu_average = request.data['thu_average']
+        timeline.fri_average = request.data['fri_average']
+        timeline.sat_average = request.data['sat_average']
+        timeline.sun_count = request.data['sun_count']
+        timeline.mon_count = request.data['mon_count']
+        timeline.tue_count = request.data['tue_count']
+        timeline.wed_count = request.data['wed_count']
+        timeline.thu_count = request.data['thu_count']
+        timeline.fri_count = request.data['fri_count']
+        timeline.sat_count = request.data['sat_count']
+        timeline.total_average = (timeline.sun_average + timeline.mon_average
+                                  + timeline.tue_average + timeline.wed_average
+                                  + timeline.thu_average + timeline.fri_average
+                                  + timeline.sat_average) / 7
+        return Response(status=200)
 
 @api_view(['GET'])
 @csrf_exempt
