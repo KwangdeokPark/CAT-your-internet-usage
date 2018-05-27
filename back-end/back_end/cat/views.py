@@ -119,4 +119,7 @@ def timeline_total(request, user_id):
 def timeline_detail(request, user_id, group_id):
     if request.method == "GET":
         print(request.data)
+        #CatUser.objects.filter(user=User.objects.get(id=user_id)).order_by()
+        user = User.objects.get(id=user_id)
+        all_timeline = Timeline.objects.all().order_by('total_average')
 

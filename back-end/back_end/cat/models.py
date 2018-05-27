@@ -22,7 +22,14 @@ AGE_CHOICE = (
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
         Token.objects.create(user=instance)'''
+class Group(models.Model):
+    name = models.CharField(blank=True, max_length=30)
+    description = models.TextField(blank=True)
+    members = models.ManyToManyField(CatUser, through='Join')
 
+    class Meta:
+        ordering = ('name',)
+        
 class Setting(models.Model):
     alert_start_time = models.BigIntegerField(default=0)
     alert_interval = models.BigIntegerField(default=0)
@@ -62,7 +69,7 @@ class CatUser(models.Model):
     last_record_time = models.DateTimeField(default=datetime.now())
     setting = models.OneToOneField(Setting, null=True, on_delete=models.CASCADE)
     timeline = models.OneToOneField(Timeline, null=True, on_delete=models.CASCADE)
-
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
     class Meta:
         ordering = ('user',)
 
@@ -76,13 +83,7 @@ def update_catuser(sender, instance, created, **kwargs):
     instance.catuser.save()
 
 
-class Group(models.Model):
-    name = models.CharField(blank=True, max_length=30)
-    description = models.TextField(blank=True)
-    members = models.ManyToManyField(CatUser, through='Join')
 
-    class Meta:
-        ordering = ('name',)
 
 class Join(models.Model):
     catuser = models.ForeignKey(CatUser, on_delete=models.CASCADE)
