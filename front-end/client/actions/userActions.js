@@ -80,43 +80,47 @@ export function putToday(id, todayTime, nowTime){
   }
 }
 
-export function putTimeline(id, todayTime, day){
+export function putTimeline(id, todayTime, day, newUser, nowTime){
   let url = `${timelineUrl}${id}`;
   let putData;
 
   try {
     const data = axios.get(url);
-    if(day == 0) putData = {
+    if(day === 0) putData = {
       sun_average: data.sun_average + todayTime,
       sun_count: data.sun_count + 1
     };
-    else if(day == 1) putData = {
+    else if(day === 1) putData = {
       mon_average: data.mon_average + todayTime,
       mon_count: data.mon_count + 1
     };
-    else if(day == 2) putData = {
+    else if(day === 2) putData = {
       tue_average: data.tue_average + todayTime,
       tue_count: data.tue_count + 1
     };
-    else if(day == 3) putData = {
+    else if(day === 3) putData = {
       wed_average: data.wed_average + todayTime,
       wed_count: data.wed_count + 1
     };
-    else if(day == 4) putData = {
+    else if(day === 4) putData = {
       thu_average: data.thu_average + todayTime,
       thu_count: data.thu_count + 1
     };
-    else if(day == 5) putData = {
+    else if(day === 5) putData = {
       fri_average: data.fri_average + todayTime,
       fri_count: data.fri_count + 1
     };
-    else if(day == 6) putData = {
+    else if(day === 6) putData = {
       sat_average: data.sat_average + todayTime,
       sat_count: data.sat_count + 1
     };
 
+    let newUserData = newUser;
+    newUserData.today_spent_time = 0;
+    newUserData.now_start_time = nowTime;
+
     return axios.put(url, putData).then(res => {
-      dispatch(nothing());
+      dispatch(setCurrentUser(newUserData));
     });
   }
   catch(e)

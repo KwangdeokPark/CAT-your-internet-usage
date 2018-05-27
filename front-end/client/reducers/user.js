@@ -5,7 +5,7 @@ const initialState = {
   isAuthenticated: false,
   user: {
     id: '',
-    username: '';
+    username: '',
     today_spent_time: '',
     last_record_time: '',
     now_start_time: '',
