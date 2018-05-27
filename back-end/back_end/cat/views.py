@@ -106,13 +106,14 @@ def signin(request):
     else:
         return Response(status=400)
 
-@api_view(['GET'])
+@api_view(['GET', 'PUT'])
 @csrf_exempt
 def timeline_total(request, user_id):
     print(request.data)
     if request.method == "GET":
-        average = CatUser.objects.get(user=User.objects.get(id=user_id)).timeline.total_average
-        return Response({'average': average}, status=200)
+        serialized = TimelineSerializer(instance=CatUser.objects.get(user=User.objects.get(id=user_id)).timeline).data
+        return Response(serialized, status=200)
+
 
 @api_view(['GET'])
 @csrf_exempt
