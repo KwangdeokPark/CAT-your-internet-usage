@@ -19,6 +19,7 @@ class LoginForm extends React.Component {
     this.onChange = this.onChange.bind(this);
   }
 
+
   isValid() {
     const { errors, isValid } = validateInput(this.state);
 
@@ -40,6 +41,7 @@ class LoginForm extends React.Component {
             text: 'You signed in successfully. Hi!'
           });
           this.context.router.push('/main');
+          localStorage.setItem('username','this.state.username');
         },
         (err) => {
           this.props.addFlashMessage({

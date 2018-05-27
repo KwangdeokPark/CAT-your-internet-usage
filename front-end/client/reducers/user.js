@@ -30,7 +30,7 @@ export default (state = initialState, action = {}) => {
 
     case SET_CURRENT_USER_SETTING:
       return {
-        isAuthenticated: !isEmpty(action.user),
+        isAuthenticated: !isEmpty(action.setting),
         setting: action.setting
       }
 

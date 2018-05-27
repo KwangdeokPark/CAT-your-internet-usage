@@ -3,6 +3,9 @@ import classnames from 'classnames';
 import validateInput from '../../../server/shared/validations/settings';
 import TextFieldGroup from '../common/TextFieldGroup';
 import { browserHistory } from 'react-router';
+import { connect } from 'react-redux';
+import { addFlashMessage } from '../../actions/flashMessages';
+import { putSetting } from '../../actions/userActions';
 
 class SettingsEdit extends React.Component{
   constructor(props){
@@ -101,8 +104,14 @@ class SettingsEdit extends React.Component{
   }
 }
 
+SettingsEdit.propTypes = {
+  putSetting: React.PropTypes.func.isRequired,
+  addFlashMessage: React.PropTypes.func.isRequired
+}
+
 SettingsEdit.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-export default SettingsEdit;
+//export default SettingsEdit;
+export default connect(null, { putSetting, addFlashMessage })(SettingsEdit);
