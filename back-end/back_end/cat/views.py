@@ -9,7 +9,7 @@ from django.utils import timezone
 from cat.forms import SignUpForm
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
-'''
+
 class UserDetail(generics.RetrieveAPIView):
     queryset = CatUser.objects.all()
     serializer_class = CatUserSerializer
@@ -27,7 +27,7 @@ class UserDetail(generics.RetrieveAPIView):
         serialized['timeline'] = TimelineSerializer(instance=catuser.timeline).data
         print(serialized)
         return Response(serialized, status=200)
-'''
+
 
 @api_view(['POST'])
 @csrf_exempt
