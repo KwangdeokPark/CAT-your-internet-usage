@@ -121,5 +121,34 @@ def timeline_detail(request, user_id, group_id):
         print(request.data)
         #CatUser.objects.filter(user=User.objects.get(id=user_id)).order_by()
         user = User.objects.get(id=user_id)
-        all_timeline = Timeline.objects.all().order_by('total_average')
+        group = Group.objects.get(id=group_id)
+        all_user = list(CatUser.objects.filter(group=group).order_by('timeline__total_average'))
+        min_time = all_user[0].timeline['total_average']
+        max_time = all_user[-1].timeline['total_average']
+        step = (max_time - min_time) / 10
+        num = [0] * 11  #[0, (1/10), (2/10), ... (9/10), (10/10)]
+        percent = (1 - (all_user.index(user) / len(all_user))) * 100
+        tmp = 1
+        for i in len(all_user):
+            if all_user[i].timeline.total_average >= tmp * step:
+                num[tmp] = i
+                tmp = tmp + 1
+        stats = [0] * 10
+        for i in range(0, 10):
+            stats[i] = ((num[i+1] - num[i]) / len(all_user)) * 100
+        return Response({'percentage': percent,
+                         'max': max_time,
+                         'min': min_time,
+                         '1': stats[0],
+                         '2': stats[1],
+                         '3': stats[2],
+                         '4': stats[3],
+                         '5': stats[4],
+                         '6': stats[5],
+                         '7': stats[6],
+                         '8': stats[7],
+                         '9': stats[8],
+                         '10': stats[9]}, status=200)
+
+
 

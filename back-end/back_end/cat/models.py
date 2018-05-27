@@ -29,7 +29,7 @@ class Group(models.Model):
 
     class Meta:
         ordering = ('name',)
-        
+
 class Setting(models.Model):
     alert_start_time = models.BigIntegerField(default=0)
     alert_interval = models.BigIntegerField(default=0)
@@ -69,7 +69,7 @@ class CatUser(models.Model):
     last_record_time = models.DateTimeField(default=datetime.now())
     setting = models.OneToOneField(Setting, null=True, on_delete=models.CASCADE)
     timeline = models.OneToOneField(Timeline, null=True, on_delete=models.CASCADE)
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, null=True, on_delete=models.CASCADE)
     class Meta:
         ordering = ('user',)
 
