@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import NavigationBarForm from './NavigationBarForm';
 import { logout, putLast, putToday, putTimeline } from '../../actions/userActions';
 
-class NavigationBarPage extends React.component {
+class NavigationBarPage extends React.Component {
   render() {
     return (
       <NavigationBarForm stateUser={this.props.stateUser} onLogout={this.props.onLogout} onPutLast={this.props.onPutLast} onPutToday={this.props.onPutToday} onPutTimeline={this.props.onPutTimeline}/>
-    )
+    );
   }
 }
 
@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch) => {
     onPutToday: (id, todayTime, nowTime) => {
       dispatch(putToday(id, todayTime, nowTime))
     },
-    onPutTimeline: (id, todayTime, day)=> {
+    onPutTimeline: (id, todayTime, day, newUser, nowTime)=> {
       dispatch(putTimeline(id, todayTime, day, newUser, nowTime))
     }
   }

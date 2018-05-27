@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-class NavigationBar extends React.Component {
+class NavigationBarForm extends React.Component {
   constructor(props) {
     super(props);
 
@@ -49,12 +49,14 @@ class NavigationBar extends React.Component {
     {
       let dayp = ((new Date(this.props.stateUser.user.last_record_day)).getDay());
       let dayn = ((new Date(nextProps.stateUser.user.last_record_day)).getDay());
+      console.log(nextProps);
+      console.log(dayp, dayn);
       if(dayp != dayn) {
         this.props.onPutTimeline(this.props.stateUser.user.id, 
                                  this.props.stateUser.user.today_spent_time, 
                                  dayp, 
-                                 nextprops.stateUser.user, 
-                                 nextprops.stateUser.user.last_record_day);
+                                 nextProps.stateUser.user, 
+                                 nextProps.stateUser.user.last_record_day);
       }
     }
   }
@@ -86,10 +88,12 @@ class NavigationBar extends React.Component {
           </div>
 
           <div className="collapse navbar-collapse">
-            { isAuthenticated ?  userLinks : guestLinks }
+            { this.isLogin(this.props) ?  userLinks : guestLinks }
           </div>
         </div>
       </nav>
     );
   }
 }
+
+export default NavigationBarForm;
