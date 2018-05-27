@@ -171,6 +171,17 @@ def timeline_detail(request, user_id, group_id):
                          '8': stats[7],
                          '9': stats[8],
                          '10': stats[9]}, status=200)
-
+@api_view(['GET', 'PUT'])
+@csrf_exempt
+def setting(request, user_id):
+    print(request.data)
+    if request.method == "GET":
+        serialized = SettingSerializer(instance=CatUser.objects.get(user=User.objects.get(id=user_id)).setting).data
+        return Response(serialized, status=200)
+    elif request.method == "PUT":
+        item = CatUser.objects.get(user=User.objects.get(id=user_id)).setting
+        item.alert_interval = request.data['alert_interval']
+        item.alert_start_time = request.data['alert_start_time']
+        return Response(status=200)
 
 
