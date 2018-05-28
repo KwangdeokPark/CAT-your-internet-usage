@@ -12,7 +12,7 @@ class StatsPage extends React.Component{
           {
             label: 'hour',
             data: [
-              100,
+              0,
               0,
               0,
               0,
@@ -33,15 +33,6 @@ class StatsPage extends React.Component{
         ]
       }
     }
-  }
-
-  componentWillMount() {
-    axios.post('http://127.0.0.1:8000/users/',this.state)
-         .then(response => this.setState({
-           alert_start_time: response.data.setting.alert_start_time/3600000,
-           alert_interval: response.data.setting.alert_interval/60000
-         }))
-         .catch(err => console.log(err))
   }
 
   componentWillMount() {
@@ -100,7 +91,6 @@ class StatsPage extends React.Component{
       </div>
     )
   }
-
 }
 
 export default StatsPage;
