@@ -10,6 +10,7 @@ from cat.forms import SignUpForm
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 
+#temp
 class UserDetail(generics.RetrieveAPIView):
     queryset = CatUser.objects.all()
     serializer_class = CatUserSerializer
@@ -28,6 +29,27 @@ class UserDetail(generics.RetrieveAPIView):
         print(serialized)
         return Response(serialized, status=200)
 
+@api_view(['GET', 'PUT'])
+@csrf_exempt
+def user_detail(request, user_id):
+    print(request.data)
+    if request.method == "GET":
+        user = User.objects.get(id=user_id)
+        catuser = CatUser.objects.get(user=user)
+        serialized = CatUserSerializer(instance=catuser).data
+        serialized['username'] = catuser.user.username
+        serialized['setting'] = SettingSerializer(instance=catuser.setting).data
+        serialized['timeline'] = TimelineSerializer(instance=catuser.timeline).data
+        serialized['user'] = {'username': catuser.user.username}
+        serialized['setting_id'] = SettingSerializer(instance=catuser.setting).data['id']
+        serialized['timeline_id'] = TimelineSerializer(instance=catuser.timeline).data['id']
+        return Response(serialized, status=200)
+    elif request.method == "PUT":
+        item = CatUser.objects.get(user=User.objects.get(id=user_id))
+        item.today_spent_time = request.data['today_spent_time']
+        item.last_record_time = request.data['last_record_time']
+        item.now_start_time = request.data['now_start_time']
+        return Response(status=200)
 
 @api_view(['POST'])
 @csrf_exempt
@@ -183,7 +205,7 @@ def timeline_detail(request, user_id, group_id):
                          '10': stats[9]}, status=200)
 @api_view(['GET', 'PUT'])
 @csrf_exempt
-def setting(request, user_id):
+def setting_detail(request, user_id):
     print(request.data)
     if request.method == "GET":
         serialized = SettingSerializer(instance=CatUser.objects.get(user=User.objects.get(id=user_id)).setting).data
