@@ -25,6 +25,14 @@ describe('actions', () =>{
     expect(actions.nothing()).toEqual(expectedAction)
   })
 
+  it('should create an action to set current user setting', () =>{
+    const setting = 'temp setting'
+    const expectedAction = {
+      type: types.SET_CURRENT_USER_SETTING,
+      setting
+    }
+    expect(actions.setCurrentUserSetting(setting)).toEqual(expectedAction)
+  })
 
   it('should run logout', () =>{
     expect(actions.logout()).not.toEqual(undefined)
@@ -67,5 +75,12 @@ describe('actions', () =>{
     }
     let nowTime = 'temp nowTime';
     expect(actions.putTimeline(id, todayTime, day, newUser, nowTime)).not.toEqual(undefined)
+  })
+
+  it('should run put setting', () =>{
+    let id = 'temp id';
+    let alertStartTime = 'temp alert start time';
+    let alertInterval = 'temp alert interval';
+    expect(actions.putSetting(id, alertStartTime, alertInterval)).not.toEqual(undefined)
   })
 })
