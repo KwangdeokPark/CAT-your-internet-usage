@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1527514463147" clover="3.2.0">
-  <project timestamp="1527514463148" name="All files">
-    <metrics statements="136" coveredstatements="67" conditionals="42" coveredconditionals="17" methods="50" coveredmethods="20" elements="228" coveredelements="104" complexity="0" loc="136" ncloc="136" packages="8" files="12" classes="12">
+<coverage generated="1527515489143" clover="3.2.0">
+  <project timestamp="1527515489143" name="All files">
+    <metrics statements="136" coveredstatements="71" conditionals="42" coveredconditionals="17" methods="50" coveredmethods="21" elements="228" coveredelements="109" complexity="0" loc="136" ncloc="136" packages="8" files="12" classes="12">
       <package name="client.actions">
         <metrics statements="72" coveredstatements="41" conditionals="16" coveredconditionals="8" methods="29" coveredmethods="12"/>
         <file name="flashMessages.js" path="/home/ialy/sw/cat/front/CAT-your-internet-usage/front-end/client/actions/flashMessages.js">
@@ -128,17 +128,17 @@
         </file>
       </package>
       <package name="client.components.nowTime">
-        <metrics statements="22" coveredstatements="14" conditionals="6" coveredconditionals="4" methods="10" coveredmethods="7"/>
+        <metrics statements="22" coveredstatements="18" conditionals="6" coveredconditionals="4" methods="10" coveredmethods="8"/>
         <file name="NowTimeForm.js" path="/home/ialy/sw/cat/front/CAT-your-internet-usage/front-end/client/components/nowTime/NowTimeForm.js">
-          <metrics statements="17" coveredstatements="9" conditionals="6" coveredconditionals="4" methods="7" coveredmethods="4"/>
+          <metrics statements="17" coveredstatements="13" conditionals="6" coveredconditionals="4" methods="7" coveredmethods="5"/>
           <line num="6" count="2" type="stmt"/>
           <line num="8" count="2" type="stmt"/>
-          <line num="14" count="0" type="stmt"/>
-          <line num="15" count="0" type="stmt"/>
-          <line num="16" count="0" type="stmt"/>
-          <line num="17" count="0" type="stmt"/>
-          <line num="21" count="4" type="cond" truecount="2" falsecount="0"/>
-          <line num="22" count="2" type="stmt"/>
+          <line num="14" count="1" type="stmt"/>
+          <line num="15" count="1" type="stmt"/>
+          <line num="16" count="1" type="stmt"/>
+          <line num="17" count="1" type="stmt"/>
+          <line num="21" count="6" type="cond" truecount="2" falsecount="0"/>
+          <line num="22" count="3" type="stmt"/>
           <line num="26" count="2" type="stmt"/>
           <line num="27" count="0" type="stmt"/>
           <line num="32" count="0" type="stmt"/>

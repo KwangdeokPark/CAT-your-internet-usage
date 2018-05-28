@@ -27,8 +27,23 @@ describe('NowTimeForm', () => {
     stateUser: testStateUser,
   }
 
+  component = mount( <NowTimeForm {...propsEmpty}/>);
+
   it('should render', () => {
-    component = mount( <NowTimeForm {...propsEmpty}/>);
     expect(component).not.toEqual(null);
   });
+
+  it('should run timestring correctly', () => {
+    expect(component.instance().timeString(3723000)).toEqual("1h 2m 3s")
+  });
+
+  it('should run isLogin correctly when undefined', () =>{
+    const prop = { stateUser: undefined }
+    expect(component.instance().isLogin(prop)).toEqual(false)
+  })
+
+  it('should run isLogin correctly when not undefined', () =>{
+    const prop = { stateUser: { isAuthenticated: true } }
+    expect(component.instance().isLogin(prop)).toEqual(true)
+  })
 });
