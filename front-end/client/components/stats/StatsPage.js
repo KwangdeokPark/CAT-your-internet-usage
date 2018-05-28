@@ -12,7 +12,7 @@ class StatsPage extends React.Component{
           {
             label: 'hour',
             data: [
-              100,
+              0,
               0,
               0,
               0,
