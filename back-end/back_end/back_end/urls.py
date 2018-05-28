@@ -20,7 +20,7 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 urlpatterns = [
     url(r'^users/$', UserDetail.as_view()),
-    url(r'^users/(?P<user_id>[0-9]+)/$', UserDetail.as_view()),
+    url(r'^users/(?P<user_id>[0-9]+)/$', user_detail),
     url(r'^admin/', admin.site.urls),
     url(r'^sign_in/$', signin, name='signin'),   # sign in page
     url(r'^sign_up/$', signup, name='signup'),   # sign up page
