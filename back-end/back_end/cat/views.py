@@ -46,9 +46,11 @@ def user_detail(request, user_id):
         return Response(serialized, status=200)
     elif request.method == "PUT":
         catuser = CatUser.objects.get(user=User.objects.get(id=user_id))
-        catuser.today_spent_time = request.data['today_spent_time']
+        if request.data.get('today_spent_time', None) != None:
+            catuser.today_spent_time = request.data['today_spent_time']
         catuser.last_record_time = request.data['last_record_time']
-        catuser.now_start_time = request.data['now_start_time']
+        if request.data.get('now_start_time', None) != None:
+            catuser.now_start_time = request.data['now_start_time']
         serialized = CatUserSerializer(instance=catuser).data
         serialized['username'] = catuser.user.username
         serialized['setting'] = SettingSerializer(instance=catuser.setting).data
@@ -181,17 +183,23 @@ def timeline_detail(request, user_id, group_id):
         print(request.data)
         #CatUser.objects.filter(user=User.objects.get(id=user_id)).order_by()
         user = User.objects.get(id=user_id)
+        catuser = CatUser.objects.get(user=user)
         group = Group.objects.get(id=group_id)
         #all_user = list(CatUser.objects.filter(group=group).order_by('timeline__total_average'))
-        all_user = group.members.order_by('timeline__total_average')
-        min_time = all_user[0].timeline['total_average']
-        max_time = all_user[-1].timeline['total_average']
+        all_user = list(group.members.order_by('timeline__total_average'))
+        #for item in all_user:
+            #item = CatUserSerializer(item)
+        #print(all_user[0].timeline.total_average)
+        min_time = all_user[0].timeline.total_average
+        max_time = all_user[-1].timeline.total_average
         step = (max_time - min_time) / 10
-        num = [0] * 11  #[0, (1/10), (2/10), ... (9/10), (10/10)]
-        percent = (1 - (all_user.index(user) / len(all_user))) * 100
+        num = [0] * 12  #[0, (1/10), (2/10), ... (9/10), (10/10)]
+        percent = (1 - (all_user.index(catuser) / len(all_user))) * 100
         tmp = 1
-        for i in len(all_user):
+        print(step)
+        for i in range(0,len(all_user)):
             if all_user[i].timeline.total_average >= tmp * step:
+                print(tmp)
                 num[tmp] = i
                 tmp = tmp + 1
         stats = [0] * 10
