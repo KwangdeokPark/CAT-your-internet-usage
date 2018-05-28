@@ -198,9 +198,8 @@ def timeline_detail(request, user_id, group_id):
         min_time = all_user[0].timeline.total_average
         max_time = all_user[-1].timeline.total_average
         step = (max_time - min_time) / 10
-        num = [0] * 12  #[0, (1/10), (2/10), ... (9/10), (10/10)]
         percent = (1 - (all_user.index(catuser) / len(all_user))) * 100
-        tmp = 1
+        '''
         print(step)
         for i in range(0,len(all_user)):
             print(TimelineSerializer(all_user[i].timeline).data)
@@ -210,7 +209,31 @@ def timeline_detail(request, user_id, group_id):
                 tmp = tmp + 1
         stats = [0] * 10
         for i in range(0, 10):
-            stats[i] = ((num[i+1] - num[i]) / len(all_user)) * 100
+            stats[i] = ((num[i+1] - num[i]) / len(all_user)) * 100'''
+        stats = [0] * 10
+        for i in all_user:
+            time = i.timeline.total_average
+            if time <= step:
+                stats[0] = stats[0] + 1
+            elif step < time and time <= step * 2:
+                stats[1] = stats[1] + 1
+            elif step * 2 < time and time <= step * 3:
+                stats[2] = stats[2] + 1
+            elif step * 3 < time and time <= step * 4:
+                stats[3] = stats[3] + 1
+            elif step * 4 < time and time <= step * 5:
+                stats[4] = stats[4] + 1
+            elif step * 5 < time and time <= step * 6:
+                stats[5] = stats[5] + 1
+            elif step * 6 < time and time <= step * 7:
+                stats[6] = stats[6] + 1
+            elif step * 7 < time and time <= step * 8:
+                stats[7] = stats[7] + 1
+            elif step * 8 < time and time <= step * 9:
+                stats[8] = stats[8] + 1
+            else:
+                stats[9] = stats[9] + 1
+
         return Response({'percentage': percent,
                          'max': max_time,
                          'min': min_time,
