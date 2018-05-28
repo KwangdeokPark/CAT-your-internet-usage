@@ -44,7 +44,7 @@ class NavigationBar extends React.Component {
 
 NavigationBar.propTypes = {
   user: React.PropTypes.object.isRequired,
-  logout: React.PropTypes.object.isRequired
+  logout: React.PropTypes.func.isRequired
 }
 
 function mapStateToProps(state){

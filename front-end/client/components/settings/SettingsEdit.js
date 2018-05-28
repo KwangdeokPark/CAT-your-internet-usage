@@ -6,12 +6,14 @@ import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { addFlashMessage } from '../../actions/flashMessages';
 import { putSetting } from '../../actions/userActions';
+import axios from 'axios';
 
 class SettingsEdit extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      id:'',
+      username:localStorage.getItem('username'),
+      setting_id:'',
       alert_start_time:'',
       alert_interval:'',
       errors:{},
@@ -19,6 +21,14 @@ class SettingsEdit extends React.Component{
     }
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentWillMount() {
+    axios.post('http://127.0.0.1:8000/users/',this.state)
+         .then(response => this.setState({
+           setting_id: response.data.id,
+         }))
+         .catch(err => console.log(err))
   }
 
   onChange(e) {
@@ -29,23 +39,18 @@ class SettingsEdit extends React.Component{
     e.preventDefault();
 
     if (this.isValid()) {
-      this.setState({ errors: {}, isLoading: true });
-      this.props.putSetting(this.state).then(
-        () => {
-          this.props.addFlashMessage({
-            type: 'success',
-            text: 'Succeffully changed setting!'
-          });
-          this.context.router.push('/main');
-        },
-        (err) => {
-          this.props.addFlashMessage({
-            type: 'error',
-            text: 'Sorry. Try Again!'
-          });
-          this.setState({ errors: err.response.data, isLoading: false })
-        }
-      );
+      this.setState({ errors: {}, isLoading:true });
+      const settingurl = 'http://127.0.0.1:8000/setting/';
+      const settingId = this.state.setting_id;
+      let url = `${settingurl}${settingId}/`;
+      axios.put(url, {
+        alert_start_time: this.state.alertStartTime,
+        alert_interval: this.state.alertInterval
+      }).then(res => {
+        console.log(res.status);
+        this.context.router.push('/main');
+      }).catch(res => {console.log(res.error); this.context.router.push('/main');});
+
     }
   }
 

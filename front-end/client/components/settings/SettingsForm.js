@@ -21,7 +21,6 @@ class SettingsForm extends React.Component{
   }
 
   componentWillMount() {
-
     axios.post('http://127.0.0.1:8000/users/',this.state)
          .then(response => this.setState({
            alert_start_time: response.data.setting.alert_start_time/3600000,
@@ -38,7 +37,7 @@ class SettingsForm extends React.Component{
     const { errors }=this.state;
     return(
       <form>
-        <h1>Settings</h1>
+        <h1>Current Settings</h1>
 
         <div >
           <label className="control-label">Alert Start Time:  After {this.state.alert_start_time} hours</label>
@@ -49,7 +48,7 @@ class SettingsForm extends React.Component{
         </div>
 
         <div className="form-group">
-          <button type="button" className="btn btn-primary btn-lg" onClick={this.onClickButton}>
+          <button className="btn btn-primary btn-lg" onClick={this.onClickButton}>
             Edit
           </button>
         </div>
