@@ -50,7 +50,8 @@ class TimelineSerializer(serializers.ModelSerializer):
                   'fri_average',
                   'fri_count',
                   'sat_average',
-                  'sat_count',)
+                  'sat_count',
+                  'total_average')
 
 class SettingSerializer(serializers.ModelSerializer):
    class Meta:
