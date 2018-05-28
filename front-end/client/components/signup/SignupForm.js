@@ -34,10 +34,10 @@ class SignupForm extends React.Component{
     return isValid;
   }
 
-  onSubmit(e){
+  onSubmit(e) {
     e.preventDefault();
 
-    if(this.isValid()) {
+    if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
       this.props.userSignupRequest(this.state).then(
         () => {
@@ -45,13 +45,18 @@ class SignupForm extends React.Component{
             type: 'success',
             text: 'You signed up successfully. Welcome!'
           });
-          this.context.router.push('/');
+          this.context.router.push('/main');
+          localStorage.setItem('id',this.state.id);
         },
-        ({ data }) => this.setState({ errors:data, isLoading:false })
+        (err) => {
+          this.props.addFlashMessage({
+            type: 'error',
+            text: 'Try Again!'
+          });
+          this.setState({ errors: err.response.data, isLoading: false })
+        }
       );
     }
-    //console.log(this.state);
-    //axios.post('/api/users',{user: this.state });
   }
 
   render(){
@@ -85,7 +90,6 @@ class SignupForm extends React.Component{
           field="password2"
           type="password"
         />
-
 
         <div className={classnames("form-group", {'has-error':errors.age})}>
         <label className="control-label">Age</label>
@@ -141,7 +145,7 @@ class SignupForm extends React.Component{
         </div>
 
         <div className="form-group">
-          <button disabled={this.state.isLoading} className="btn btn-primary btn-lg">
+          <button  className="btn btn-primary btn-lg">
             Sign up
           </button>
         </div>
@@ -153,6 +157,10 @@ class SignupForm extends React.Component{
 SignupForm.propTypes = {
   userSignupRequest: React.PropTypes.func.isRequired,
   addFlashMessage: React.PropTypes.func.isRequired
+}
+
+SignupForm.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 export default SignupForm;
