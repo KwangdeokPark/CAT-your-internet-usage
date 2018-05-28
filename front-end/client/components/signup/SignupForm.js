@@ -45,7 +45,7 @@ class SignupForm extends React.Component{
             type: 'success',
             text: 'You signed up successfully. Welcome!'
           });
-          this.context.router.push('/main');
+          this.context.router.push('/sign_in');
         },
         (err) => {
           this.props.addFlashMessage({
@@ -89,7 +89,6 @@ class SignupForm extends React.Component{
           field="password2"
           type="password"
         />
-
 
         <div className={classnames("form-group", {'has-error':errors.age})}>
         <label className="control-label">Age</label>

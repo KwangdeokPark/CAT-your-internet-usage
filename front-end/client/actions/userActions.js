@@ -3,10 +3,11 @@ import axios from 'axios';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 import jwt from 'jsonwebtoken';
 import { SET_CURRENT_USER, LOGOUT, NOTHING } from './types';
+import { SET_CURRENT_USER_SETTING } from './types';
 
 const signinUrl = 'http://127.0.0.1:8000/sign_in/'
 const userUrl = 'http://127.0.0.1:8000/users/'
-const timelineUrl = 'htt[://127.0.1:8000/timeline/'
+const settingUrl = 'http://127.0.0.1:8000/settings/'
 
 export function setCurrentUser(user){
   return {
@@ -24,6 +25,13 @@ export function logoutUser(){
 export function nothing(){
   return {
     type: NOTHING
+  }
+}
+
+export function setCurrentUserSetting(setting){
+  return {
+    type: SET_CURRENT_USER_SETTING,
+    setting: setting
   };
 }
 
@@ -31,7 +39,9 @@ export function logout(){
   return dispatch => {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('id');
+    localStorage.setItem('username','');
     setAuthorizationToken(false);
+    //dispatch(setCurrentUser({}));
     dispatch(logoutUser());
   }
 }
@@ -168,5 +178,18 @@ export function putTimeline(id, todayTime, day, newUser, nowTime){
   catch(e)
   {
     console.log(e);
+  }
+}
+
+export function putSetting(id, alertStartTime, alertInterval){
+  let url = `${settingUrl}${id}/`;
+
+  return dispatch => {
+    return axios.put(url, {
+      alert_start_time: alertStartTime,
+      alert_interval: alertInterval
+    }).then(res => {
+      dispatch(setCurrentUserSetting(res.data));
+    });
   }
 }

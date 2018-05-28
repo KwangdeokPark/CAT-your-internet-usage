@@ -8,6 +8,7 @@ import rootReducer from './rootReducer';
 import setAuthorizationToken from './utils/setAuthorizationToken';
 import jwt from 'jsonwebtoken';
 import { setCurrentUserById } from './actions/userActions';
+import { setCurrentUser } from './actions/userActions';
 
 import routes from './routes';
 
