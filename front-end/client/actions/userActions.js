@@ -50,8 +50,6 @@ export function login(data){
         last_record_time: res.data.user.last_record_time,
         now_start_time: res.data.user.now_start_time
       }
-      console.log("login data");
-      console.log(newUserData);
       dispatch(setCurrentUser(newUserData));
     });
   }
@@ -99,8 +97,6 @@ export function putToday(id, todayTime, nowTime){
         last_record_time: res.data.last_record_time,
         now_start_time: res.data.now_start_time
       }
-      console.log("today daata");
-      console.log(newUserData);
       dispatch(setCurrentUser(newUserData));
     });
   }

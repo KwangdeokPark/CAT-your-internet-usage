@@ -16,8 +16,6 @@ class NavigationBarForm extends React.Component {
   checkRecord(prop) {
     let nt = new Date();
     let dt = nt - (new Date(prop.stateUser.user.last_record_time)) + 100;
-    console.log("dt");
-    console.log(dt);
     if(dt > 3000) {
       let spent = (new Date(prop.stateUser.user.last_record_time)) - (new Date(prop.stateUser.user.now_start_time));
       prop.onPutToday(prop.stateUser.user.id, spent + prop.stateUser.user.today_spent_time, nt.toISOString());
