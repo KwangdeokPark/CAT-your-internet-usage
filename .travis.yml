@@ -1,0 +1,13 @@
+matrix:
+	include:
+		- language: node_js
+		  node_js: - v6
+		  before script:
+		  	- cd front-end/
+		  script:
+		    - npm test -- --coverage
+		  sudo: false
+		  cache:
+		    - yarn
+		  after success:
+		    - bash <(curl -s https://codecov.io/bash)
