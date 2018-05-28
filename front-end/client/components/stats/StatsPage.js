@@ -2,8 +2,6 @@ import React from 'react';
 import {Bar, Line, Pie} from 'react-chartjs-2';
 import axios from 'axios';
 
-
-
 class StatsPage extends React.Component{
   constructor(props){
     super(props);
@@ -12,9 +10,9 @@ class StatsPage extends React.Component{
         labels: ['Sun', 'Mon', 'Tue', 'Wed','Thu', 'Fri', 'Sat'],
         datasets: [
           {
-            label: 'time',
+            label: 'hour',
             data: [
-              0,
+              100,
               0,
               0,
               0,
@@ -56,7 +54,7 @@ class StatsPage extends React.Component{
               labels: ['Sun', 'Mon', 'Tue', 'Wed','Thu', 'Fri', 'Sat'],
               datasets:[
                 {
-                  label:'time',
+                  label:'hour',
                   data:[
                     res.data.sun_average,
                     res.data.mon_average,
