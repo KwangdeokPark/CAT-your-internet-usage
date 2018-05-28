@@ -30,10 +30,29 @@ export function nothing(){
 export function logout(){
   return dispatch => {
     localStorage.removeItem('jwtToken');
+    localStorage.removeItem('id');
     setAuthorizationToken(false);
     dispatch(logoutUser());
   }
 }
+
+export function setCurrentUserById(id) {
+  let url = `${userUrl}${id}/`
+  
+  return dispatch => {
+    return axios.get(url).then(res => {
+      let newUserData = {
+        id: res.data.id,
+        username: res.data.username,
+        today_spent_time: res.data.today_spent_time,
+        last_record_time: res.data.last_record_time,
+        now_start_time: res.data.now_start_time
+      }
+      dispatch(setCurrentUser(newUserData));
+    });
+  }
+}
+
 
 export function login(data){
   let url = `${signinUrl}`;
@@ -42,6 +61,7 @@ export function login(data){
     return axios.post(url,data).then(res=> {
       const token = res.data.token;
       localStorage.setItem('jwtToken', token);
+      localStorage.setItem('id', res.data.user.id);
       setAuthorizationToken(token);
       let newUserData = {
         id: res.data.user.id,
