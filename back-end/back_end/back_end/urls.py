@@ -20,12 +20,13 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 urlpatterns = [
     url(r'^users/$', UserDetail.as_view()),
+    url(r'^users/(?P<user_id>[0-9]+)/$', UserDetail.as_view()),
     url(r'^admin/', admin.site.urls),
     url(r'^sign_in/$', signin, name='signin'),   # sign in page
     url(r'^sign_up/$', signup, name='signup'),   # sign up page
     url(r'^timeline/(?P<user_id>[0-9]+)/$', timeline_total),
     url(r'^timeline/(?P<user_id>[0-9]+)/group/(?P<group_id>[0-9]+)/$', timeline_detail),
-    url(r'^setting/(?P<user_id>[0-9]+)/$', setting),   #settings page
+    url(r'^setting/(?P<user_id>[0-9]+)/$', setting_detail),   #settings page
     #url(r'^main/$', , name='main'),  # main page
     #url(r'^group/$', ), # group list page
     #url(r'^group/(?P<pk>[0-9]+)/$', ),  # group detail page
