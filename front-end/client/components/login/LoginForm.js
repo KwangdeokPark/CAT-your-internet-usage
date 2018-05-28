@@ -35,10 +35,11 @@ class LoginForm extends React.Component {
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
       this.props.login(this.state).then(
-        () => {
+        (res) => {
           this.props.addFlashMessage({
             type: 'success',
             text: 'You signed in successfully. Hi!'
+
           });
           this.context.router.push('/main');
           localStorage.setItem('username',this.state.username);

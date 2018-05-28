@@ -32,6 +32,7 @@ export function logoutUser(){
 export function logout(){
   return dispatch => {
     localStorage.removeItem('jwtToken');
+    localStorage.setItem('username','');
     setAuthorizationToken(false);
     //dispatch(setCurrentUser({}));
     dispatch(logoutUser());
@@ -44,7 +45,11 @@ export function login(data){
   return dispatch =>{
     return axios.post(url,data).then(res=> {
       const token = res.data.token;
+
       localStorage.setItem('jwtToken', token);
+      //console.log(res);
+      localStorage.setItem('id',res.data.user.id);
+
       setAuthorizationToken(token);
       dispatch(setCurrentUser(jwt.decode(token)));
     });
