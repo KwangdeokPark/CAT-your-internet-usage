@@ -123,6 +123,8 @@ for i in range(0, userN):
 	decode_token = jwt.decode(token, 'SECRET', algorithms=['HS256'])
 	#print({'token': jwt.encode({'username':username, 'password':password}, 'SECRET', algorithm='HS256')})
 	print("\tsame? {0}. {1}".format((decode_token == payload), payload))
+	if decode_token != payload:
+		exit(1)
 print("******************************************************************************************************************")
 print("3. Checking users http://localhost:8000/users/.")
 users = []
@@ -130,16 +132,8 @@ link = "http://localhost:8000/users/"
 for i in range(0, userN):
 	username = usernames[i]
 	age = proms[i]['age']
-	alert_start_time = proms[i]['alert_start_time']
-	if alert_start_time < 10:
-		alert_start_time = '0' + str(alert_start_time) + ':00:00'
-	else:
-		alert_start_time = str(alert_start_time) + ':00:00'
-	alert_interval = proms[i]['alert_interval']
-	if alert_interval < 10:
-		alert_interval = '00:0' + str(alert_interval) + ':00'
-	else:
-		alert_interval = '00:' + str(alert_interval) + ':00'
+	alert_start_time = proms[i]['alert_start_time']*60*60*1000
+	alert_interval = proms[i]['alert_interval']*60*1000
 	payload = {'username': username}
 	result = post_json_or_error_new(link, payload)
 	#print(result)
@@ -147,5 +141,6 @@ for i in range(0, userN):
 		print('\t'+ username + '\'s information is same (username: ' + result['user']['username'] + '  age: ' + result['age'] + '  alert_start_time: ' + result['setting']['alert_start_time'] + '  alert_interval: ' + result['setting']['alert_interval'])
 	else:
 		print('\t'+username + '\'s information is wrong')
+		exit(1)
 
 print("TEST SUCCESSFUL (further tests will be added)")
