@@ -1,22 +1,26 @@
 import React from 'react';
 import {Bar, Line, Pie} from 'react-chartjs-2';
+import axios from 'axios';
+
+
 
 class StatsPage extends React.Component{
   constructor(props){
     super(props);
     this.state = {
       chartData:{
-        labels: ['Boston', 'Worcester', 'SpringField', 'Lowell', 'Cambridge', 'New Bedford'],
+        labels: ['Sun', 'Mon', 'Tue', 'Wed','Thu', 'Fri', 'Sat'],
         datasets: [
           {
-            label: 'Population',
+            label: 'time',
             data: [
-              617594,
-              181045,
-              153060,
-              106519,
-              105162,
-              95062
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
             ],
             backgroundColor: [
               'rgba(255, 99, 132, 0.6)',
@@ -33,12 +37,65 @@ class StatsPage extends React.Component{
     }
   }
 
+  componentWillMount() {
+    axios.post('http://127.0.0.1:8000/users/',this.state)
+         .then(response => this.setState({
+           alert_start_time: response.data.setting.alert_start_time/3600000,
+           alert_interval: response.data.setting.alert_interval/60000
+         }))
+         .catch(err => console.log(err))
+  }
+
+  componentWillMount() {
+    const timelineUrl = 'http://127.0.0.1:8000/timeline/';
+    const Id = localStorage.getItem('id');
+    let url = `${timelineUrl}${Id}/`;
+    axios.get(url)
+         .then(res => this.setState({
+           chartData:{
+              labels: ['Sun', 'Mon', 'Tue', 'Wed','Thu', 'Fri', 'Sat'],
+              datasets:[
+                {
+                  label:'time',
+                  data:[
+                    res.data.sun_average,
+                    res.data.mon_average,
+                    res.data.tue_average,
+                    res.data.wed_average,
+                    res.data.thu_average,
+                    res.data.fri_average,
+                    res.data.sat_average
+                  ],
+                  backgroundColor:[
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)',
+                    'rgba(255, 99, 132, 0.6)'
+                  ]
+                }
+              ]
+         }}))
+         .catch(err => console.log(err))
+  }
+
   render(){
     return (
       <div className = "chart">
       <Bar
         data={this.state.chartData}
         options={{
+          title:{
+            display:true,
+            text:'Daily internet usage time',
+            fontSize:25
+          },
+          legend:{
+            display: true,
+            position:'right'
+          },
           maintainAspectRatio: false
         }}
       />
