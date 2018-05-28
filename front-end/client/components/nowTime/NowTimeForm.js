@@ -51,8 +51,6 @@ class NowTimeForm extends React.Component {
                   <p1>Hi, {this.props.stateUser.user.username}</p1><br/>
                   <h1>You now use {this.timeString(dt)}</h1><br/>
                   <h1>You today use {this.timeString(dt + tt)}</h1><br/>
-                  <h1>{this.props.stateUser.user.last_record_time}</h1><br/>
-                  <h1>{this.props.stateUser.user.now_start_time}</h1><br/>
                 </div>
               )
             : (

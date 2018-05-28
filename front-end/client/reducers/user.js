@@ -9,8 +9,6 @@ const initialState = {
     today_spent_time: '',
     last_record_time: '',
     now_start_time: '',
-    setting_id: '',
-    timeline_id: '',
   }
 };
 

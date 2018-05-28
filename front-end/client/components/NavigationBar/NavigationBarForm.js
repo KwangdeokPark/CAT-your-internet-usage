@@ -19,9 +19,7 @@ class NavigationBarForm extends React.Component {
     console.log("dt");
     console.log(dt);
     if(dt > 3000) {
-      console.log("putToday");
       let spent = (new Date(prop.stateUser.user.last_record_time)) - (new Date(prop.stateUser.user.now_start_time));
-      console.log(""+prop.stateUser.user.id + " " + spent + prop.stateUser.user.today_spent_time + " " + nt.toISOString());
       prop.onPutToday(prop.stateUser.user.id, spent + prop.stateUser.user.today_spent_time, nt.toISOString());
     } 
   } 

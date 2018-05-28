@@ -43,9 +43,16 @@ export function login(data){
       const token = res.data.token;
       localStorage.setItem('jwtToken', token);
       setAuthorizationToken(token);
-      console.log("login user data");
-      console.log(res.data.user);
-      dispatch(setCurrentUser(res.data.user));
+      let newUserData = {
+        id: res.data.user.id,
+        username: res.data.user.username,
+        today_spent_time: res.data.user.today_spent_time,
+        last_record_time: res.data.user.last_record_time,
+        now_start_time: res.data.user.now_start_time
+      }
+      console.log("login data");
+      console.log(newUserData);
+      dispatch(setCurrentUser(newUserData));
     });
   }
 }
@@ -63,14 +70,20 @@ export function putLast(id, lastTime, logOut){
   else {
     return dispatch => {
       return axios.put(url, {last_record_time: lastTime}).then(res => {
-        dispatch(setCurrentUser(res.data));
+        let newUserData = {
+          id: res.data.id,
+          username: res.data.username,
+          today_spent_time: res.data.today_spent_time,
+          last_record_time: res.data.last_record_time,
+          now_start_time: res.data.now_start_time
+        }
+        dispatch(setCurrentUser(newUserData));
       });
     };
   }
 }
 
 export function putToday(id, todayTime, nowTime){
-  console.log("put today action "+id+" "+todayTime+" "+nowTime);
   let url = `${userUrl}${id}/`;
 
   return dispatch => {
@@ -79,7 +92,16 @@ export function putToday(id, todayTime, nowTime){
       last_record_time: nowTime,
       now_start_time: nowTime
     }).then(res => {
-      dispatch(setCurrentUser(res.data));
+      let newUserData = {
+        id: res.data.id,
+        username: res.data.username,
+        today_spent_time: res.data.today_spent_time,
+        last_record_time: res.data.last_record_time,
+        now_start_time: res.data.now_start_time
+      }
+      console.log("today daata");
+      console.log(newUserData);
+      dispatch(setCurrentUser(newUserData));
     });
   }
 }
