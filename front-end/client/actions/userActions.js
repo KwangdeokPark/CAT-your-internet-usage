@@ -8,6 +8,7 @@ import { SET_CURRENT_USER_SETTING } from './types';
 const signinUrl = 'http://127.0.0.1:8000/sign_in/'
 const userUrl = 'http://127.0.0.1:8000/users/'
 const settingUrl = 'http://127.0.0.1:8000/settings/'
+const timelineUrl = 'http://127.0.0.1:8000/timeline/'
 
 export function setCurrentUser(user){
   return {
@@ -133,7 +134,7 @@ export function putToday(id, todayTime, nowTime){
 }
 
 export function putTimeline(id, todayTime, day, newUser, nowTime){
-  let url = `${timelineUrl}${id}`;
+  let url = `${timelineUrl}${id}/`;
   let putData;
 
   try {
