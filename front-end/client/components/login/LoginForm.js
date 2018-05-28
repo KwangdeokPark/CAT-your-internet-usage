@@ -2,7 +2,7 @@ import React from 'react';
 import TextFieldGroup from '../common/TextFieldGroup';
 import validateInput from '../../../server/shared/validations/login';
 import { connect } from 'react-redux';
-import { login } from '../../actions/authActions';
+import { login } from '../../actions/userActions';
 import { addFlashMessage } from '../../actions/flashMessages';
 
 class LoginForm extends React.Component {
@@ -18,6 +18,7 @@ class LoginForm extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
+
 
   isValid() {
     const { errors, isValid } = validateInput(this.state);
@@ -40,6 +41,7 @@ class LoginForm extends React.Component {
             text: 'You signed in successfully. Hi!'
           });
           this.context.router.push('/main');
+          localStorage.setItem('username',this.state.username);
         },
         (err) => {
           this.props.addFlashMessage({

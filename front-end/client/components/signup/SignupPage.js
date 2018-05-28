@@ -6,7 +6,7 @@ import { addFlashMessage } from '../../actions/flashMessages';
 
 class SignupPage extends React.Component{
   render(){
-    const { userSignupRequest, addFlashMessage } = this.props;
+    const { userSignupRequest, addFlashMessage} = this.props;
     return(
       <div className="row">
         <div className="col-md-4 col-md-offset-4">
@@ -22,4 +22,4 @@ SignupPage.propTypes = {
   addFlashMessage: React.PropTypes.func.isRequired
 }
 
-export default connect(null,{ userSignupRequest, addFlashMessage })(SignupPage);
+export default connect(null,{ userSignupRequest, addFlashMessage})(SignupPage);
