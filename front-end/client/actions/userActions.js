@@ -53,8 +53,6 @@ export function login(data){
 export function putLast(id, lastTime, logOut){
   let url = `${userUrl}${id}/`;
 
-  console.log("put last");
-
   if(logOut) {
     return dispatch => {
       return axios.put(url, {last_record_time: lastTime}).then(res => {
