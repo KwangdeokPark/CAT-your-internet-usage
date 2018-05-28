@@ -53,6 +53,8 @@ export function login(data){
 export function putLast(id, lastTime, logOut){
   let url = `${userUrl}${id}/`;
 
+  console.log("put last");
+
   if(logOut) {
     return dispatch => {
       return axios.put(url, {last_record_time: lastTime}).then(res => {
@@ -63,13 +65,14 @@ export function putLast(id, lastTime, logOut){
   else {
     return dispatch => {
       return axios.put(url, {last_record_time: lastTime}).then(res => {
-        dispatch(setCurrentUserTest(res.data));
+        dispatch(setCurrentUser(res.data));
       });
     };
   }
 }
 
 export function putToday(id, todayTime, nowTime){
+  console.log("put today action "+id+" "+todayTime+" "+nowTime);
   let url = `${userUrl}${id}/`;
 
   return dispatch => {
@@ -78,7 +81,7 @@ export function putToday(id, todayTime, nowTime){
       last_record_time: nowTime,
       now_start_time: nowTime
     }).then(res => {
-      dispatch(setCurrentUserTest(res.data));
+      dispatch(setCurrentUser(res.data));
     });
   }
 }

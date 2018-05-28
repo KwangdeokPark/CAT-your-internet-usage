@@ -22,13 +22,13 @@ class NowTimeForm extends React.Component {
     return prop.stateUser.isAuthenticated;
   }
 
-  conponentDidMount() {
+  componentDidMount() {
     this.interval = setInterval(() => {
       this.setState({nowTime: new Date()});
     }, 500);
   }
 
-  conponentWillUnmount() {
+  componentWillUnmount() {
     clearInterval(this.interval)
   }
 
@@ -50,7 +50,9 @@ class NowTimeForm extends React.Component {
                 <div>
                   <p1>Hi, {this.props.stateUser.user.username}</p1><br/>
                   <h1>You now use {this.timeString(dt)}</h1><br/>
-                  <h1>You today use {this.timeString(dt + tt)}</h1>
+                  <h1>You today use {this.timeString(dt + tt)}</h1><br/>
+                  <h1>{this.props.stateUser.user.last_record_time}</h1><br/>
+                  <h1>{this.props.stateUser.user.now_start_time}</h1><br/>
                 </div>
               )
             : (

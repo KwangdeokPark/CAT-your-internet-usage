@@ -2,13 +2,6 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 class NavigationBarForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      nowTime: new Date()
-    }
-  }
   
   logout(e){
     e.preventDefault();
@@ -22,14 +15,18 @@ class NavigationBarForm extends React.Component {
 
   checkRecord(prop) {
     let nt = new Date();
-    let dt = nt - (new Date(prop.stateUser.last_record_time)) + 100;
-    if(dt > 5000) {
-      let spent = (new Date(prop.stateUser.last_record_time)) - (new Date(prop.stateUser.now_start_time));
-      prop.onPutToday(prop.stateUser.id, spent + prop.stateUser.today_spent_time, nt.toISOString());
+    let dt = nt - (new Date(prop.stateUser.user.last_record_time)) + 100;
+    console.log("dt");
+    console.log(dt);
+    if(dt > 3000) {
+      console.log("putToday");
+      let spent = (new Date(prop.stateUser.user.last_record_time)) - (new Date(prop.stateUser.user.now_start_time));
+      console.log(""+prop.stateUser.user.id + " " + spent + prop.stateUser.user.today_spent_time + " " + nt.toISOString());
+      prop.onPutToday(prop.stateUser.user.id, spent + prop.stateUser.user.today_spent_time, nt.toISOString());
     } 
   } 
   
-  componentDidMount() {        
+  componentDidMount() {
     if(this.isLogin(this.props)) {
       this.checkRecord(this.props); 
     }   
@@ -37,7 +34,6 @@ class NavigationBarForm extends React.Component {
       if(this.isLogin(this.props)) {
         this.props.onPutLast(this.props.stateUser.user.id, (new Date()).toISOString(), false);
       }
-      this.setState({nowTime: new Date()});
     }, 500);
   } 
       
