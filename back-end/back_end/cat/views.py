@@ -10,7 +10,7 @@ from cat.forms import SignUpForm
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 
-#temp
+
 class UserDetail(generics.RetrieveAPIView):
     queryset = CatUser.objects.all()
     serializer_class = CatUserSerializer
