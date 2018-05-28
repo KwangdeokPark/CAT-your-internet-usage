@@ -46,9 +46,9 @@ def user_detail(request, user_id):
         return Response(serialized, status=200)
     elif request.method == "PUT":
         catuser = CatUser.objects.get(user=User.objects.get(id=user_id))
+        catuser.last_record_time = request.data['last_record_time']
         if request.data.get('today_spent_time', None) != None:
             catuser.today_spent_time = request.data['today_spent_time']
-        catuser.last_record_time = request.data['last_record_time']
         if request.data.get('now_start_time', None) != None:
             catuser.now_start_time = request.data['now_start_time']
         serialized = CatUserSerializer(instance=catuser).data
@@ -58,6 +58,7 @@ def user_detail(request, user_id):
         serialized['user'] = {'username': catuser.user.username}
         serialized['setting_id'] = SettingSerializer(instance=catuser.setting).data['id']
         serialized['timeline_id'] = TimelineSerializer(instance=catuser.timeline).data['id']
+        catuser.save()
         return Response(serialized, status=200)
 
 @api_view(['POST'])
@@ -155,7 +156,8 @@ def timeline_total(request, user_id):
         serialized = TimelineSerializer(instance=CatUser.objects.get(user=User.objects.get(id=user_id)).timeline).data
         return Response(serialized, status=200)
     elif request.method == "PUT":
-        timeline = CatUser.objects.get(user=User.objects.get(id=user_id)).timeline
+        catuser = CatUser.objects.get(user=User.objects.get(id=user_id))
+        timeline = catuser.timeline
         timeline.sun_average = request.data['sun_average']
         timeline.mon_average = request.data['mon_average']
         timeline.tue_average = request.data['tue_average']
@@ -174,7 +176,10 @@ def timeline_total(request, user_id):
                                   + timeline.tue_average + timeline.wed_average
                                   + timeline.thu_average + timeline.fri_average
                                   + timeline.sat_average) / 7
-        return Response(status=200)
+        timeline.save()
+        catuser.timeline = timeline
+        catuser.save()
+        return Response(TimelineSerializer(catuser.timeline).data, status=200)
 
 @api_view(['GET'])
 @csrf_exempt
@@ -198,6 +203,7 @@ def timeline_detail(request, user_id, group_id):
         tmp = 1
         print(step)
         for i in range(0,len(all_user)):
+            print(TimelineSerializer(all_user[i].timeline).data)
             if all_user[i].timeline.total_average >= tmp * step:
                 print(tmp)
                 num[tmp] = i
@@ -226,9 +232,14 @@ def setting_detail(request, user_id):
         serialized = SettingSerializer(instance=CatUser.objects.get(user=User.objects.get(id=user_id)).setting).data
         return Response(serialized, status=200)
     elif request.method == "PUT":
-        item = CatUser.objects.get(user=User.objects.get(id=user_id)).setting
-        item.alert_interval = request.data['alert_interval']
-        item.alert_start_time = request.data['alert_start_time']
-        return Response(status=200)
+        catuser = CatUser.objects.get(user=User.objects.get(id=user_id))
+        setting = catuser.setting
+        setting.alert_interval = request.data['alert_interval']
+        setting.alert_start_time = request.data['alert_start_time']
+        setting.save()
+        catuser.setting = setting
+        catuser.save()
+
+        return Response(SettingSerializer(catuser.setting).data, status=200)
 
 
