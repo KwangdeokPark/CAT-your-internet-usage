@@ -47,10 +47,8 @@ class NavigationBarForm extends React.Component {
     }
     else if(this.isLogin(nextProps))
     {
-      let dayp = ((new Date(this.props.stateUser.user.last_record_day)).getDay());
-      let dayn = ((new Date(nextProps.stateUser.user.last_record_day)).getDay());
-      console.log(nextProps);
-      console.log(dayp, dayn);
+      let dayp = ((new Date(this.props.stateUser.user.last_record_time)).getDay());
+      let dayn = ((new Date(nextProps.stateUser.user.last_record_time)).getDay());
       if(dayp != dayn) {
         this.props.onPutTimeline(this.props.stateUser.user.id, 
                                  this.props.stateUser.user.today_spent_time, 

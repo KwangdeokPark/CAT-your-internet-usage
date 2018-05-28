@@ -43,7 +43,9 @@ export function login(data){
       const token = res.data.token;
       localStorage.setItem('jwtToken', token);
       setAuthorizationToken(token);
-      dispatch(setCurrentUser(jwt.decode(token)));
+      console.log("login user data");
+      console.log(res.data.user);
+      dispatch(setCurrentUser(res.data.user));
     });
   }
 }
