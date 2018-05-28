@@ -1,15 +1,35 @@
 
 matrix:	
-		include:
-				- language: node_js
-				  node_js: - v6
-				  before script:
-						 - cd front-end/
-				  script:
-						 - npm test -- --coverage
-				  sudo: false
-		  		  cache:
-		 		    - yarn								
-				  after success:
-		  		    - bash <(curl -s https://codecov.io/bash)
+include:
+	language: node_js
+		node_js: - v6
+	before script:
+		- cd front-end/
+	script:
+		- npm test -- --coverage
+	sudo: false
+	cache:
+		- yarn								
+	after success:
+		- bash <(curl -s https://codecov.io/bash)
+include:
+	language: python
+	python:
+   		 - "3.5"
+    		- "3.6"
+	install:
+    		- pip3 install django djangorestframework
+    		- pip3 install djangorestframework_simplejwt
 
+	script:
+    		- cd back-end/back_end/
+    		- rm -rf db.sqlite3
+    		- rm -rf cat/migrations/
+    		- rm -rf migrations/
+    		- python3 manage.py makemigrations
+    		- python3 manage.py migrate --run-syncdb
+    		- python3 manage.py migrate
+    		- python3 manage.py runserver
+    		- python3 runtest.py
+
+	
