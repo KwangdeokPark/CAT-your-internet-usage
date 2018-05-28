@@ -45,11 +45,18 @@ def user_detail(request, user_id):
         serialized['timeline_id'] = TimelineSerializer(instance=catuser.timeline).data['id']
         return Response(serialized, status=200)
     elif request.method == "PUT":
-        item = CatUser.objects.get(user=User.objects.get(id=user_id))
-        item.today_spent_time = request.data['today_spent_time']
-        item.last_record_time = request.data['last_record_time']
-        item.now_start_time = request.data['now_start_time']
-        return Response(status=200)
+        catuser = CatUser.objects.get(user=User.objects.get(id=user_id))
+        catuser.today_spent_time = request.data['today_spent_time']
+        catuser.last_record_time = request.data['last_record_time']
+        catuser.now_start_time = request.data['now_start_time']
+        serialized = CatUserSerializer(instance=catuser).data
+        serialized['username'] = catuser.user.username
+        serialized['setting'] = SettingSerializer(instance=catuser.setting).data
+        serialized['timeline'] = TimelineSerializer(instance=catuser.timeline).data
+        serialized['user'] = {'username': catuser.user.username}
+        serialized['setting_id'] = SettingSerializer(instance=catuser.setting).data['id']
+        serialized['timeline_id'] = TimelineSerializer(instance=catuser.timeline).data['id']
+        return Response(serialized, status=200)
 
 @api_view(['POST'])
 @csrf_exempt
@@ -176,7 +183,7 @@ def timeline_detail(request, user_id, group_id):
         user = User.objects.get(id=user_id)
         group = Group.objects.get(id=group_id)
         #all_user = list(CatUser.objects.filter(group=group).order_by('timeline__total_average'))
-        all_user = list(group.members.order_by('timeline__total_average'))
+        all_user = group.members.order_by('timeline__total_average')
         min_time = all_user[0].timeline['total_average']
         max_time = all_user[-1].timeline['total_average']
         step = (max_time - min_time) / 10

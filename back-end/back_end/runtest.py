@@ -136,11 +136,10 @@ for i in range(0, userN):
 	alert_interval = proms[i]['alert_interval']*60*1000
 	payload = {'username': username}
 	result = post_json_or_error_new(link, payload)
-	#print(result)
-	if (result['user']['username']==username) and (result['age'] == str(age)) and (result['setting']['alert_start_time']==alert_start_time) and (result['setting']['alert_interval']==alert_interval):
-		print('\t'+ username + '\'s information is same (username: ' + result['user']['username'] + '  age: ' + result['age'] + '  alert_start_time: ' + result['setting']['alert_start_time'] + '  alert_interval: ' + result['setting']['alert_interval'])
+	if (result['user']['username']==username) and (str(result['age'] == str(age))) and (str(result['setting']['alert_start_time'])==str(alert_start_time)) and (str(result['setting']['alert_interval'])==str(alert_interval)):
+		print('\t'+ str(username) + '\'s information is same (username: ' + str(result['user']['username']) + '  age: ' + str(result['age']) + '  alert_start_time: ' + str(result['setting']['alert_start_time']) + '  alert_interval: ' + str(result['setting']['alert_interval']))
 	else:
-		print('\t'+username + '\'s information is wrong')
+		print('\t'+str(username) + '\'s information is wrong')
 		exit(1)
 
 print("TEST SUCCESSFUL (further tests will be added)")
