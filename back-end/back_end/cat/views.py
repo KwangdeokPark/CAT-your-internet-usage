@@ -47,6 +47,9 @@ def user_detail(request, user_id):
         groups = []
         for i in list(Join.objects.filter(catuser_id=catuser.pk)):
             groups.append(GroupSerializer(Group.objects.get(id=i.group_id)).data)
+            members = groups[-1]['members']
+            for j in range(0, len(members)):
+                members[j] = CatUser.objects.get(id=members[j]).user.username
         print(groups)
         serialized['groups'] = groups
         return Response(serialized, status=200)
@@ -270,5 +273,20 @@ def setting_detail(request, user_id):
         catuser.save()
 
         return Response(SettingSerializer(catuser.setting).data, status=200)
+
+
+@api_view(['GET'])
+@csrf_exempt
+def group_all(request):
+    if request.method == "GET":
+        groups = []
+        for group in Group.objects.all():
+            groups.append(GroupSerializer(group).data)
+            members = groups[-1]['members']
+            for j in range(0, len(members)):
+                members[j] = CatUser.objects.get(id=members[j]).user.username
+        print(groups)
+        return Response(groups, status=200)
+
 
 
