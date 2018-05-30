@@ -275,7 +275,7 @@ def setting_detail(request, user_id):
         return Response(SettingSerializer(catuser.setting).data, status=200)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'PUT'])
 @csrf_exempt
 def group_all(request):
     if request.method == "GET":
@@ -287,6 +287,26 @@ def group_all(request):
                 members[j] = CatUser.objects.get(id=members[j]).user.username
         print(groups)
         return Response(groups, status=200)
+    elif request.method == "PUT":
+        # add new group
+        return Response(status=200)
+
+@api_view(['GET', 'PUT', 'DELETE'])
+@csrf_exempt
+def group_detail(request, group_id):
+    if request.method == "GET":
+        group = GroupSerializer(Group.objects.get(id=group_id)).data
+        members = group['members']
+        for j in range(0, len(members)):
+            members[j] = CatUser.objects.get(id=members[j]).user.username
+        print(group)
+        return Response(group, status=200)
+    elif request.method == "PUT":
+        # add new user
+        return Response(status=200)
+    elif request.method == "DELETE":
+        # delete user
+        return  Response(status=200)
 
 
 
