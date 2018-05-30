@@ -33,7 +33,6 @@ urlpatterns = [
     #그룹에 속한 유저들 정보
     #url(r'^main/$', , name='main'),  # main page
     #url(r'^group/$', ), # group list page
-
     #url(r'^group/join/$', ),    # group join page
     #url(r'^group/create/$', ),  # group create page
     #url(r'^stats/$', ), # statistics page
