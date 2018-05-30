@@ -24,6 +24,7 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
         Token.objects.create(user=instance)'''
 
 
+
 class Setting(models.Model):
     alert_start_time = models.BigIntegerField(default=0)
     alert_interval = models.BigIntegerField(default=0)
