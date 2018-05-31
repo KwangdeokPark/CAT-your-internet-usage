@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 import NowTimePage from './NowTimePage';
 import configureMockStore from 'redux-mock-store';
-import * as userTestAction from '../../actions/userTest'
+import * as userTestAction from '../../actions/userActions'
 
 describe('NowTimePage', () => {
   let component = null;
@@ -16,9 +16,6 @@ describe('NowTimePage', () => {
         last_record_time: 'testLRT',
         now_spent_time: 'testNST'
       },
-      onLogin: 'testOnLogin',
-      onPutLast: 'testOnPutLast',
-      onPutToday: 'testOnPutToday'
     });
 
   it('should render', () => {

@@ -1,14 +1,10 @@
-import reducer from './auth'
+import reducer from './user'
 import * as types from '../actions/types'
+import { initialState } from './user' 
 
-describe('auth reducer', () =>{
+describe('user reducer', () =>{
   it('should return intial state', () =>{
-    expect(reducer(undefined, {})).toEqual(
-      {
-        isAuthenticated:false,
-        user: {}
-      }
-    )
+    expect(reducer(undefined, {})).toEqual(initialState)
   })
 
   it('should handle SET_CURRENT_USER', () =>{
@@ -25,4 +21,23 @@ describe('auth reducer', () =>{
     )
   })
 
+  let tempState = {
+    isAuthenticated: true,
+    user: 'temp user'
+  }
+  it('should handle LOGOUT', () =>{
+    expect(
+      reducer(tempState, {
+        type: types.LOGOUT
+      })
+    ).toEqual(initialState)
+  })
+
+  it('should handle NOTHING', () =>{
+    expect(
+      reducer(tempState, {
+        type: types.NOTHING
+      })
+    ).toEqual(tempState)
+  })
 })
