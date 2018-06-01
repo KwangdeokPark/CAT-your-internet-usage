@@ -1,5 +1,6 @@
 import React from 'react';
 import {Bar, Line, Pie} from 'react-chartjs-2';
+import GroupStats from './GroupStats'
 import axios from 'axios';
 
 class StatsPage extends React.Component{
@@ -72,23 +73,42 @@ class StatsPage extends React.Component{
   }
 
   render(){
+
+    let testData = {
+      min: 92431,
+      max: 2432045,
+      a1: 2,
+      a2: 3,
+      a3: 1,
+      a4: 12,
+      a5: 5,
+      a6: 10,
+      a7: 10,
+      a8: 9,
+      a9: 2,
+      a10: 6,
+      percentage: 12.3,
+      userbin: 9
+    }
+
     return (
       <div className = "chart">
-      <Bar
-        data={this.state.chartData}
-        options={{
-          title:{
-            display:true,
-            text:'Daily internet usage time',
-            fontSize:25
-          },
-          legend:{
-            display: true,
-            position:'right'
-          },
-          maintainAspectRatio: false
-        }}
-      />
+        <Bar
+          data={this.state.chartData}
+          options={{
+           title:{
+              display:true,
+              text:'Daily internet usage time',
+              fontSize:25
+           },
+            legend:{
+              display: true,
+              position:'right'
+            },
+            maintainAspectRatio: false
+          }}
+        /><br/>
+        <GroupStats statsData={testData}/>
       </div>
     )
   }
