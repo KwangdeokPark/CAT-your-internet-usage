@@ -86,19 +86,27 @@ export function login(data){
   }
 }
 
-export function putLast(id, lastTime, logOut){
+export function putLast(id, todayTime, lastTime, nowTime, logOut){
   let url = `${userUrl}${id}/`;
 
   if(logOut) {
     return dispatch => {
-      return axios.put(url, {last_record_time: lastTime}).then(res => {
+      return axios.put(url, {
+        today_spent_time: todayTime,
+        last_record_time: lastTime,
+        now_start_time: nowTime
+      }).then(res => {
         dispatch(logout());
       });
     };
   }
   else {
     return dispatch => {
-      return axios.put(url, {last_record_time: lastTime}).then(res => {
+      return axios.put(url, {
+        today_spent_time: todayTime,
+        last_record_time: lastTime,
+        now_start_time: nowTime
+      }).then(res => {
         let newUserData = {
           id: res.data.id,
           username: res.data.username,
@@ -133,48 +141,63 @@ export function putToday(id, todayTime, nowTime){
   }
 }
 
-export function putTimeline(id, todayTime, day, newUser, nowTime){
+export function putTimelineData(id, data, newUserData) {
   let url = `${timelineUrl}${id}/`;
-  let putData;
+  
+  console.log(data);
 
-  try {
-    const data = axios.get(url);
-    if(day === 0) putData = {
-      sun_average: data.sun_average + todayTime,
-      sun_count: data.sun_count + 1
-    };
-    else if(day === 1) putData = {
-      mon_average: data.mon_average + todayTime,
-      mon_count: data.mon_count + 1
-    };
-    else if(day === 2) putData = {
-      tue_average: data.tue_average + todayTime,
-      tue_count: data.tue_count + 1
-    };
-    else if(day === 3) putData = {
-      wed_average: data.wed_average + todayTime,
-      wed_count: data.wed_count + 1
-    };
-    else if(day === 4) putData = {
-      thu_average: data.thu_average + todayTime,
-      thu_count: data.thu_count + 1
-    };
-    else if(day === 5) putData = {
-      fri_average: data.fri_average + todayTime,
-      fri_count: data.fri_count + 1
-    };
-    else if(day === 6) putData = {
-      sat_average: data.sat_average + todayTime,
-      sat_count: data.sat_count + 1
-    };
-
-    let newUserData = newUser;
-    newUserData.today_spent_time = 0;
-    newUserData.now_start_time = nowTime;
-
-    return axios.put(url, putData).then(res => {
+  return dispatch => {
+    return axios.put(url, data).then(res => {
       dispatch(setCurrentUser(newUserData));
     });
+  }
+}
+
+
+export function putTimeline(id, todayTime, day, newUser, nowTime){
+  let url = `${timelineUrl}${id}/`;
+    
+  try {
+    return dispatch => {
+      return axios.get(url).then(res => {
+        let data;
+        data = res.data;
+        if(day === 0) {
+          data.sun_average = ((data.sun_average * data.sun_count) +todayTime)/(data.sun_count + 1);
+          data.sun_count ++;
+        }
+        else if(day === 1) {
+          data.mon_average = ((data.mon_average * data.mon_count) + todayTime)/(data.mon_count + 1);
+          data.mon_count ++;
+        }
+        else if(day === 2) {
+          data.tue_average = ((data.tue_average * data.tue_count) + todayTime)/(data.tue_count + 1);
+          data.tue_count++;
+        }
+        else if(day === 3) {
+          data.wed_average = ((data.wed_average * data.wed_count) + todayTime)/(data.wed_count + 1);
+          data.wed_count++;
+        }
+        else if(day === 4) {
+          data.thu_average = ((data.thu_average * data.thu_count) + todayTime)/(data.thu_count + 1);
+          data.thu_count++;
+        }
+        else if(day === 5) {
+          data.fri_average = ((data.fri_average * data.fri_count) + todayTime)/(data.fri_count + 1);
+          data.fri_count++;
+        }
+        else {
+          data.sat_average = ((data.sat_average * data.sat_count) + todayTime)/(data.sat_count + 1);
+          data.sat_count++;
+        }
+
+        let newUserData = newUser;
+        newUserData.today_spent_time = 0;
+        newUserData.now_start_time = nowTime;
+
+        dispatch(putTimelineData(id, data, newUserData));
+      });
+    }
   }
   catch(e)
   {

@@ -39,6 +39,7 @@ class StatsPage extends React.Component{
     const timelineUrl = 'http://127.0.0.1:8000/timeline/';
     const Id = localStorage.getItem('id');
     let url = `${timelineUrl}${Id}/`;
+    let hourMs = 3600000;
     axios.get(url)
          .then(res => this.setState({
            chartData:{
@@ -47,13 +48,13 @@ class StatsPage extends React.Component{
                 {
                   label:'hour',
                   data:[
-                    res.data.sun_average,
-                    res.data.mon_average,
-                    res.data.tue_average,
-                    res.data.wed_average,
-                    res.data.thu_average,
-                    res.data.fri_average,
-                    res.data.sat_average
+                    res.data.sun_average/hourMs,
+                    res.data.mon_average/hourMs,
+                    res.data.tue_average/hourMs,
+                    res.data.wed_average/hourMs,
+                    res.data.thu_average/hourMs,
+                    res.data.fri_average/hourMs,
+                    res.data.sat_average/hourMs
                   ],
                   backgroundColor:[
                     'rgba(255, 99, 132, 0.6)',
