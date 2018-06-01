@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import GroupStats from '../stats/GroupStats'
 
 class NowTimeForm extends React.Component {
 
@@ -42,6 +43,25 @@ class NowTimeForm extends React.Component {
       tt = Math.floor(this.props.stateUser.user.today_spent_time/1000)*1000;
     }
 
+    let testData = {
+      min: 92431,
+      max: 243204589,
+      a1: 2,
+      a2: 3,
+      a3: 1,
+      a4: 12,
+      a5: 5,
+      a6: 10,
+      a7: 10,
+      a8: 9,
+      a9: 5,
+      a10: 3,
+      percentage: 12.3,
+      userbin: 9,
+      groupname: "All User"
+    }
+
+
     return (
       <div>
         <div>
@@ -51,6 +71,7 @@ class NowTimeForm extends React.Component {
                   <h1>Hi, {this.props.stateUser.user.username}</h1><br/>
                   <h1>You now use {this.timeString(dt)}</h1><br/>
                   <h1>You today use {this.timeString(dt + tt)}</h1><br/>
+                  <GroupStats statsData={testData} />
                 </div>
               )
             : (
