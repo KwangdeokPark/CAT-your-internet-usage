@@ -219,7 +219,6 @@ def timeline_detail(request, user_id, group_id):
         stats = [0] * 10
         for i in range(0, 10):
             stats[i] = ((num[i+1] - num[i]) / len(all_user)) * 100'''
-        user_bin = 'bin'
         stats = [0] * 10
         for i in all_user:
             if i != catuser:
@@ -248,34 +247,34 @@ def timeline_detail(request, user_id, group_id):
                 time = i.timeline.total_average
                 if time <= step:
                     stats[0] = stats[0] + 1
-                    user_bin = user_bin + '1'
+                    user_bin = 1
                 elif time <= step * 2:
                     stats[1] = stats[1] + 1
-                    user_bin = user_bin + '2'
+                    user_bin = 2
                 elif time <= step * 3:
                     stats[2] = stats[2] + 1
-                    user_bin = user_bin + '3'
+                    user_bin = 3
                 elif time <= step * 4:
                     stats[3] = stats[3] + 1
-                    user_bin = user_bin + '4'
+                    user_bin = 4
                 elif time <= step * 5:
                     stats[4] = stats[4] + 1
-                    user_bin = user_bin + '5'
+                    user_bin = 5
                 elif time <= step * 6:
                     stats[5] = stats[5] + 1
-                    user_bin = user_bin + '6'
+                    user_bin = 6
                 elif time <= step * 7:
                     stats[6] = stats[6] + 1
-                    user_bin = user_bin + '7'
+                    user_bin = 7
                 elif time <= step * 8:
                     stats[7] = stats[7] + 1
-                    user_bin = user_bin + '8'
+                    user_bin = 8
                 elif time <= step * 9:
                     stats[8] = stats[8] + 1
-                    user_bin = user_bin + '9'
+                    user_bin = 9
                 else:
                     stats[9] = stats[9] + 1
-                    user_bin = user_bin + '10'
+                    user_bin = 10
         return Response({'group_name': group.name,
                          'percentage': percent,
                          'max': max_time,
