@@ -360,9 +360,16 @@ def group_detail(request, group_id):
 
 @api_view(['DELETE'])
 @csrf_exempt
-def group_delete(request, group_id):
+def group_delete(request, group_id, user_id):
     if request.method == "DELETE":
         # delete user
-        return Response(status=200)
+        user = CatUser.objects.get(id=user_id)
+        group = Group.objects.get(id=group_id)
+        if list(Join.objects.filter(group=group, catuser=user)):
+            Join.objects.filter(group=group, catuser=user).delete()
+            return Response(status=200)
+        else:
+            #cannot find
+            return Response(status=400)
 
 
