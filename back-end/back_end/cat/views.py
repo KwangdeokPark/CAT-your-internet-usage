@@ -309,7 +309,7 @@ def setting_detail(request, user_id):
         return Response(SettingSerializer(catuser.setting).data, status=200)
 
 
-@api_view(['GET', 'PUT'])
+@api_view(['GET', 'POST'])
 @csrf_exempt
 def group_all(request):
     if request.method == "GET":
@@ -321,11 +321,22 @@ def group_all(request):
                 members[j] = CatUser.objects.get(id=members[j]).user.username
         print(groups)
         return Response(groups, status=200)
-    elif request.method == "PUT":
-        # add new group
-        return Response(status=200)
+    elif request.method == "POST":
+        print(request.data)
+        if not(list(Group.objects.filter(name=request.data.get('name')))):
+            # add new group
+            new_group = Group.objects.create(name=request.data.get('name'),
+                                             description=request.data.get('description'))
+            Join.objects.create(group=new_group, catuser=CatUser.objects.get(id=request.data.get('user_id')))
+            new_group.save()
+            serialized = GroupSerializer(new_group).data
+            serialized['members'] = [CatUser.objects.get(id=request.data.get('user_id')).user.username]
+            return Response(serialized, status=200)
+        else:
+            print(list(Group.objects.filter(name=request.data.get('name'))))
+            return Response(status=400)
 
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET', 'PUT'])
 @csrf_exempt
 def group_detail(request, group_id):
     if request.method == "GET":
@@ -337,10 +348,21 @@ def group_detail(request, group_id):
         return Response(group, status=200)
     elif request.method == "PUT":
         # add new user
-        return Response(status=200)
-    elif request.method == "DELETE":
-        # delete user
-        return  Response(status=200)
+        group = Group.objects.get(id=group_id)
+        user = CatUser.objects.get(id=request.data.get('user_id'))
+        join = Join.objects.create(group=group, catuser=user)
+        join.save()
+        group = GroupSerializer(Group.objects.get(id=group_id)).data
+        members = group['members']
+        for j in range(0, len(members)):
+            members[j] = CatUser.objects.get(id=members[j]).user.username
+        return Response(group, status=200)
 
+@api_view(['DELETE'])
+@csrf_exempt
+def group_delete(request, group_id):
+    if request.method == "DELETE":
+        # delete user
+        return Response(status=200)
 
 
