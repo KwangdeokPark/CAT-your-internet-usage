@@ -70,6 +70,22 @@ def user_detail(request, user_id):
         catuser.save()
         return Response(serialized, status=200)
 
+@api_view(['GET'])
+@csrf_exempt
+def user_group_detail(request, user_id):
+    print(request.data)
+    if request.method == "GET":
+        user = User.objects.get(id=user_id)
+        catuser = CatUser.objects.get(user=user)
+        groups = []
+        for i in list(Join.objects.filter(catuser_id=catuser.pk)):
+            groups.append(GroupSerializer(Group.objects.get(id=i.group_id)).data)
+            members = groups[-1]['members']
+            for j in range(0, len(members)):
+                members[j] = CatUser.objects.get(id=members[j]).user.username
+        print(groups)
+        return Response(groups, status=200)
+
 @api_view(['POST'])
 @csrf_exempt
 def signup(request):
