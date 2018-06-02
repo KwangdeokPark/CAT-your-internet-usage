@@ -59,6 +59,7 @@ class NavigationBarForm extends React.Component {
 
     const userLinks = (
       <ul className="nav navbar-nav navbar-right">
+        <li><Link to="/group">Group</Link></li>
         <li><Link to="/stats">Statistics</Link></li>
         <li><Link to="/settings">Settings</Link></li>
         <li><a href="#" onClick={this.logout.bind(this)}>Sign out</a></li>
