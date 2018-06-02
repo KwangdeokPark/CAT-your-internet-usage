@@ -11,6 +11,8 @@ class NavigationBarForm extends React.Component {
   isLogin(prop) {
     if(prop.stateUser === undefined) return false;
     return prop.stateUser.isAuthenticated;
+
+
   }
 
   checkRecord(prop) {
@@ -60,16 +62,25 @@ class NavigationBarForm extends React.Component {
     const userLinks = (
       <ul className="nav navbar-nav navbar-right">
         <li><Link to="/group">Group</Link></li>
-        <li><Link to="/stats">Statistics</Link></li>
-        <li><Link to="/settings">Settings</Link></li>
+        <li><Link to="/stats" >Statistics</Link></li>
+        <li><Link to="/settings" >Settings</Link></li>
         <li><a href="#" onClick={this.logout.bind(this)}>Sign out</a></li>
       </ul>
     );
 
     const guestLinks =(
       <ul className="nav navbar-nav navbar-right">
-        <li><Link to="/sign_up">Sign up</Link></li>
-        <li><Link to="/sign_in">Sign in</Link></li>
+        <li><Link to="/sign_up" >Sign up</Link></li>
+        <li><Link to="/sign_in" >Sign in</Link></li>
+      </ul>
+    );
+
+    const groupLinks = (
+      <ul className="nav navbar-nav navbar-right">
+        <li><Link to="/group/join" > Join group</Link></li>
+        <li><Link to="/group/create" >Create new group</Link></li>
+        <li><Link to="/main" >Back to main</Link></li>
+        <li><a href="#">Sign out</a></li>
       </ul>
     );
 
@@ -81,7 +92,10 @@ class NavigationBarForm extends React.Component {
           </div>
 
           <div className="collapse navbar-collapse">
-            { this.isLogin(this.props) ?  userLinks : guestLinks }
+            {
+              window.location.href == 'http://localhost:3000/group' ?  groupLinks :
+              this.isLogin(this.props) ?  userLinks : guestLinks
+            }
           </div>
         </div>
       </nav>

@@ -6,6 +6,7 @@ import { addFlashMessage } from '../../actions/flashMessages';
 
 class SignupPage extends React.Component{
   render(){
+    //localStorage.setItem('route', 'sign_up');
     const { userSignupRequest, addFlashMessage} = this.props;
     return(
       <div className="row">

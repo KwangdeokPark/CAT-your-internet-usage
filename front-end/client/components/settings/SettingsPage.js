@@ -3,6 +3,7 @@ import SettingsForm from './SettingsForm';
 
 class SettingsPage extends React.Component {
   render() {
+    //localStorage.setItem('route', 'settings');
     return (
       <div className="row">
         <div className="col-md-4 col-md-offset-4">

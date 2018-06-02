@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { addFlashMessage } from '../../actions/flashMessages';
 
 class LoginPage extends React.Component {
+
   render() {
+    //localStorage.setItem('route', 'sign_in');
     const { addFlashMessage } = this.props;
     return (
       <div className="row">

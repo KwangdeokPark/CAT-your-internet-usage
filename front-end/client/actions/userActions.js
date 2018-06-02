@@ -44,7 +44,7 @@ export function logout(){
     setAuthorizationToken(false);
     //dispatch(setCurrentUser({}));
     dispatch(logoutUser());
-    this.context.router.push('/sign_in');
+
   }
 }
 
