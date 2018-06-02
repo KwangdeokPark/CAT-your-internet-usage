@@ -2,6 +2,11 @@ import React from 'react';
 import TextFieldGroup from '../common/TextFieldGroup';
 import validateInput from '../../../server/shared/validations/groupcreate';
 import axios from 'axios';
+import { addFlashMessage } from '../../actions/flashMessages';
+import { connect } from 'react-redux';
+
+
+import {Router, browserHistory} from 'react-router';
 
 class GroupCreateForm extends React.Component {
   constructor(props) {
@@ -31,11 +36,22 @@ class GroupCreateForm extends React.Component {
     if (this.isValid()) {
       this.setState({ errors: {} });
       axios.post('http://127.0.0.1:8000/group/', this.state)
-        .then(res => {
-        console.log(res);
-        //this.context.router.push('/main');
-      }).catch(res => {console.log(res.error)});
-
+        .then(
+          (res) => {
+            this.props.addFlashMessage({
+              type: 'success',
+              text: 'New Group Created!'
+            });
+            browserHistory.push('/group');
+          },
+          (err) => {
+            this.props.addFlashMessage({
+              type: 'error',
+              text: 'Try Again!'
+            });
+            this.setState({ errors: err.response.data, isLoading: false })
+          }
+        );
     }
   }
 
@@ -73,5 +89,8 @@ class GroupCreateForm extends React.Component {
     );
   }
 }
+GroupCreateForm.propTypes = {
+  addFlashMessage: React.PropTypes.func.isRequired
+}
 
-export default GroupCreateForm;
+export default connect(null, { addFlashMessage }) (GroupCreateForm);

@@ -24,7 +24,7 @@ export default (
     <Route path ="settingsEdit" component={SettingsEdit}/>
     <Route path ="stats" component={StatsPage}/>
     <Route path ="group" component={GroupPage}/>
-    <Route path ="group/join" component={GroupJoinPage}/>
-    <Route path ="group/create" component={GroupCreatePage}/>
+    <Route path ="group_join" component={GroupJoinPage}/>
+    <Route path ="group_create" component={GroupCreatePage}/>
   </Route>
 )
