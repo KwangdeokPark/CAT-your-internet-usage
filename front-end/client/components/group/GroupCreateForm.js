@@ -5,7 +5,6 @@ import axios from 'axios';
 import { addFlashMessage } from '../../actions/flashMessages';
 import { connect } from 'react-redux';
 
-
 import {Router, browserHistory} from 'react-router';
 
 class GroupCreateForm extends React.Component {

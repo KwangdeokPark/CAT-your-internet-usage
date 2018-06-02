@@ -12,7 +12,7 @@ import StatsPage from './components/stats/StatsPage';
 import GroupPage from './components/group/GroupPage';
 import GroupJoinPage from './components/group/GroupJoinPage';
 import GroupCreatePage from './components/group/GroupCreatePage';
-
+import GroupDetailForm from './components/group/GroupDetailForm';
 
 export default (
   <Route path="/" component = {App} >
@@ -24,7 +24,8 @@ export default (
     <Route path ="settingsEdit" component={SettingsEdit}/>
     <Route path ="stats" component={StatsPage}/>
     <Route path ="group" component={GroupPage}/>
-    <Route path ="group_join" component={GroupJoinPage}/>
-    <Route path ="group_create" component={GroupCreatePage}/>
+    <Route path ="group/join" component={GroupJoinPage}/>
+    <Route path ="group/create" component={GroupCreatePage}/>
+    <Route path ="group/detail" component={GroupDetailForm}/>
   </Route>
 )

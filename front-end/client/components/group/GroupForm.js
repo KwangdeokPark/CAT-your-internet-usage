@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import {Router, browserHistory} from 'react-router';
+
 class GroupForm extends React.Component {
   constructor(props) {
   super(props);
@@ -22,12 +24,21 @@ class GroupForm extends React.Component {
     .catch(err => console.log(err))
   }
 
+  onClickButton(){
+    browserHistory.push('/group/detail');
+  }
+
   render() {
     return (
       <form>
-      <h1>Group Lists</h1>
+      <h1>Your Group List</h1>
       <ul>
-        { this.state.groups.map(group => <li>{group.name}</li>)}
+        { this.state.groups.map(group =>
+          <li>
+          {group.name}{"   "}
+          <button onClick={this.onClickButton}>Detail</button>
+          </li>
+        )}
       </ul>
       </form>
     );
