@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
 class NavigationBarForm extends React.Component {
-  
+
   logout(e){
     e.preventDefault();
     this.props.onLogout();
@@ -19,40 +19,40 @@ class NavigationBarForm extends React.Component {
     if(dt > 3000) {
       let spent = (new Date(prop.stateUser.user.last_record_time)) - (new Date(prop.stateUser.user.now_start_time));
       prop.onPutToday(prop.stateUser.user.id, spent + prop.stateUser.user.today_spent_time, nt.toISOString());
-    } 
-  } 
-  
+    }
+  }
+
   componentDidMount() {
     if(this.isLogin(this.props)) {
-      this.checkRecord(this.props); 
-    }   
+      this.checkRecord(this.props);
+    }
     this.interval = setInterval(() => {
       if(this.isLogin(this.props)) {
         this.props.onPutLast(this.props.stateUser.user.id, (new Date()).toISOString(), false);
       }
     }, 500);
-  } 
-      
+  }
+
   componentWillUpdate(nextProps, nextState) {
     if((!(this.isLogin(this.props))) && (this.isLogin(nextProps))) {
-      this.checkRecord(nextProps) 
+      this.checkRecord(nextProps)
     }
     else if(this.isLogin(nextProps))
     {
       let dayp = ((new Date(this.props.stateUser.user.last_record_time)).getDay());
       let dayn = ((new Date(nextProps.stateUser.user.last_record_time)).getDay());
       if(dayp != dayn) {
-        this.props.onPutTimeline(this.props.stateUser.user.id, 
-                                 this.props.stateUser.user.today_spent_time, 
-                                 dayp, 
-                                 nextProps.stateUser.user, 
+        this.props.onPutTimeline(this.props.stateUser.user.id,
+                                 this.props.stateUser.user.today_spent_time,
+                                 dayp,
+                                 nextProps.stateUser.user,
                                  nextProps.stateUser.user.last_record_day);
       }
     }
   }
-    
+
   componentWillUnmount() {
-    clearInterval(this.interval)  
+    clearInterval(this.interval)
   }
 
   render() {

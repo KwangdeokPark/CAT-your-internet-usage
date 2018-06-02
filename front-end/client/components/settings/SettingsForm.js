@@ -27,6 +27,10 @@ class SettingsForm extends React.Component{
            alert_interval: response.data.setting.alert_interval/60000
          }))
          .catch(err => console.log(err))
+
+    if(localStorage.getItem('username')=='')
+      this.context.router.push('/sign_in');
+
   }
 
   onClickButton(){
@@ -35,6 +39,7 @@ class SettingsForm extends React.Component{
 
   render(){
     const { errors }=this.state;
+
     return(
       <form>
         <h1>Current Settings</h1>
@@ -56,6 +61,9 @@ class SettingsForm extends React.Component{
     );
   }
 }
+
+
+
 
 SettingsForm.contextTypes = {
   router: React.PropTypes.object.isRequired
