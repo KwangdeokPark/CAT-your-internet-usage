@@ -43,15 +43,6 @@ def user_detail(request, user_id):
         serialized['user'] = {'username': catuser.user.username}
         serialized['setting_id'] = SettingSerializer(instance=catuser.setting).data['id']
         serialized['timeline_id'] = TimelineSerializer(instance=catuser.timeline).data['id']
-
-        groups = []
-        for i in list(Join.objects.filter(catuser_id=catuser.pk)):
-            groups.append(GroupSerializer(Group.objects.get(id=i.group_id)).data)
-            members = groups[-1]['members']
-            for j in range(0, len(members)):
-                members[j] = CatUser.objects.get(id=members[j]).user.username
-        print(groups)
-        serialized['groups'] = groups
         return Response(serialized, status=200)
     elif request.method == "PUT":
         catuser = CatUser.objects.get(user=User.objects.get(id=user_id))
