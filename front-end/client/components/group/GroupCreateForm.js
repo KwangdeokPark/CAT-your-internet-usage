@@ -7,7 +7,7 @@ class GroupCreateForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: localStorage.getItem('id'),
+      user_id: localStorage.getItem('id'),
       name: '',
       description: '',
       errors: {},
