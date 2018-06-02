@@ -1,12 +1,8 @@
 import React from 'react';
 import GroupForm from './GroupForm';
-import { connect } from 'react-redux';
 
 class GroupPage extends React.Component{
-
-
   render(){
-
     return(
       <div className="row">
         <div className="col-md-4 col-md-offset-4">
@@ -17,4 +13,4 @@ class GroupPage extends React.Component{
   }
 }
 
-export default GroupForm;
+export default GroupPage;

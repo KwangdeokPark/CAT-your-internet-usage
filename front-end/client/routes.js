@@ -13,6 +13,7 @@ import GroupPage from './components/group/GroupPage';
 import GroupJoinPage from './components/group/GroupJoinPage';
 import GroupCreatePage from './components/group/GroupCreatePage';
 
+
 export default (
   <Route path="/" component = {App} >
     <IndexRoute component={Greetings}/>
