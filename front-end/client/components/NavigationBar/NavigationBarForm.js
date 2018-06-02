@@ -84,6 +84,18 @@ class NavigationBarForm extends React.Component {
       </ul>
     );
 
+    const groupJoinLinks = (
+      <ul className="nav navbar-nav navbar-right">
+        <li><Link to="/group" >Back</Link></li>
+      </ul>
+    );
+
+    const groupCreateLinks = (
+      <ul className="nav navbar-nav navbar-right">
+        <li><Link to="/group" >Back</Link></li>
+      </ul>
+    );
+
     return (
       <nav className="navbar navbar-default">
         <div className="container-fluid">
@@ -94,6 +106,8 @@ class NavigationBarForm extends React.Component {
           <div className="collapse navbar-collapse">
             {
               window.location.href == 'http://localhost:3000/group' ?  groupLinks :
+              window.location.href == 'http://localhost:3000/group/join' ?  groupJoinLinks :
+              window.location.href == 'http://localhost:3000/group/create' ?  groupCreateLinks :
               this.isLogin(this.props) ?  userLinks : guestLinks
             }
           </div>
