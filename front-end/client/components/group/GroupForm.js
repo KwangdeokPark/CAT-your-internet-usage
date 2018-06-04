@@ -26,16 +26,11 @@ class GroupForm extends React.Component {
   }
 
   onClickButton(group){
+    //store groupId(use it in group detail page)
     //move to this group's detail page
 
-    //localStorage.setItem('groupId', group.id);
-    var url = '/group/:';
-    var id = group.id;
-    let toUrl= `${url}${id}/`;
-    browserHistory.push(toUrl);
-
-
-    //  let url = `${timelineUrl}${id}/`;
+    localStorage.setItem('groupId', group.id);
+    browserHistory.push('group/detail/');
   }
 
   render() {
