@@ -8,20 +8,34 @@ class GroupDetailForm extends React.Component{
     this.state = {
       groupname:'',
       percentage:'',
-      chartData: undefined
+      chartData: undefined,
+      members: ''
       }
     }
 
   componentWillMount() {
+    const groupUrl = 'http://127.0.0.1:8000/group/';
+    const groupId = localStorage.getItem('groupId');
+
+    let url1 = `${groupUrl}${groupId}/`;
+    //console.log(url1);
+    axios.get(url1)
+         .then(res => {
+            let memberslist = res.data.members;
+            this.setState({members: memberslist});
+         })
+         .catch(err => console.log(err));
+
+
     const timelineUrl = 'http://127.0.0.1:8000/timeline/';
     const userId = localStorage.getItem('id');
-    const groupUrl = '/group/';
-    const groupId = localStorage.getItem('groupId');
-    let url = `${timelineUrl}${userId}${groupUrl}${groupId}/`;
-    axios.get(url)
+    const group = '/group/';
+
+    let url2 = `${timelineUrl}${userId}${group}${groupId}/`;
+    axios.get(url2)
          .then(res =>
            {
-             //console.log(url);
+             console.log(url2);
              let hourMs = 3600000;
              let minn = res.data.min;
              let maxx = res.data.max;
@@ -78,13 +92,11 @@ class GroupDetailForm extends React.Component{
             }
             newData.datasets[0].backgroundColor[res.data.user_bin - 1] = 'rgba(254, 103, 99, 1)';
 
-            console.log("before");
             this.setState({
               groupname: res.data.group_name,
               percentage:res.data.percentage,
               chartData: newData
             });
-  console.log(chartData);
           })
          .catch(err => console.log(err))
   }
@@ -94,7 +106,10 @@ class GroupDetailForm extends React.Component{
         <div>
           { this.state.chartData != undefined
             ? (
+
                 <div>
+                <h1>Members</h1>
+                <p key={this.state.members.id}>{this.state.members}</p>
                   <Bar
                     data = {this.state.chartData}
                     width={50}
