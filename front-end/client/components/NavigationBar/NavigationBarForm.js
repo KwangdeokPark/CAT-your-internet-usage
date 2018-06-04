@@ -80,7 +80,6 @@ class NavigationBarForm extends React.Component {
         <li><Link to="/group/join" > Join group</Link></li>
         <li><Link to="/group/create" >Create new group</Link></li>
         <li><Link to="/main" >Back to main</Link></li>
-        <li><a href="#">Sign out</a></li>
       </ul>
     );
 

@@ -8,7 +8,8 @@ class GroupForm extends React.Component {
   super(props);
   this.state = {
     groups:[]
-  }
+  };
+  this.onClickButton = this.onClickButton.bind(this);
 }
 
   componentWillMount() {
@@ -24,21 +25,29 @@ class GroupForm extends React.Component {
     .catch(err => console.log(err))
   }
 
-  onClickButton(){
-    browserHistory.push('/group/detail');
+  onClickButton(group){
+    //move to this group's detail page
+
+    //localStorage.setItem('groupId', group.id);
+    var url = '/group/:';
+    var id = group.id;
+    let toUrl= `${url}${id}/`;
+    browserHistory.push(toUrl);
+
+
+    //  let url = `${timelineUrl}${id}/`;
   }
 
   render() {
+    //var thisGroup = this.state.groups.map(group =>
     return (
       <form>
       <h1>Your Group List</h1>
-      <ul>
-        { this.state.groups.map(group =>
-          <li>
-          {group.name}{"   "}
-          <button onClick={this.onClickButton}>Detail</button>
-          </li>
-        )}
+      <ul >
+        { this.state.groups.map((group )=>{
+          //console.log(group.id);
+          return <div key={group.id}><button key={group.id} onClick={() =>this.onClickButton(group)}>{group.name}</button></div>
+        })}
       </ul>
       </form>
     );
