@@ -97,7 +97,7 @@ class GroupStats extends React.Component {
                     scales: {
                       xAxes: [{
                         ticks: {
-                          fontSize: 16
+                          fontSize: 14
                         }
                       }]
                     }

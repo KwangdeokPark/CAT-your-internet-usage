@@ -37,6 +37,7 @@ class StatsPage extends React.Component{
     }
   }
 
+  
   componentWillMount() {
     const timelineUrl = 'http://127.0.0.1:8000/timeline/';
     const userGroupUrl = 'http://127.0.0.1:8000/users_group/';
@@ -82,17 +83,14 @@ class StatsPage extends React.Component{
         url = `${timelineUrl}${Id}/group/${groups[i].id}/`
         axios.get(url).then(res =>{
           groupStats.push(res.data);
-        });
+        }).then(res =>this.setState({
+          groupStatsData: groupStats
+        }));
       }
-      this.setState({
-        groupStatsData: groupStats
-      });
     });
   }
 
   render(){
-
-    console.log(this.state);
 
     return (
       <div>
@@ -114,7 +112,7 @@ class StatsPage extends React.Component{
           />
         </div><br/>
         <div>
-          {this.state.groupStatsData.map((data) => <GroupStats key={data.group_name} statsData={data} />)}    
+          {this.state.groupStatsData.map((data) => <GroupStats key={data.group_name} statsData={data}/> )}
         </div>
       </div>
     )
