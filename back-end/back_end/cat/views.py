@@ -226,7 +226,17 @@ def timeline_detail(request, user_id, group_id):
         stats = [0] * 10
         for i in range(0, 10):
             stats[i] = ((num[i+1] - num[i]) / len(all_user)) * 100'''
-        stats = [0] * 10
+        stats = [0] * 11
+        for i in all_user:
+            time = i.timeline.total_average / step
+            stats[int(time)] += 1
+        stats[9] += stats[10]
+        user_time = int(catuser.timeline.total_average / step)
+        if user_time != 10:
+            user_bin = user_time + 1
+        else:
+            user_bin = user_time
+        '''
         for i in all_user:
             if i != catuser:
                 time = i.timeline.total_average
@@ -281,7 +291,7 @@ def timeline_detail(request, user_id, group_id):
                     user_bin = 9
                 else:
                     stats[9] = stats[9] + 1
-                    user_bin = 10
+                    user_bin = 10'''
         return Response({'group_name': group.name,
                          'percentage': percent,
                          'max': max_time,
@@ -381,5 +391,18 @@ def group_delete(request, group_id, user_id):
         else:
             #cannot find
             return Response(status=400)
+@api_view(['GET'])
+@csrf_exempt
+def group_stat(request, group_id):
+    if request.method == "GET":
+        all_group = list(Group.objects.all())
+        for i in range(0, len(all_group)):
+            all_group[i] = GroupSerializer(all_group[i]).data
+
+        members = group['members']
+        for j in range(0, len(members)):
+            members[j] = CatUser.objects.get(id=members[j]).user.username
+        print(group)
+        return Response(group, status=200)
 
 
