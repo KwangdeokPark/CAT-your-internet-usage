@@ -426,7 +426,7 @@ def group_stat(request, group_id):
         stats[9] += stats[10]
         group_index = int((group_time - min_time) / step)
         if group_index != 10:
-            group_bin = group_index + 1
+            group_bin = group_index + 1 
         else:
             group_bin = group_index
         return Response({'group_name': group.name,
