@@ -357,13 +357,16 @@ def group_detail(request, group_id):
         # add new user
         group = Group.objects.get(id=group_id)
         user = CatUser.objects.get(id=request.data.get('user_id'))
-        join = Join.objects.create(group=group, catuser=user)
-        join.save()
-        group = GroupSerializer(Group.objects.get(id=group_id)).data
-        members = group['members']
-        for j in range(0, len(members)):
-            members[j] = CatUser.objects.get(id=members[j]).user.username
-        return Response(group, status=200)
+        if not(list(group.members.filter(group__join__catuser=user))):
+            join = Join.objects.create(group=group, catuser=user)
+            join.save()
+            group = GroupSerializer(Group.objects.get(id=group_id)).data
+            members = group['members']
+            for j in range(0, len(members)):
+                members[j] = CatUser.objects.get(id=members[j]).user.username
+            return Response(group, status=200)
+        else:
+            return Response(status=400)
 
 @api_view(['DELETE'])
 @csrf_exempt
