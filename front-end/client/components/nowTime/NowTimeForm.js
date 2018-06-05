@@ -7,7 +7,8 @@ class NowTimeForm extends React.Component {
     super(props);
 
     this.state = {
-      nowTime: new Date()
+      nowTime: new Date(),
+      laert_start_time: 0
     }
   }
 
