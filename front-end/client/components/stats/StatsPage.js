@@ -33,6 +33,7 @@ class StatsPage extends React.Component{
           }
         ]
       },
+      totalUse: 0,
       groupStatsData: []
     }
   }
@@ -70,7 +71,8 @@ class StatsPage extends React.Component{
             ]
           }
         ]
-      }
+      },
+      totalUse: res.data.total_average/hourMs
     })).catch(err => console.log(err));
 
     let groups = [];
@@ -94,7 +96,7 @@ class StatsPage extends React.Component{
 
     return (
       <div>
-        <div className = "chart">
+        <div style={{border: '4px solid #777', margin: '20px', padding: '20px'}} className = "chart">
           <Bar
             data={this.state.chartData}
             options={{
@@ -109,7 +111,8 @@ class StatsPage extends React.Component{
               },
               maintainAspectRatio: false
             }}
-          />
+          /><br/>
+          <h1>You use internet {this.state.totalUse.toFixed(2)}h per day</h1>
         </div><br/>
         <div>
           {this.state.groupStatsData.map((data) => <GroupStats key={data.group_name} statsData={data}/> )}
