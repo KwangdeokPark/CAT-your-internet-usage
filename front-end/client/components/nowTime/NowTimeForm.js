@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import GroupStats from '../stats/GroupStats'
 
 class NowTimeForm extends React.Component {
 
@@ -70,7 +71,7 @@ class NowTimeForm extends React.Component {
           { this.isLogin(this.props)
             ? (
                 <div>
-                  <p1>Hi, {this.props.stateUser.user.username}</p1><br/>
+                  <h1>Hi, {this.props.stateUser.user.username}</h1><br/>
                   <h1>You now use {this.timeString(dt)}</h1><br/>
                   <h1>You today use {this.timeString(dt + tt)}</h1><br/>
                 </div>
