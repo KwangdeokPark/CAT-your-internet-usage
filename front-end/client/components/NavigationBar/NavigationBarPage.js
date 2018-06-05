@@ -22,8 +22,8 @@ const mapDispatchToProps = (dispatch) => {
     onLogout: () => {
       dispatch(logout())
     },
-    onPutLast: (id, lastTime, logOut) => {
-      dispatch(putLast(id, lastTime, logOut))
+    onPutLast: (id, todayTime, lastTime, nowTime, logOut) => {
+      dispatch(putLast(id, todayTime, lastTime, nowTime, logOut))
     },
     onPutToday: (id, todayTime, nowTime) => {
       dispatch(putToday(id, todayTime, nowTime))
