@@ -103,7 +103,7 @@ class GroupStats extends React.Component {
                     }
                   }}
                 /><br/>
-                <h1>Your internet usage is {"top"} {this.props.statsData.percentage}%</h1><br/>
+                <h1>Your internet usage is {"top"} {this.props.statsData.percentage.toFixed(2)}%</h1><br/>
               </div>
             )
           : (
