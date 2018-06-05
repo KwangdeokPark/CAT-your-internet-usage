@@ -174,20 +174,20 @@ def timeline_total(request, user_id):
     elif request.method == "PUT":
         catuser = CatUser.objects.get(user=User.objects.get(id=user_id))
         timeline = catuser.timeline
-        timeline.sun_average = request.data['sun_average']
-        timeline.mon_average = request.data['mon_average']
-        timeline.tue_average = request.data['tue_average']
-        timeline.wed_average = request.data['wed_average']
-        timeline.thu_average = request.data['thu_average']
-        timeline.fri_average = request.data['fri_average']
-        timeline.sat_average = request.data['sat_average']
-        timeline.sun_count = request.data['sun_count']
-        timeline.mon_count = request.data['mon_count']
-        timeline.tue_count = request.data['tue_count']
-        timeline.wed_count = request.data['wed_count']
-        timeline.thu_count = request.data['thu_count']
-        timeline.fri_count = request.data['fri_count']
-        timeline.sat_count = request.data['sat_count']
+        timeline.sun_average = int(request.data['sun_average'])
+        timeline.mon_average = int(request.data['mon_average'])
+        timeline.tue_average = int(request.data['tue_average'])
+        timeline.wed_average = int(request.data['wed_average'])
+        timeline.thu_average = int(request.data['thu_average'])
+        timeline.fri_average = int(request.data['fri_average'])
+        timeline.sat_average = int(request.data['sat_average'])
+        timeline.sun_count = int(request.data['sun_count'])
+        timeline.mon_count = int(request.data['mon_count'])
+        timeline.tue_count = int(request.data['tue_count'])
+        timeline.wed_count = int(request.data['wed_count'])
+        timeline.thu_count = int(request.data['thu_count'])
+        timeline.fri_count = int(request.data['fri_count'])
+        timeline.sat_count = int(request.data['sat_count'])
         timeline.total_average = (timeline.sun_average + timeline.mon_average
                                   + timeline.tue_average + timeline.wed_average
                                   + timeline.thu_average + timeline.fri_average
@@ -228,10 +228,10 @@ def timeline_detail(request, user_id, group_id):
             stats[i] = ((num[i+1] - num[i]) / len(all_user)) * 100'''
         stats = [0] * 11
         for i in all_user:
-            time = i.timeline.total_average / step
+            time = (i.timeline.total_average - min_time) / step
             stats[int(time)] += 1
         stats[9] += stats[10]
-        user_time = int(catuser.timeline.total_average / step)
+        user_time = int(catuser.timeline.total_average - min_time / step)
         if user_time != 10:
             user_bin = user_time + 1
         else:
@@ -395,14 +395,54 @@ def group_delete(request, group_id, user_id):
 @csrf_exempt
 def group_stat(request, group_id):
     if request.method == "GET":
+        group = Group.objects.get(id=group_id)
         all_group = list(Group.objects.all())
+        print(all_group)
+        all_time = []
+        #for i in range(0, len(all_group)):
+            #all_group[i] = GroupSerializer(all_group[i]).data
         for i in range(0, len(all_group)):
-            all_group[i] = GroupSerializer(all_group[i]).data
-
-        members = group['members']
-        for j in range(0, len(members)):
-            members[j] = CatUser.objects.get(id=members[j]).user.username
-        print(group)
-        return Response(group, status=200)
+            time = 0
+            members = GroupSerializer(all_group[i]).data['members']
+            print(members)
+            for member in members:
+                time += CatUser.objects.get(id=member).timeline.total_average
+            all_time.append(time / len(members))
+            if all_group[i] == group:
+                group_time = all_time[-1]
+        print(all_time)
+        min_time = min(all_time)
+        max_time = max(all_time)
+        step = (max_time - min_time) / 10
+        index = 0
+        for time in all_time:
+            if time > group_time:
+                index += 1
+        percent = (index / len(all_time)) * 100
+        stats = [0] * 11
+        for i in all_time:
+            time = (i - min_time) / step
+            stats[int(time)] += 1
+        stats[9] += stats[10]
+        group_index = int((group_time - min_time) / step)
+        if group_index != 10:
+            group_bin = group_index + 1
+        else:
+            group_bin = group_index
+        return Response({'group_name': group.name,
+                         'percentage': percent,
+                         'max': max_time,
+                         'min': min_time,
+                         'user_bin': group_bin,
+                         'bin1': stats[0],
+                         'bin2': stats[1],
+                         'bin3': stats[2],
+                         'bin4': stats[3],
+                         'bin5': stats[4],
+                         'bin6': stats[5],
+                         'bin7': stats[6],
+                         'bin8': stats[7],
+                         'bin9': stats[8],
+                         'bin10': stats[9]}, status=200)
 
 
