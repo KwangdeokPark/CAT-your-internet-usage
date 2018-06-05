@@ -6,7 +6,8 @@ class NowTimeForm extends React.Component {
     super(props);
 
     this.state = {
-      nowTime: new Date()
+      nowTime: new Date(),
+      alert_start_time: 0
     }
   }
 
@@ -28,6 +29,16 @@ class NowTimeForm extends React.Component {
     }, 500);
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    if(this.isLogin(nextProps)) {
+      let dt = nextState.nowTime - (new Date(nextProps.stateUser.user.now_start_time)) + 100;
+      document.title = this.timeString(dt);
+    }
+    else {
+      document.tile = 'login first';
+    }
+  }
+
   componentWillUnmount() {
     clearInterval(this.interval)
   }
@@ -40,6 +51,17 @@ class NowTimeForm extends React.Component {
     if (this.isLogin(this.props)) {
       dt = this.state.nowTime - (new Date(this.props.stateUser.user.now_start_time)) + 100;
       tt = Math.floor(this.props.stateUser.user.today_spent_time/1000)*1000;
+
+      if(this.state.alert_start_time > 0)
+      {
+        let sColor = 0xCCF390;
+        let eColor = 0xFF003D;
+        let bColor;
+        let rat;
+        if(dt > this.state.alert_start_time) rat = 1;
+        else rat = dt / this.state.alert_start_time;
+        bColor = rat*eColor + (1-rat)*sColor;
+      }
     }
 
     return (
