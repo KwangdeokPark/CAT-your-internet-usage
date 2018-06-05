@@ -238,7 +238,7 @@ def timeline_detail(request, user_id, group_id):
             time = (i.timeline.total_average - min_time) / step
             stats[int(time)] += 1
         stats[9] += stats[10]
-        user_time = int(catuser.timeline.total_average - min_time / step)
+        user_time = int((catuser.timeline.total_average - min_time) / step)
         if user_time != 10:
             user_bin = user_time + 1
         else:
