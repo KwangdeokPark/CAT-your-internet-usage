@@ -10,13 +10,13 @@ from django.dispatch import receiver
 from rest_framework.authtoken.models import Token
 
 # Create your models here.
-
+'''
 AGE_CHOICE = (
     ('0', '0~19'),
     ('20', '20~29'),
     ('30', '30~39'),
     ('40', '40~')
-)
+)'''
 '''
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
@@ -55,7 +55,7 @@ class Timeline(models.Model):
 
 class CatUser(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    age = models.CharField(choices=AGE_CHOICE, max_length=100)
+    age = models.CharField(max_length=100)
     #today_spent_time = models.DurationField(null=True)
     today_spent_time = models.BigIntegerField(default=0)
     #now_start_time = models.DateTimeField(null=True)
