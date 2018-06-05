@@ -112,7 +112,14 @@ def signup(request):
             all_group_obj = Join.objects.create(group=all_group, catuser=user.catuser)
             print(JoinSerializer(all_group_obj).data)
             all_group_obj.save()
-            age_group, created2 = Group.objects.get_or_create(name=request.data['age'])
+            age = request.data['age']
+            if age == '0':
+                name = '10세 이하'
+            elif age == '100':
+                name = '100세 이상'
+            else:
+                name = str(age) + '대'
+            age_group, created2 = Group.objects.get_or_create(name=name)
             #age_group.members.add(user.catuser)
             age_group_obj = Join.objects.create(group=age_group, catuser=user.catuser)
             print(JoinSerializer(age_group_obj).data)
@@ -426,7 +433,7 @@ def group_stat(request, group_id):
         stats[9] += stats[10]
         group_index = int((group_time - min_time) / step)
         if group_index != 10:
-            group_bin = group_index + 1 
+            group_bin = group_index + 1
         else:
             group_bin = group_index
         return Response({'group_name': group.name,

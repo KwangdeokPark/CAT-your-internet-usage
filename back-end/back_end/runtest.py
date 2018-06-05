@@ -5,7 +5,7 @@ from random import randint
 import jwt
 
 def put_json_or_error(link, payload):
-	sleep(0.05)
+	#sleep(0.05)
 	try:
 		res = requests.put(link, payload)
 		if res.status_code != 200:
@@ -18,7 +18,7 @@ def put_json_or_error(link, payload):
 		exit(1)
 
 def post_json_or_error_new(link, payload):
-    sleep(0.05)
+	#sleep(0.05)
     try:
         res = requests.post(link, payload)
         if res.status_code != 200:
@@ -31,7 +31,7 @@ def post_json_or_error_new(link, payload):
         exit(1)
 
 def post_or_error(link, data):
-    sleep(0.05)
+	#sleep(0.05)
     try:
         res = requests.post(link, data=data)
         if res.status_code != 200:
@@ -42,7 +42,7 @@ def post_or_error(link, data):
         exit(1)
 
 def get_json_or_error(link):
-    sleep(0.05)
+	#sleep(0.05)
     try:
         res = requests.get(link).json()
         return res
@@ -51,7 +51,7 @@ def get_json_or_error(link):
         exit(1)
 
 def forbidden_or_error(method, link, uname, upwd):
-    sleep(0.05)
+	#sleep(0.05)
     try:
         if method == "GET":
             res = requests.get(link, auth=(uname, upwd))
@@ -69,7 +69,7 @@ def forbidden_or_error(method, link, uname, upwd):
         exit(1)
 
 def forbidden_or_error_anon(method, link):
-    sleep(0.05)
+	#sleep(0.05)
     try:
         if method == "GET":
             res = requests.get(link)
