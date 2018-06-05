@@ -21,6 +21,7 @@ class GroupDetailForm extends React.Component{
     //console.log(url1);
     axios.get(url1)
          .then(res => {
+console.log('group detail:axios put request');
             let memberslist = res.data.members;
             this.setState({members: memberslist});
          })
