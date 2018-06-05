@@ -38,16 +38,16 @@ class GroupStats extends React.Component {
         {
           label: '# of user',
           data: [
-            this.props.statsData.a1,
-            this.props.statsData.a2,
-            this.props.statsData.a3,
-            this.props.statsData.a4,
-            this.props.statsData.a5,
-            this.props.statsData.a6,
-            this.props.statsData.a7,
-            this.props.statsData.a8,
-            this.props.statsData.a9,
-            this.props.statsData.a10
+            this.props.statsData.bin1,
+            this.props.statsData.bin2,
+            this.props.statsData.bin3,
+            this.props.statsData.bin4,
+            this.props.statsData.bin5,
+            this.props.statsData.bin6,
+            this.props.statsData.bin7,
+            this.props.statsData.bin8,
+            this.props.statsData.bin9,
+            this.props.statsData.bin10
           ],
           backgroundColor: [
             'rgba(194, 203, 206, 1)',
@@ -65,7 +65,7 @@ class GroupStats extends React.Component {
       ]
     }
 
-    newData.datasets[0].backgroundColor[this.props.statsData.userbin - 1] = 'rgba(254, 103, 99, 1)';
+    newData.datasets[0].backgroundColor[this.props.statsData.user_bin - 1] = 'rgba(254, 103, 99, 1)';
 
     this.setState({
       chartData: newData
@@ -78,7 +78,7 @@ class GroupStats extends React.Component {
       <div>
         { this.state.chartData != undefined
           ? (
-              <div>
+              <div style={{border: '4px solid #777', margin: '20px', padding: '20px'}}>
                 <Bar
                   data = {this.state.chartData}
                   width={50}
@@ -86,14 +86,21 @@ class GroupStats extends React.Component {
                   options={{
                     title:{
                       display: true,
-                      text: "In <"+this.props.statsData.groupname+">",
+                      text: "In <"+this.props.statsData.group_name+">",
                       fontSize: 25
                     },
                     legend:{
                       display: true,
-                      position: 'right'
+                      position: 'bottom'
                     },
-                    maintainAspectRatio: true
+                    maintainAspectRatio: true,
+                    scales: {
+                      xAxes: [{
+                        ticks: {
+                          fontSize: 16
+                        }
+                      }]
+                    }
                   }}
                 /><br/>
                 <h1>Your internet usage is {"top"} {this.props.statsData.percentage}%</h1><br/>
