@@ -2,7 +2,7 @@ import React from 'react';
 import {Bar, Line, Pie} from 'react-chartjs-2';
 import axios from 'axios';
 
-class GroupDetailForm extends React.Component{
+class UserStatChart extends React.Component{
   constructor(props){
     super(props);
     this.state = {
@@ -118,7 +118,7 @@ console.log('group detail:axios put request');
                     options={{
                       title:{
                         display: true,
-                        text: "In <"+this.state.groupname+">",
+                        text: "Your stat in "+this.state.groupname,
                         fontSize: 25
                       },
                       legend:{
@@ -142,4 +142,4 @@ console.log('group detail:axios put request');
     }
   }
 
-export default GroupDetailForm;
+export default UserStatChart;
