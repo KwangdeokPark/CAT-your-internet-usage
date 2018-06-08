@@ -1,0 +1,4 @@
+*.sqlite3
+back-end/back_end/cat/__pycache__/
+back-end/back_end/cat/migrations/
+back-end/back_end/back_end/__pycache__/

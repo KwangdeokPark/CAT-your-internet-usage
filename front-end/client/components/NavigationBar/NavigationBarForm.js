@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 import axios from 'axios';
 
 class NavigationBarForm extends React.Component {
-  
   constructor(props) {
     super(props);
 
@@ -21,6 +20,8 @@ class NavigationBarForm extends React.Component {
   isLogin(prop) {
     if(prop.stateUser === undefined) return false;
     return prop.stateUser.isAuthenticated;
+
+
   }
 
   checkRecord(prop) {
@@ -31,8 +32,8 @@ class NavigationBarForm extends React.Component {
       console.log("spent");
       console.log(spent);
       prop.onPutToday(prop.stateUser.user.id, spent + prop.stateUser.user.today_spent_time, nt.toISOString());
-    } 
-  } 
+    }
+  }
 
   componentWillMount() {
     const settingUrl = 'http://127.0.0.1:8000/setting/';
@@ -42,40 +43,48 @@ class NavigationBarForm extends React.Component {
       alert_start_time: res.data.alert_start_time
     }));
   }
-  
+
   componentDidMount() {
     if(this.isLogin(this.props)) {
-      this.checkRecord(this.props); 
-    }   
+      this.checkRecord(this.props);
+    }
     this.interval = setInterval(() => {
       if(this.isLogin(this.props)) {
         this.setState({nowTime: new Date()});
         this.props.onPutLast(this.props.stateUser.user.id, this.props.stateUser.user.today_spent_time, (new Date()).toISOString(), (new Date(this.props.stateUser.user.now_start_time)).toISOString(), false);
       }
     }, 500);
-  } 
-      
+  }
+
   componentWillUpdate(nextProps, nextState) {
     if((!(this.isLogin(this.props))) && (this.isLogin(nextProps))) {
-      this.checkRecord(nextProps) 
+      this.checkRecord(nextProps)
     }
     else if(this.isLogin(nextProps))
     {
       let dayp = ((new Date(this.props.stateUser.user.last_record_time)).getDay());
       let dayn = ((new Date(nextProps.stateUser.user.last_record_time)).getDay());
       if(dayp != dayn) {
+
+        this.props.onPutTimeline(this.props.stateUser.user.id,
+                                 this.props.stateUser.user.today_spent_time,
+                                 dayp,
+                                 nextProps.stateUser.user,
+                                 nextProps.stateUser.user.last_record_day);
+
         let spent = (new Date(this.props.stateUser.user.last_record_time)) - (new Date(this.props.stateUser.user.now_start_time));
-        this.props.onPutTimeline(this.props.stateUser.user.id, 
-                                 spent + this.props.stateUser.user.today_spent_time, 
-                                 dayp % 7, 
-                                 nextProps.stateUser.user, 
+        this.props.onPutTimeline(this.props.stateUser.user.id,
+                                 spent + this.props.stateUser.user.today_spent_time,
+                                 dayp % 7,
+                                 nextProps.stateUser.user,
                                  nextProps.stateUser.user.last_record_time);
+
       }
     }
   }
-    
+
   componentWillUnmount() {
-    clearInterval(this.interval)  
+    clearInterval(this.interval)
   }
 
   colorString(col) {
@@ -140,16 +149,43 @@ class NavigationBarForm extends React.Component {
 
     const userLinks = (
       <ul className="nav navbar-nav navbar-right">
-        <li><Link to="/stats">Statistics</Link></li>
-        <li><Link to="/settings">Settings</Link></li>
+        <li><Link to="/group">Group</Link></li>
+        <li><Link to="/stats" >Statistics</Link></li>
+        <li><Link to="/settings" >Settings</Link></li>
         <li><a href="#" onClick={this.logout.bind(this)}>Sign out</a></li>
       </ul>
     );
 
     const guestLinks =(
       <ul className="nav navbar-nav navbar-right">
-        <li><Link to="/sign_up">Sign up</Link></li>
-        <li><Link to="/sign_in">Sign in</Link></li>
+        <li><Link to="/sign_up" >Sign up</Link></li>
+        <li><Link to="/sign_in" >Sign in</Link></li>
+      </ul>
+    );
+
+    const groupLinks = (
+      <ul className="nav navbar-nav navbar-right">
+        <li><Link to="/group/join" > Join group</Link></li>
+        <li><Link to="/group/create" >Create new group</Link></li>
+        <li><Link to="/main" >Back to main</Link></li>
+      </ul>
+    );
+
+    const groupJoinLinks = (
+      <ul className="nav navbar-nav navbar-right">
+        <li><Link to="/group" >Back</Link></li>
+      </ul>
+    );
+
+    const groupCreateLinks = (
+      <ul className="nav navbar-nav navbar-right">
+        <li><Link to="/group" >Back</Link></li>
+      </ul>
+    );
+
+    const groupDetailLinks = (
+      <ul className="nav navbar-nav navbar-right">
+        <li><Link to="/group" >Back</Link></li>
       </ul>
     );
 
@@ -161,7 +197,13 @@ class NavigationBarForm extends React.Component {
           </div>
 
           <div className="collapse navbar-collapse">
-            { this.isLogin(this.props) ?  userLinks : guestLinks }
+            {
+              window.location.href == 'http://localhost:3000/group' ?  groupLinks :
+              window.location.href == 'http://localhost:3000/group/join' ?  groupJoinLinks :
+              window.location.href == 'http://localhost:3000/group/create' ?  groupCreateLinks :
+              window.location.href == 'http://localhost:3000/group/detail/' ?  groupDetailLinks :
+              this.isLogin(this.props) ?  userLinks : guestLinks
+            }
           </div>
         </div>
       </nav>

@@ -44,12 +44,13 @@ export function logout(){
     setAuthorizationToken(false);
     //dispatch(setCurrentUser({}));
     dispatch(logoutUser());
+
   }
 }
 
 export function setCurrentUserById(id) {
   let url = `${userUrl}${id}/`
-  
+
   return dispatch => {
     return axios.get(url).then(res => {
       let newUserData = {
