@@ -65,20 +65,20 @@ class NavigationBarForm extends React.Component {
       let dayp = ((new Date(this.props.stateUser.user.last_record_time)).getDay());
       let dayn = ((new Date(nextProps.stateUser.user.last_record_time)).getDay());
       if(dayp != dayn) {
-<<<<<<< HEAD
+
         this.props.onPutTimeline(this.props.stateUser.user.id,
                                  this.props.stateUser.user.today_spent_time,
                                  dayp,
                                  nextProps.stateUser.user,
                                  nextProps.stateUser.user.last_record_day);
-=======
+
         let spent = (new Date(this.props.stateUser.user.last_record_time)) - (new Date(this.props.stateUser.user.now_start_time));
         this.props.onPutTimeline(this.props.stateUser.user.id,
                                  spent + this.props.stateUser.user.today_spent_time,
                                  dayp % 7,
                                  nextProps.stateUser.user,
                                  nextProps.stateUser.user.last_record_time);
->>>>>>> ff3c9a1f9753df00f02474e94a2a71a49c928317
+
       }
     }
   }
