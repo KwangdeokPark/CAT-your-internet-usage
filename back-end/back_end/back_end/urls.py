@@ -27,17 +27,9 @@ urlpatterns = [
     url(r'^sign_up/$', signup, name='signup'),   # sign up page
     url(r'^timeline/(?P<user_id>[0-9]+)/$', timeline_total),
     url(r'^timeline/(?P<user_id>[0-9]+)/group/(?P<group_id>[0-9]+)/$', timeline_detail),
-    url(r'^setting/(?P<user_id>[0-9]+)/$', setting_detail),   #settings page
-    url(r'^group/$', group_all), # all group
-    url(r'^group/(?P<group_id>[0-9]+)/$', group_detail),  # group detail page
+    url(r'^setting/(?P<user_id>[0-9]+)/$', setting_detail),
+    url(r'^group/$', group_all), 
+    url(r'^group/(?P<group_id>[0-9]+)/$', group_detail),
     url(r'^group/(?P<group_id>[0-9]+)/users/(?P<user_id>[0-9]+)/$', group_delete),
     url(r'^group_stat/(?P<group_id>[0-9]+)/$', group_stat),
-    #유저가 속한 그룹들 정보
-    #그룹에 속한 유저들 정보
-    #url(r'^main/$', , name='main'),  # main page
-    #url(r'^group/$', ), # group list page
-    #url(r'^group/join/$', ),    # group join page
-    #url(r'^group/create/$', ),  # group create page
-    #url(r'^stats/$', ), # statistics page
-    #url(r'^settings/$', ),   #settings page
 ]

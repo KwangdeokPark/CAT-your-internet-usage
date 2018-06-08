@@ -18,21 +18,15 @@ class UserDetail(generics.RetrieveAPIView):
     def post(self, request, *args, **kwargs):
         user = User.objects.get(username=self.request.data.get('username'))
         catuser = CatUser.objects.get(user=user)
-        print({'username': catuser.user})
-        print(SettingSerializer(instance=catuser.setting).data)
-        print(TimelineSerializer(instance=catuser.timeline).data)
-        print(CatUserSerializer(instance=catuser).data)
         serialized = CatUserSerializer(instance=catuser).data
         serialized['user'] = {'username': catuser.user.username}
         serialized['setting'] = SettingSerializer(instance=catuser.setting).data
         serialized['timeline'] = TimelineSerializer(instance=catuser.timeline).data
-        print(serialized)
         return Response(serialized, status=200)
 
 @api_view(['GET', 'PUT'])
 @csrf_exempt
 def user_detail(request, user_id):
-    print(request.data)
     if request.method == "GET":
         user = User.objects.get(id=user_id)
         catuser = CatUser.objects.get(user=user)
@@ -64,7 +58,6 @@ def user_detail(request, user_id):
 @api_view(['GET'])
 @csrf_exempt
 def user_group_detail(request, user_id):
-    print(request.data)
     if request.method == "GET":
         user = User.objects.get(id=user_id)
         catuser = CatUser.objects.get(user=user)
@@ -74,43 +67,31 @@ def user_group_detail(request, user_id):
             members = groups[-1]['members']
             for j in range(0, len(members)):
                 members[j] = CatUser.objects.get(id=members[j]).user.username
-        print(groups)
         return Response(groups, status=200)
 
 @api_view(['POST'])
 @csrf_exempt
 def signup(request):
     if request.method == 'POST':
-        print(request.data)
         form = SignUpForm(request.data)
-        print(form)
         if form.is_valid():
             user = form.save()
             user.catuser.age = form.cleaned_data.get('age')
-            print(user.catuser.age)
-            #user.catuser.today_spent_time = datetime.timedelta(minutes=0)
             user.catuser.today_spent_time = 0
-            print(user.catuser.today_spent_time)
             user.catuser.now_start_time = timezone.localtime()
-            print(user.catuser.now_start_time)
             user.catuser.last_record_time = timezone.localtime()
-            print(user.catuser.last_record_time)
             user.catuser.timeline = Timeline.objects.create(sun_average=0, mon_average=0,
                                                             tue_average=0, wed_average=0,
                                                             thu_average=0, fri_average=0,
                                                             sat_average=0,
                                                             sun_count=0, mon_count=0, tue_count=0, wed_count=0,
                                                             thu_count=0, fri_count=0, sat_count=0)
-            print(user.catuser.timeline.fri_average)
             user.catuser.setting = Setting.objects.create(
                 alert_start_time=(form.cleaned_data.get('alert_start_time'))*1000*60*60,
                 alert_interval=(form.cleaned_data.get('alert_interval'))*1000*60)
-            print(user.catuser.setting.alert_interval)
             user.catuser.save()
             all_group, created1 = Group.objects.get_or_create(name='all_user')
-            #all_group.members.add(user.catuser)
             all_group_obj = Join.objects.create(group=all_group, catuser=user.catuser)
-            print(JoinSerializer(all_group_obj).data)
             all_group_obj.save()
             age = request.data['age']
             if age == '0':
@@ -120,9 +101,7 @@ def signup(request):
             else:
                 name = str(age) + '대'
             age_group, created2 = Group.objects.get_or_create(name=name)
-            #age_group.members.add(user.catuser)
             age_group_obj = Join.objects.create(group=age_group, catuser=user.catuser)
-            print(JoinSerializer(age_group_obj).data)
             age_group_obj.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
@@ -140,32 +119,20 @@ import jwt
 @api_view(['POST', 'GET'])
 @csrf_exempt
 def signin(request):
-    print(request.data)
     if request.method == "POST":
-        print(request.data)
         username = request.data['username']
         password = request.data['password']
         user = authenticate(username=username, password=password)
-        print(user)
-
         if user is not None:
             encoded_token = jwt.encode({'username':username, 'password':password}, 'SECRET', algorithm='HS256')
-            print(encoded_token)
             user = User.objects.get(username=request.data['username'])
             catuser = CatUser.objects.get(user=user)
-            print({'username': catuser.user})
-            print(SettingSerializer(instance=catuser.setting).data)
-            print(TimelineSerializer(instance=catuser.timeline).data)
-            print(CatUserSerializer(instance=catuser).data)
             serialized = CatUserSerializer(instance=catuser).data
             serialized['username'] = username
             serialized['user'] = {'username': catuser.user.username}
             serialized['setting_id'] = SettingSerializer(instance=catuser.setting).data['id']
             serialized['timeline_id'] = TimelineSerializer(instance=catuser.timeline).data['id']
-            print(serialized)
-            print({'user': serialized, 'token': encoded_token})
             return Response({'user': serialized, 'token': encoded_token}, status=200)
-
         else:
             return Response(status=400)
     else:
