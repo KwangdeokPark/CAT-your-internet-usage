@@ -1,14 +1,13 @@
-from cat.models import CatUser, Group, Setting, Timeline, Join
 from cat.serializers import *
 from rest_framework import generics
 from django.contrib.auth.models import User
-from datetime import datetime, timedelta
 from django.contrib.auth import login, authenticate
-import datetime
 from django.utils import timezone
 from cat.forms import SignUpForm
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
+from rest_framework.response import Response
+import jwt
 
 
 class UserDetail(generics.RetrieveAPIView):
@@ -24,6 +23,7 @@ class UserDetail(generics.RetrieveAPIView):
         serialized['timeline'] = TimelineSerializer(instance=catuser.timeline).data
         return Response(serialized, status=200)
 
+
 @api_view(['GET', 'PUT'])
 @csrf_exempt
 def user_detail(request, user_id):
@@ -38,6 +38,7 @@ def user_detail(request, user_id):
         serialized['setting_id'] = SettingSerializer(instance=catuser.setting).data['id']
         serialized['timeline_id'] = TimelineSerializer(instance=catuser.timeline).data['id']
         return Response(serialized, status=200)
+
     elif request.method == "PUT":
         catuser = CatUser.objects.get(user=User.objects.get(id=user_id))
         catuser.last_record_time = request.data['last_record_time']
@@ -86,9 +87,8 @@ def signup(request):
                                                             sat_average=0,
                                                             sun_count=0, mon_count=0, tue_count=0, wed_count=0,
                                                             thu_count=0, fri_count=0, sat_count=0)
-            user.catuser.setting = Setting.objects.create(
-                alert_start_time=(form.cleaned_data.get('alert_start_time'))*1000*60*60,
-                alert_interval=(form.cleaned_data.get('alert_interval'))*1000*60)
+            user.catuser.setting = Setting.objects.create(alert_start_time=(form.cleaned_data.get('alert_start_time'))*1000*60*60,
+                                                          alert_interval=(form.cleaned_data.get('alert_interval'))*1000*60)
             user.catuser.save()
             all_group, created1 = Group.objects.get_or_create(name='all_user')
             all_group_obj = Join.objects.create(group=all_group, catuser=user.catuser)
@@ -113,8 +113,6 @@ def signup(request):
     else:
         return Response(status=400)
 
-from rest_framework.response import Response
-import jwt
 
 @api_view(['POST', 'GET'])
 @csrf_exempt
@@ -138,13 +136,14 @@ def signin(request):
     else:
         return Response(status=400)
 
+
 @api_view(['GET', 'PUT'])
 @csrf_exempt
 def timeline_total(request, user_id):
-    print(request.data)
     if request.method == "GET":
         serialized = TimelineSerializer(instance=CatUser.objects.get(user=User.objects.get(id=user_id)).timeline).data
         return Response(serialized, status=200)
+
     elif request.method == "PUT":
         catuser = CatUser.objects.get(user=User.objects.get(id=user_id))
         timeline = catuser.timeline
@@ -171,35 +170,20 @@ def timeline_total(request, user_id):
         catuser.save()
         return Response(TimelineSerializer(catuser.timeline).data, status=200)
 
+
 @api_view(['GET'])
 @csrf_exempt
 def timeline_detail(request, user_id, group_id):
     if request.method == "GET":
-        print(request.data)
-        #CatUser.objects.filter(user=User.objects.get(id=user_id)).order_by()
         user = User.objects.get(id=user_id)
         catuser = CatUser.objects.get(user=user)
         group = Group.objects.get(id=group_id)
-        #all_user = list(CatUser.objects.filter(group=group).order_by('timeline__total_average'))
         all_user = list(group.members.order_by('timeline__total_average'))
-        #for item in all_user:
-            #item = CatUserSerializer(item)
-        #print(all_user[0].timeline.total_average)
         min_time = all_user[0].timeline.total_average
         max_time = all_user[-1].timeline.total_average
         step = (max_time - min_time) / 10
         percent = (1 - (all_user.index(catuser) / len(all_user))) * 100
-        '''
-        print(step)
-        for i in range(0,len(all_user)):
-            print(TimelineSerializer(all_user[i].timeline).data)
-            if all_user[i].timeline.total_average >= tmp * step:
-                print(tmp)
-                num[tmp] = i
-                tmp = tmp + 1
-        stats = [0] * 10
-        for i in range(0, 10):
-            stats[i] = ((num[i+1] - num[i]) / len(all_user)) * 100'''
+
         stats = [0] * 11
         for i in all_user:
             time = (i.timeline.total_average - min_time) / step
@@ -210,62 +194,6 @@ def timeline_detail(request, user_id, group_id):
             user_bin = user_time + 1
         else:
             user_bin = user_time
-        '''
-        for i in all_user:
-            if i != catuser:
-                time = i.timeline.total_average
-                if time <= step:
-                    stats[0] = stats[0] + 1
-                elif time <= step * 2:
-                    stats[1] = stats[1] + 1
-                elif time <= step * 3:
-                    stats[2] = stats[2] + 1
-                elif time <= step * 4:
-                    stats[3] = stats[3] + 1
-                elif time <= step * 5:
-                    stats[4] = stats[4] + 1
-                elif time <= step * 6:
-                    stats[5] = stats[5] + 1
-                elif time <= step * 7:
-                    stats[6] = stats[6] + 1
-                elif time <= step * 8:
-                    stats[7] = stats[7] + 1
-                elif time <= step * 9:
-                    stats[8] = stats[8] + 1
-                else:
-                    stats[9] = stats[9] + 1
-            else:
-                time = i.timeline.total_average
-                if time <= step:
-                    stats[0] = stats[0] + 1
-                    user_bin = 1
-                elif time <= step * 2:
-                    stats[1] = stats[1] + 1
-                    user_bin = 2
-                elif time <= step * 3:
-                    stats[2] = stats[2] + 1
-                    user_bin = 3
-                elif time <= step * 4:
-                    stats[3] = stats[3] + 1
-                    user_bin = 4
-                elif time <= step * 5:
-                    stats[4] = stats[4] + 1
-                    user_bin = 5
-                elif time <= step * 6:
-                    stats[5] = stats[5] + 1
-                    user_bin = 6
-                elif time <= step * 7:
-                    stats[6] = stats[6] + 1
-                    user_bin = 7
-                elif time <= step * 8:
-                    stats[7] = stats[7] + 1
-                    user_bin = 8
-                elif time <= step * 9:
-                    stats[8] = stats[8] + 1
-                    user_bin = 9
-                else:
-                    stats[9] = stats[9] + 1
-                    user_bin = 10'''
         return Response({'group_name': group.name,
                          'percentage': percent,
                          'max': max_time,
@@ -281,13 +209,15 @@ def timeline_detail(request, user_id, group_id):
                          'bin8': stats[7],
                          'bin9': stats[8],
                          'bin10': stats[9]}, status=200)
+
+
 @api_view(['GET', 'PUT'])
 @csrf_exempt
 def setting_detail(request, user_id):
-    print(request.data)
     if request.method == "GET":
         serialized = SettingSerializer(instance=CatUser.objects.get(user=User.objects.get(id=user_id)).setting).data
         return Response(serialized, status=200)
+
     elif request.method == "PUT":
         catuser = CatUser.objects.get(user=User.objects.get(id=user_id))
         setting = catuser.setting
@@ -296,7 +226,6 @@ def setting_detail(request, user_id):
         setting.save()
         catuser.setting = setting
         catuser.save()
-
         return Response(SettingSerializer(catuser.setting).data, status=200)
 
 
@@ -310,12 +239,10 @@ def group_all(request):
             members = groups[-1]['members']
             for j in range(0, len(members)):
                 members[j] = CatUser.objects.get(id=members[j]).user.username
-        print(groups)
         return Response(groups, status=200)
+
     elif request.method == "POST":
-        print(request.data)
         if not(list(Group.objects.filter(name=request.data.get('name')))):
-            # add new group
             new_group = Group.objects.create(name=request.data.get('name'),
                                              description=request.data.get('description'))
             Join.objects.create(group=new_group, catuser=CatUser.objects.get(id=request.data.get('user_id')))
@@ -324,8 +251,8 @@ def group_all(request):
             serialized['members'] = [CatUser.objects.get(id=request.data.get('user_id')).user.username]
             return Response(serialized, status=200)
         else:
-            print(list(Group.objects.filter(name=request.data.get('name'))))
             return Response(status=400)
+
 
 @api_view(['GET', 'PUT'])
 @csrf_exempt
@@ -335,10 +262,9 @@ def group_detail(request, group_id):
         members = group['members']
         for j in range(0, len(members)):
             members[j] = CatUser.objects.get(id=members[j]).user.username
-        print(group)
         return Response(group, status=200)
+
     elif request.method == "PUT":
-        # add new user
         group = Group.objects.get(id=group_id)
         user = CatUser.objects.get(id=request.data.get('user_id'))
         if not(list(group.members.filter(group__join__catuser=user))):
@@ -352,11 +278,11 @@ def group_detail(request, group_id):
         else:
             return Response(status=400)
 
+
 @api_view(['DELETE'])
 @csrf_exempt
 def group_delete(request, group_id, user_id):
     if request.method == "DELETE":
-        # delete user
         user = CatUser.objects.get(id=user_id)
         group = Group.objects.get(id=group_id)
         if list(Join.objects.filter(group=group, catuser=user)):
@@ -365,26 +291,23 @@ def group_delete(request, group_id, user_id):
         else:
             #cannot find
             return Response(status=400)
+
+
 @api_view(['GET'])
 @csrf_exempt
 def group_stat(request, group_id):
     if request.method == "GET":
         group = Group.objects.get(id=group_id)
         all_group = list(Group.objects.all())
-        print(all_group)
         all_time = []
-        #for i in range(0, len(all_group)):
-            #all_group[i] = GroupSerializer(all_group[i]).data
         for i in range(0, len(all_group)):
             time = 0
             members = GroupSerializer(all_group[i]).data['members']
-            print(members)
             for member in members:
                 time += CatUser.objects.get(id=member).timeline.total_average
             all_time.append(time / len(members))
             if all_group[i] == group:
                 group_time = all_time[-1]
-        print(all_time)
         min_time = min(all_time)
         max_time = max(all_time)
         step = (max_time - min_time) / 10
@@ -418,5 +341,3 @@ def group_stat(request, group_id):
                          'bin8': stats[7],
                          'bin9': stats[8],
                          'bin10': stats[9]}, status=200)
-
-
