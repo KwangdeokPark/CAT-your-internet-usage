@@ -221,8 +221,8 @@ def setting_detail(request, user_id):
     elif request.method == "PUT":
         catuser = CatUser.objects.get(user=User.objects.get(id=user_id))
         setting = catuser.setting
-        setting.alert_interval = request.data['alert_interval']
-        setting.alert_start_time = request.data['alert_start_time']
+        setting.alert_interval = int(request.data['alert_interval'])* 60 * 1000
+        setting.alert_start_time = int(request.data['alert_start_time']) * 60 * 60 * 1000
         setting.save()
         catuser.setting = setting
         catuser.save()
