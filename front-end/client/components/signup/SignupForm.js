@@ -38,6 +38,9 @@ class SignupForm extends React.Component{
     e.preventDefault();
 
     if (this.isValid()) {
+      console.log(this.state.username);
+      console.log(this.state.alertStartTime);
+      console.log(this.state.alertInterval);
       this.setState({ errors: {}, isLoading: true });
       this.props.userSignupRequest(this.state).then(
         () => {
