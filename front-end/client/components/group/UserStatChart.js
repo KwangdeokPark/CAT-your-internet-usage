@@ -107,10 +107,10 @@ console.log('group detail:axios put request');
         <div>
           { this.state.chartData != undefined
             ? (
-
                 <div>
                 <h1>Members</h1>
                 <p key={this.state.members.id}>{this.state.members}</p>
+                <div style={{border: '4px solid #777', margin: '20px', padding: '20px'}} className = "chart">
                   <Bar
                     data = {this.state.chartData}
                     width={50}
@@ -129,6 +129,7 @@ console.log('group detail:axios put request');
                     }}
                   /><br/>
                   <h1>Your internet usage is {"top"} {this.state.percentage}%</h1><br/>
+                </div>
                 </div>
               )
             : (

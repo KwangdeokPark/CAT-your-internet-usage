@@ -35,10 +35,9 @@
     "babel-preset-react": "^6.24.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-14": "^1.0.5",
-    "enzyme-adapter-react-15.4": "^1.0.5",
     "enzyme-to-json": "^3.3.3",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^22.4.3",
+    "jest": "^22.4.4",
     "jest-enzyme": "^6.0.0",
     "jest-mock-axios": "^2.1.11",
     "react-addons-test-utils": "^0.14.8",
@@ -68,6 +67,7 @@
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "shortid": "^2.2.6",
+    "topo": "^3.0.0",
     "validator": "^5.4.0"
   }
 }
