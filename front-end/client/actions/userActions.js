@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-import setAuthorizationToken from '../utils/setAuthorizationToken';
-import jwt from 'jsonwebtoken';
+//import setAuthorizationToken from '../utils/setAuthorizationToken';
+//import jwt from 'jsonwebtoken';
 import { SET_CURRENT_USER, LOGOUT, NOTHING } from './types';
 import { SET_CURRENT_USER_SETTING } from './types';
 
@@ -38,10 +38,10 @@ export function setCurrentUserSetting(setting){
 
 export function logout(){
   return dispatch => {
-    localStorage.removeItem('jwtToken');
+    //localStorage.removeItem('jwtToken');
     localStorage.removeItem('id');
     localStorage.setItem('username','');
-    setAuthorizationToken(false);
+    //setAuthorizationToken(false);
     //dispatch(setCurrentUser({}));
     dispatch(logoutUser());
 
@@ -71,10 +71,10 @@ export function login(data){
 
   return dispatch =>{
     return axios.post(url,data).then(res=> {
-      const token = res.data.token;
-      localStorage.setItem('jwtToken', token);
+      //const token = res.data.token;
+      //localStorage.setItem('jwtToken', token);
       localStorage.setItem('id', res.data.user.id);
-      setAuthorizationToken(token);
+      //setAuthorizationToken(token);
       let newUserData = {
         id: res.data.user.id,
         username: res.data.user.username,
@@ -144,7 +144,7 @@ export function putToday(id, todayTime, nowTime){
 
 export function putTimelineData(id, data, newUserData) {
   let url = `${timelineUrl}${id}/`;
-  
+
   console.log(data);
 
   return dispatch => {
@@ -157,7 +157,7 @@ export function putTimelineData(id, data, newUserData) {
 
 export function putTimeline(id, todayTime, day, newUser, nowTime){
   let url = `${timelineUrl}${id}/`;
-    
+
   try {
     return dispatch => {
       return axios.get(url).then(res => {

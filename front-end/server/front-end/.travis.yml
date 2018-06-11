@@ -1,6 +1,0 @@
-language: node_js
-node_js:
-    - v6
-script:
-    - npm run server && npm test -- --coverage
-sudo: false
