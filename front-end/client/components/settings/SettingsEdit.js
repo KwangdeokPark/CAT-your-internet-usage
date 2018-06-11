@@ -12,8 +12,7 @@ class SettingsEdit extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      username:localStorage.getItem('username'),
-      setting_id:'',
+      user_id:localStorage.getItem('id'),
       alert_start_time:'',
       alert_interval:'',
       errors:{},
@@ -23,35 +22,8 @@ class SettingsEdit extends React.Component{
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentWillMount() {
-    axios.post('http://127.0.0.1:8000/users/',this.state)
-         .then(response => this.setState({
-           setting_id: response.data.id,
-         }))
-         .catch(err => console.log(err))
-  }
-
   onChange(e) {
       this.setState({ [e.target.name]: e.target.value });
-  }
-
-  onSubmit(e) {
-    e.preventDefault();
-
-    if (this.isValid()) {
-      this.setState({ errors: {}, isLoading:true });
-      const settingurl = 'http://127.0.0.1:8000/setting/';
-      const settingId = this.state.setting_id;
-      let url = `${settingurl}${settingId}/`;
-      axios.put(url, {
-        alert_start_time: this.state.alertStartTime,
-        alert_interval: this.state.alertInterval
-      }).then(res => {
-        console.log(res.status);
-        this.context.router.push('/main');
-      }).catch(res => {console.log(res.error); this.context.router.push('/main');});
-
-    }
   }
 
   isValid(){
@@ -62,6 +34,25 @@ class SettingsEdit extends React.Component{
     }
     return isValid;
   }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    if (this.isValid()) {
+      console.log(this.state.alertStartTime);
+      console.log(this.state.alertInterval);
+      this.setState({ errors: {}, isLoading:true });
+      const settingurl = 'http://127.0.0.1:8000/setting/';
+      const userId = localStorage.getItem('id');
+      let url = `${settingurl}${userId}/`;
+      axios.put(url, this.state).then(res => {
+        console.log(res.status);
+        this.context.router.push('/main');
+      }).catch(res => {console.log(res.error); this.context.router.push('/main');});
+
+    }
+  }
+
 
   render(){
     const { errors }=this.state;
