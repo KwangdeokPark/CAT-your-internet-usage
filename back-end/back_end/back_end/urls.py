@@ -16,22 +16,19 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url
 from cat.views import *
-from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 urlpatterns = [
     url(r'^users/$', UserDetail.as_view()),
     url(r'^users/(?P<user_id>[0-9]+)/$', user_detail),
+    url(r'^users_group/(?P<user_id>[0-9]+)/$', user_group_detail),
     url(r'^admin/', admin.site.urls),
     url(r'^sign_in/$', signin, name='signin'),   # sign in page
     url(r'^sign_up/$', signup, name='signup'),   # sign up page
     url(r'^timeline/(?P<user_id>[0-9]+)/$', timeline_total),
     url(r'^timeline/(?P<user_id>[0-9]+)/group/(?P<group_id>[0-9]+)/$', timeline_detail),
-    url(r'^setting/(?P<user_id>[0-9]+)/$', setting_detail),   #settings page
-    #url(r'^main/$', , name='main'),  # main page
-    #url(r'^group/$', ), # group list page
-    #url(r'^group/(?P<pk>[0-9]+)/$', ),  # group detail page
-    #url(r'^group/join/$', ),    # group join page
-    #url(r'^group/create/$', ),  # group create page
-    #url(r'^stats/$', ), # statistics page
-    #url(r'^settings/$', ),   #settings page
+    url(r'^setting/(?P<user_id>[0-9]+)/$', setting_detail),
+    url(r'^group/$', group_all),
+    url(r'^group/(?P<group_id>[0-9]+)/$', group_detail),
+    url(r'^group/(?P<group_id>[0-9]+)/users/(?P<user_id>[0-9]+)/$', group_delete),
+    url(r'^group_stat/(?P<group_id>[0-9]+)/$', group_stat),
 ]

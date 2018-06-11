@@ -5,8 +5,6 @@ from django.contrib.auth.models import User
 
 class SignUpForm(UserCreationForm):
     age = forms.IntegerField()
-    #last_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
-    #email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
     alert_start_time = forms.IntegerField()
     alert_interval = forms.IntegerField()
     class Meta:
@@ -16,4 +14,4 @@ class SignUpForm(UserCreationForm):
 class SignInForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'password'] # 로그인 시에는 유저이름과 비밀번호만 입력 받는다.
+        fields = ['username', 'password']
