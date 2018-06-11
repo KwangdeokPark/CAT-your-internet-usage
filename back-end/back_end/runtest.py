@@ -158,7 +158,8 @@ for i in range(0, userN):
 		print('\t'+str(username) + '\'s information is wrong')
 		exit(1)
 
-
+print("******************************************************************************************************************")
+print("4. Posting timeline http://localhost:8000/timeline/.")
 link = "http://localhost:8000/timeline/"
 usercount = []
 usertime = []
@@ -189,5 +190,17 @@ for i in range(0, userN):
 				'fri_average': fri, 'fri_count': fric,
 				'sat_average': sat, 'sat_count': satc}
 	put_json_or_error(alink, payload)
+print('\tall post is pass')
 
-print("TEST SUCCESSFUL (further tests will be added)")
+print("******************************************************************************************************************")
+print("5. Checking timeline http://localhost:8000/timeline/.")
+link = "http://localhost:8000/timeline/"
+for i in range(0, userN):
+	alink = link + str(i + 1) + '/'
+	payload = get_json_or_error(alink)
+	if usertime[i][0] != payload['sun_average'] or usercount[i][0] != payload['sun_count']:
+		print(payload + 'is wrong')
+		exit(1)
+	else:
+		print('\tthis user timeline is right')
+print("TEST SUCCESSFUL")
