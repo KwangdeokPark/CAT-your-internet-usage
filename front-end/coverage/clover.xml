@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1528725047752" clover="3.2.0">
-  <project timestamp="1528725047752" name="All files">
-    <metrics statements="224" coveredstatements="83" conditionals="82" coveredconditionals="23" methods="67" coveredmethods="25" elements="373" coveredelements="131" complexity="0" loc="224" ncloc="224" packages="9" files="16" classes="16">
+<coverage generated="1528725340456" clover="3.2.0">
+  <project timestamp="1528725340456" name="All files">
+    <metrics statements="199" coveredstatements="88" conditionals="74" coveredconditionals="25" methods="60" coveredmethods="28" elements="333" coveredelements="141" complexity="0" loc="199" ncloc="199" packages="8" files="15" classes="15">
       <package name="client.actions">
         <metrics statements="86" coveredstatements="30" conditionals="14" coveredconditionals="1" methods="33" coveredmethods="12"/>
         <file name="flashMessages.js" path="/Users/june/CAT/CAT-your-internet-usage/front-end/client/actions/flashMessages.js">
@@ -16,19 +16,19 @@
         </file>
         <file name="types.js" path="/Users/june/CAT/CAT-your-internet-usage/front-end/client/actions/types.js">
           <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-          <line num="1" count="6" type="stmt"/>
-          <line num="2" count="6" type="stmt"/>
-          <line num="3" count="6" type="stmt"/>
-          <line num="4" count="6" type="stmt"/>
-          <line num="5" count="6" type="stmt"/>
-          <line num="6" count="6" type="stmt"/>
+          <line num="1" count="5" type="stmt"/>
+          <line num="2" count="5" type="stmt"/>
+          <line num="3" count="5" type="stmt"/>
+          <line num="4" count="5" type="stmt"/>
+          <line num="5" count="5" type="stmt"/>
+          <line num="6" count="5" type="stmt"/>
         </file>
         <file name="userActions.js" path="/Users/june/CAT/CAT-your-internet-usage/front-end/client/actions/userActions.js">
           <metrics statements="76" coveredstatements="23" conditionals="14" coveredconditionals="1" methods="29" coveredmethods="11"/>
-          <line num="8" count="4" type="stmt"/>
-          <line num="9" count="4" type="stmt"/>
-          <line num="10" count="4" type="stmt"/>
-          <line num="11" count="4" type="stmt"/>
+          <line num="8" count="3" type="stmt"/>
+          <line num="9" count="3" type="stmt"/>
+          <line num="10" count="3" type="stmt"/>
+          <line num="11" count="3" type="stmt"/>
           <line num="14" count="1" type="stmt"/>
           <line num="21" count="1" type="stmt"/>
           <line num="27" count="1" type="stmt"/>
@@ -104,23 +104,23 @@
         </file>
       </package>
       <package name="client.components.common">
-        <metrics statements="4" coveredstatements="3" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <file name="TextFieldGroup.js" path="/Users/june/CAT/CAT-your-internet-usage/front-end/client/components/common/TextFieldGroup.js">
-          <metrics statements="4" coveredstatements="3" conditionals="2" coveredconditionals="0" methods="1" coveredmethods="0"/>
-          <line num="4" count="2" type="stmt"/>
-          <line num="5" count="0" type="stmt"/>
-          <line num="20" count="2" type="stmt"/>
-          <line num="29" count="2" type="stmt"/>
+          <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+          <line num="4" count="1" type="stmt"/>
+          <line num="5" count="2" type="stmt"/>
+          <line num="20" count="1" type="stmt"/>
+          <line num="29" count="1" type="stmt"/>
         </file>
       </package>
       <package name="client.components.login">
-        <metrics statements="22" coveredstatements="2" conditionals="6" coveredconditionals="0" methods="7" coveredmethods="0"/>
+        <metrics statements="22" coveredstatements="8" conditionals="6" coveredconditionals="1" methods="7" coveredmethods="2"/>
         <file name="LoginForm.js" path="/Users/june/CAT/CAT-your-internet-usage/front-end/client/components/login/LoginForm.js">
-          <metrics statements="22" coveredstatements="2" conditionals="6" coveredconditionals="0" methods="7" coveredmethods="0"/>
-          <line num="10" count="0" type="stmt"/>
-          <line num="11" count="0" type="stmt"/>
-          <line num="18" count="0" type="stmt"/>
-          <line num="19" count="0" type="stmt"/>
+          <metrics statements="22" coveredstatements="8" conditionals="6" coveredconditionals="1" methods="7" coveredmethods="2"/>
+          <line num="10" count="1" type="stmt"/>
+          <line num="11" count="1" type="stmt"/>
+          <line num="18" count="1" type="stmt"/>
+          <line num="19" count="1" type="stmt"/>
           <line num="24" count="0" type="stmt"/>
           <line num="26" count="0" type="cond" truecount="0" falsecount="2"/>
           <line num="27" count="0" type="stmt"/>
@@ -135,8 +135,8 @@
           <line num="48" count="0" type="stmt"/>
           <line num="52" count="0" type="stmt"/>
           <line num="59" count="0" type="stmt"/>
-          <line num="63" count="0" type="stmt"/>
-          <line num="65" count="0" type="stmt"/>
+          <line num="63" count="1" type="stmt"/>
+          <line num="65" count="1" type="stmt"/>
           <line num="94" count="1" type="stmt"/>
           <line num="99" count="1" type="stmt"/>
         </file>
@@ -180,37 +180,6 @@
           <line num="14" count="1" type="stmt"/>
           <line num="19" count="1" type="stmt"/>
           <line num="20" count="1" type="stmt"/>
-        </file>
-      </package>
-      <package name="client.components.settings">
-        <metrics statements="25" coveredstatements="2" conditionals="8" coveredconditionals="0" methods="7" coveredmethods="0"/>
-        <file name="SettingsEdit.js" path="/Users/june/CAT/CAT-your-internet-usage/front-end/client/components/settings/SettingsEdit.js">
-          <metrics statements="25" coveredstatements="2" conditionals="8" coveredconditionals="0" methods="7" coveredmethods="0"/>
-          <line num="13" count="0" type="stmt"/>
-          <line num="14" count="0" type="stmt"/>
-          <line num="21" count="0" type="stmt"/>
-          <line num="22" count="0" type="stmt"/>
-          <line num="26" count="0" type="stmt"/>
-          <line num="30" count="0" type="stmt"/>
-          <line num="32" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="33" count="0" type="stmt"/>
-          <line num="35" count="0" type="stmt"/>
-          <line num="39" count="0" type="stmt"/>
-          <line num="41" count="0" type="cond" truecount="0" falsecount="2"/>
-          <line num="42" count="0" type="stmt"/>
-          <line num="43" count="0" type="stmt"/>
-          <line num="44" count="0" type="stmt"/>
-          <line num="45" count="0" type="stmt"/>
-          <line num="46" count="0" type="stmt"/>
-          <line num="47" count="0" type="stmt"/>
-          <line num="48" count="0" type="stmt"/>
-          <line num="49" count="0" type="stmt"/>
-          <line num="50" count="0" type="stmt"/>
-          <line num="51" count="0" type="stmt"/>
-          <line num="58" count="0" type="stmt"/>
-          <line num="59" count="0" type="stmt"/>
-          <line num="103" count="1" type="stmt"/>
-          <line num="108" count="1" type="stmt"/>
         </file>
       </package>
       <package name="client.components.stats">
@@ -298,7 +267,7 @@
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <file name="jestsetup.js" path="/Users/june/CAT/CAT-your-internet-usage/front-end/test/jestsetup.js">
           <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-          <line num="14" count="14" type="stmt"/>
+          <line num="14" count="13" type="stmt"/>
         </file>
       </package>
     </metrics>

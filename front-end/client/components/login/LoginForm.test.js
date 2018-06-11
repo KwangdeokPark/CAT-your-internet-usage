@@ -1,23 +1,22 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import LoginForm from './LoginForm';
+import configureMockStore from 'redux-mock-store';
 
 describe('Login Form', () => {
   let component = null;
-  const testEmptyUser = {
-    username: '',
-    password: ''
-  };
-  const testStateUser = {
-    username: 'testUsername',
-    password: 'testTST'
-  };
+  const mockStore = configureMockStore();
+  let store = mockStore({
+      stateUser: {
+        id: 'testId',
+        username: 'testUsername',
+        password: 'testPassword'
+      },
+    });
 
-  const propsEmpty = {
-    stateUser: testEmptyUser,
-  }
 
   it('should render', () => {
-    expect(LoginForm).not.toEqual(null);
+    component = mount(<LoginForm store={ store }/>);
+    expect(component).not.toEqual(null);
   });
 });
