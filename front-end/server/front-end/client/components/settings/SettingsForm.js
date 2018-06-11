@@ -28,7 +28,7 @@ class SettingsForm extends React.Component{
          }))
          .catch(err => console.log(err))
 
-    if(localStorage.getItem('username')=='')
+    if(localStorage.getItem('id')=='')
       this.context.router.push('/sign_in');
 
   }
