@@ -20,11 +20,12 @@ const store = createStore(
   )
 );
 
-if(localStorage.id != ''){
-  //setAuthorizationToken(localStorage.jwtToken);
+///if(localStorage.jwtToken){
+//  setAuthorizationToken(localStorage.jwtToken);
+  if(localStorage.id != '') {
     store.dispatch(setCurrentUserById(localStorage.id));
-
-}
+  }
+//}
 
 //setAuthorizationToken(localStorage.jwtToken);
 
