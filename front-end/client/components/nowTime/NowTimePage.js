@@ -4,6 +4,7 @@ import NowTimeForm from './NowTimeForm'
 
 class NowTimePage extends React.Component {
   render() {
+
     return (
       <NowTimeForm stateUser={this.props.stateUser} />
     );

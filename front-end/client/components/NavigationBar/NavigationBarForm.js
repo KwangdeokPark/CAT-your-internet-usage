@@ -21,8 +21,6 @@ class NavigationBarForm extends React.Component {
   isLogin(prop) {
     if(prop.stateUser === undefined) return false;
     return prop.stateUser.isAuthenticated;
-
-
   }
 
   checkRecord(prop) {
@@ -194,7 +192,7 @@ class NavigationBarForm extends React.Component {
       <nav className="navbar navbar-default">
         <div style={{backgroundColor: this.colorString(bCol)}}className="container-fluid">
           <div className="navbar-header">
-            <Link to="/" className="navbar-brand">CAT</Link>
+            <Link to="/main" className="navbar-brand">CAT</Link>
           </div>
 
           <div className="collapse navbar-collapse">

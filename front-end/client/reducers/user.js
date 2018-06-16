@@ -19,7 +19,6 @@ export default (state = initialState, action = {}) => {
         isAuthenticated: !isEmpty(action.user),
         user: action.user
       };
-
     case LOGOUT:
       return initialState;
 

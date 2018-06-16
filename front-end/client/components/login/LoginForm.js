@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import { login } from '../../actions/userActions';
 import { addFlashMessage } from '../../actions/flashMessages';
 
+
+
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -32,6 +34,7 @@ class LoginForm extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
+
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
       this.props.login(this.state).then(
@@ -67,6 +70,7 @@ class LoginForm extends React.Component {
         <h1>Login</h1>
 
         { errors.form && <div className="alert alert-danger">{errors.form}</div> }
+
 
         <TextFieldGroup
           field="username"

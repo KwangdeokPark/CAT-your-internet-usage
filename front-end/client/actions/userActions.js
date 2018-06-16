@@ -53,6 +53,10 @@ export function setCurrentUserById(id) {
 
   return dispatch => {
     return axios.get(url).then(res => {
+      //localStorage.setItem('id', '');
+      //localStorage.setItem('jwtToken', '');
+      //localStorage.setItem('groupId', '');
+      //localStorage.setItem('username', '');
       let newUserData = {
         id: res.data.id,
         username: res.data.username,
@@ -153,7 +157,6 @@ export function putTimelineData(id, data, newUserData) {
     });
   }
 }
-
 
 export function putTimeline(id, todayTime, day, newUser, nowTime){
   let url = `${timelineUrl}${id}/`;
