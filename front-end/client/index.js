@@ -19,16 +19,16 @@ const store = createStore(
     window.devToolsExtension ? window.devToolsExtension() : f => f
   )
 );
-/*
-if(localStorage.jwtToken){
-  setAuthorizationToken(localStorage.jwtToken);
-  if(localStorage.id != undefined) {
+
+///if(localStorage.jwtToken){
+//  setAuthorizationToken(localStorage.jwtToken);
+  if(localStorage.id != '') {
     store.dispatch(setCurrentUserById(localStorage.id));
   }
-}
+//}
 
-setAuthorizationToken(localStorage.jwtToken);
-*/
+//setAuthorizationToken(localStorage.jwtToken);
+
 render(
   <Provider store={store}>
     <Router history={browserHistory} routes={routes}/>
