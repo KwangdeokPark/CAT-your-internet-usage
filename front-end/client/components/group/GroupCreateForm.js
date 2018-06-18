@@ -34,7 +34,7 @@ class GroupCreateForm extends React.Component {
     e.preventDefault();
     if (this.isValid()) {
       this.setState({ errors: {} });
-      axios.post('http://127.0.0.1:8000/group/', this.state)
+      axios.post('http://13.125.151.229:8000/group/', this.state)
         .then(
           (res) => {
             this.props.addFlashMessage({

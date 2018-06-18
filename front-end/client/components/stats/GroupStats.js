@@ -73,7 +73,7 @@ class GroupStats extends React.Component {
   }
 
   render() {
-
+    console.log(this.props.statsData);
     return (
       <div>
         { this.state.chartData != undefined
@@ -86,7 +86,7 @@ class GroupStats extends React.Component {
                   options={{
                     title:{
                       display: true,
-                      text: "In <"+this.props.statsData.group_name+">",
+                      text: this.props.statsData.yname + " stats in <"+this.props.statsData.group_name+">",
                       fontSize: 25
                     },
                     legend:{
@@ -103,7 +103,7 @@ class GroupStats extends React.Component {
                     }
                   }}
                 /><br/>
-                <h1>Your internet usage is {"top"} {this.props.statsData.percentage.toFixed(2)}%</h1><br/>
+                <h1>{this.props.statsData.yname} internet usage is {"top"} {this.props.statsData.percentage.toFixed(2)}%</h1><br/>
               </div>
             )
           : (

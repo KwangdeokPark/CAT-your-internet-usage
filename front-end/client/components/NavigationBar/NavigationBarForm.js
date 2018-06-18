@@ -36,7 +36,7 @@ class NavigationBarForm extends React.Component {
   }
 
   getSetting() {
-    const settingUrl = 'http://127.0.0.1:8000/setting/';
+    const settingUrl = 'http://13.125.151.229:8000/setting/';
     const Id = localStorage.getItem('id');
     let url = `${settingUrl}${Id}/`;
     axios.get(url).then(res => this.setState({
@@ -225,10 +225,10 @@ class NavigationBarForm extends React.Component {
 
           <div className="collapse navbar-collapse">
             {
-              window.location.href == 'http://localhost:3000/group' ?  groupLinks :
-              window.location.href == 'http://localhost:3000/group/join' ?  groupJoinLinks :
-              window.location.href == 'http://localhost:3000/group/create' ?  groupCreateLinks :
-              window.location.href == 'http://localhost:3000/group/detail/' ?  groupDetailLinks :
+              window.location.href == 'http://13.125.151.229:3000/group' ?  groupLinks :
+              window.location.href == 'http://13.125.151.229:3000/group/join' ?  groupJoinLinks :
+              window.location.href == 'http://13.125.151.229:3000/group/create' ?  groupCreateLinks :
+              window.location.href == 'http://13.125.151.229:3000/group/detail/' ?  groupDetailLinks :
               this.isLogin(this.props) ?  userLinks : guestLinks
             }
           </div>

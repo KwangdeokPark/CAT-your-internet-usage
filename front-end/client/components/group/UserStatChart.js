@@ -14,7 +14,7 @@ class UserStatChart extends React.Component{
     }
 
   componentWillMount() {
-    const groupUrl = 'http://127.0.0.1:8000/group/';
+    const groupUrl = 'http://13.125.151.229:8000/group/';
     const groupId = localStorage.getItem('groupId');
 
     let url1 = `${groupUrl}${groupId}/`;
@@ -26,7 +26,7 @@ class UserStatChart extends React.Component{
          .catch(err => console.log(err));
 
 
-    const timelineUrl = 'http://127.0.0.1:8000/timeline/';
+    const timelineUrl = 'http://13.125.151.229:8000/timeline/';
     const userId = localStorage.getItem('id');
     const group = '/group/';
 
@@ -34,8 +34,10 @@ class UserStatChart extends React.Component{
     axios.get(url2)
          .then(res =>
            {
+            let cdata = res.data;
+            cdata.yname = "Your";
             this.setState({
-              chartData: res.data
+              chartData: cdata
             })
           })
          .catch(err => console.log(err))

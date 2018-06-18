@@ -42,7 +42,7 @@ class SettingsEdit extends React.Component{
       console.log(this.state.alertStartTime);
       console.log(this.state.alertInterval);
       this.setState({ errors: {}, isLoading:true });
-      const settingurl = 'http://127.0.0.1:8000/setting/';
+      const settingurl = 'http://13.125.151.229:8000/setting/';
       const userId = localStorage.getItem('id');
       let url = `${settingurl}${userId}/`;
       axios.put(url, this.state).then(res => {

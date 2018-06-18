@@ -16,7 +16,7 @@ class GroupJoinPage extends React.Component {
 }
 
   componentWillMount() {
-    const url = 'http://127.0.0.1:8000/group/'
+    const url = 'http://13.125.151.229:8000/group/'
     axios.get(url)
          .then(response =>{
            //console.log(response.data);
@@ -28,7 +28,7 @@ class GroupJoinPage extends React.Component {
 
   onClickButton(group){
     //add user to the group
-    const url='http://127.0.0.1:8000/group/';
+    const url='http://13.125.151.229:8000/group/';
     const groupId= group.id;
 
     const groupUrl = `${url}${groupId}/`
