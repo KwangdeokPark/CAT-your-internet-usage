@@ -21,8 +21,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cat/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1871">
-              <caret line="134" column="39" lean-forward="true" selection-start-line="134" selection-start-column="39" selection-end-line="134" selection-end-column="39" />
+            <state relative-caret-position="2752">
+              <caret line="240" column="77" selection-start-line="240" selection-start-column="77" selection-end-line="240" selection-end-column="77" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -311,7 +311,7 @@
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32975295" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22234157" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32975295" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.34676564" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19830328" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -469,8 +469,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cat/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1871">
-          <caret line="134" column="39" lean-forward="true" selection-start-line="134" selection-start-column="39" selection-end-line="134" selection-end-column="39" />
+        <state relative-caret-position="2752">
+          <caret line="240" column="77" selection-start-line="240" selection-start-column="77" selection-end-line="240" selection-end-column="77" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
