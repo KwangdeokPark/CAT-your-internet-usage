@@ -9,7 +9,8 @@ class NavigationBarForm extends React.Component {
 
     this.state = {
       notTime: new Date(),
-      alert_start_time: 0
+      alert_start_time: 0,
+      alert_interval: 0
     }
   }
 
@@ -34,13 +35,25 @@ class NavigationBarForm extends React.Component {
     }
   }
 
-  componentWillMount() {
+  getSetting() {
     const settingUrl = 'http://127.0.0.1:8000/setting/';
     const Id = localStorage.getItem('id');
     let url = `${settingUrl}${Id}/`;
     axios.get(url).then(res => this.setState({
-      alert_start_time: res.data.alert_start_time
+      alert_start_time: res.data.alert_start_time,
+      alert_interval: res.data.alert_interval
     }));
+  }
+
+  timeString(dt) {
+    let ht = Math.floor(dt/3600000);
+    let mt = (Math.floor(dt/60000))%60;
+    let st = (Math.floor(dt/1000))%60;
+    return ht + "h " + mt + "m " + st + "s"
+  }
+
+  componentWillMount() {
+    this.getSetting();
   }
 
   componentDidMount() {
@@ -50,6 +63,20 @@ class NavigationBarForm extends React.Component {
     this.interval = setInterval(() => {
       if(this.isLogin(this.props)) {
         this.setState({nowTime: new Date()});
+        if(this.state.alert_start_time != 0 && this.state.alert_intervel != 0)
+        {
+          let nt = new Date();
+          let dt = nt - (new Date(this.props.stateUser.user.now_start_time)) + 100;
+          if(dt >= (this.state.alert_start_time))
+          {
+            let sdt = dt;
+            dt -= (this.state.alert_start_time);
+            while(dt > (this.state.alert_interval)) dt -= (this.state.alert_interval);
+            if(dt < 510) {
+              alert("you use internet for "+this.timeString(sdt));
+            }
+          }
+        }
         this.props.onPutLast(this.props.stateUser.user.id, this.props.stateUser.user.today_spent_time, (new Date()).toISOString(), (new Date(this.props.stateUser.user.now_start_time)).toISOString(), false);
       }
     }, 500);
@@ -57,7 +84,8 @@ class NavigationBarForm extends React.Component {
 
   componentWillUpdate(nextProps, nextState) {
     if((!(this.isLogin(this.props))) && (this.isLogin(nextProps))) {
-      this.checkRecord(nextProps)
+      this.checkRecord(nextProps);
+      this.getSetting();
     }
     else if(this.isLogin(nextProps))
     {
@@ -190,7 +218,7 @@ class NavigationBarForm extends React.Component {
 
     return (
       <nav className="navbar navbar-default">
-        <div style={{backgroundColor: this.colorString(bCol)}}className="container-fluid">
+        <div style={{backgroundColor: this.colorString(bCol)}} className="container-fluid">
           <div className="navbar-header">
             <Link to="/main" className="navbar-brand">CAT</Link>
           </div>

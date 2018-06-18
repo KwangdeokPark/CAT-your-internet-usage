@@ -70,7 +70,7 @@ class NowTimeForm extends React.Component {
         <div>
           { this.isLogin(this.props)
             ? (
-                <div>
+                <div style={{border: '4px solid #777', margin: '20px', padding: '20px', textAlign: 'center'}} >
                   <h1>Hi, {this.props.stateUser.user.username}</h1><br/>
                   <h1>You now use {this.timeString(dt)}</h1><br/>
                   <h1>You today use {this.timeString(dt + tt)}</h1><br/>
