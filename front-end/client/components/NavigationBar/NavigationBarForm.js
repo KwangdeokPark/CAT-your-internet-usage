@@ -17,6 +17,7 @@ class NavigationBarForm extends React.Component {
   logout(e){
     e.preventDefault();
     this.props.onLogout();
+    window.location.href="http://13.125.151.229:3000/sign_in";
   }
 
   isLogin(prop) {
