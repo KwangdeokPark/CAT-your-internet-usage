@@ -5,10 +5,10 @@ import axios from 'axios';
 import { SET_CURRENT_USER, LOGOUT, NOTHING } from './types';
 import { SET_CURRENT_USER_SETTING } from './types';
 
-const signinUrl = 'http://127.0.0.1:8000/sign_in/'
-const userUrl = 'http://127.0.0.1:8000/users/'
-const settingUrl = 'http://127.0.0.1:8000/settings/'
-const timelineUrl = 'http://127.0.0.1:8000/timeline/'
+const signinUrl = 'http://13.125.151.229:8000/sign_in/'
+const userUrl = 'http://13.125.151.229:8000/users/'
+const settingUrl = 'http://13.125.151.229:8000/settings/'
+const timelineUrl = 'http://13.125.151.229:8000/timeline/'
 
 export function setCurrentUser(user){
   return {

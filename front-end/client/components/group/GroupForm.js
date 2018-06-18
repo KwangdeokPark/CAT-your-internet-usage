@@ -21,7 +21,7 @@ class GroupForm extends React.Component {
 }
 
   componentWillMount() {
-    const userUrl = 'http://127.0.0.1:8000/users_group/'
+    const userUrl = 'http://13.125.151.229:8000/users_group/'
     const id = localStorage.getItem('id')
     let url = `${userUrl}${id}/`
     axios.get(url)

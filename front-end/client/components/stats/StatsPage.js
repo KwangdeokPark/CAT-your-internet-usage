@@ -40,8 +40,8 @@ class StatsPage extends React.Component{
 
   
   componentWillMount() {
-    const timelineUrl = 'http://127.0.0.1:8000/timeline/';
-    const userGroupUrl = 'http://127.0.0.1:8000/users_group/';
+    const timelineUrl = 'http://13.125.151.229:8000/timeline/';
+    const userGroupUrl = 'http://13.125.151.229:8000/users_group/';
     const Id = localStorage.getItem('id');
     let url = `${timelineUrl}${Id}/`;
     let hourMs = 3600000;
@@ -84,7 +84,9 @@ class StatsPage extends React.Component{
       for(i=0;i<groups.length;i++) {
         url = `${timelineUrl}${Id}/group/${groups[i].id}/`
         axios.get(url).then(res =>{
-          groupStats.push(res.data);
+          let cdata = res.data;
+          cdata.yname = "Your"
+          groupStats.push(cdata);
         }).then(res =>this.setState({
           groupStatsData: groupStats
         }));

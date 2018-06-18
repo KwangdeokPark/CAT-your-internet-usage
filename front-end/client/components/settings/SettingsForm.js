@@ -23,7 +23,7 @@ class SettingsForm extends React.Component{
   }
 
   componentWillMount() {
-    axios.post('http://127.0.0.1:8000/users/',this.state)
+    axios.post('http://13.125.151.229:8000/users/',this.state)
          .then(response => this.setState({
            alert_start_time: response.data.setting.alert_start_time/3600000,
            alert_interval: response.data.setting.alert_interval/60000

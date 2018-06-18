@@ -181,7 +181,23 @@ def timeline_detail(request, user_id, group_id):
         all_user = list(group.members.order_by('timeline__total_average'))
         min_time = all_user[0].timeline.total_average
         max_time = all_user[-1].timeline.total_average
-        step = (max_time - min_time) / 10
+        step = float(max_time - min_time) / 10
+        if step == 0:
+            return Response({'group_name': group.name,
+                             'percentage': 0,
+                             'max': max_time,
+                             'min': 0,
+                             'user_bin': 10,
+                             'bin1': 0,
+                             'bin2': 0,
+                             'bin3': 0,
+                             'bin4': 0,
+                             'bin5': 0,
+                             'bin6': 0,
+                             'bin7': 0,
+                             'bin8': 0,
+                             'bin9': 0,
+                             'bin10': 1}, status=200)
         percent = (1 - (all_user.index(catuser) / len(all_user))) * 100
 
         stats = [0] * 11
