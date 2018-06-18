@@ -78,7 +78,7 @@ class GroupStats extends React.Component {
       <div>
         { this.state.chartData != undefined
           ? (
-              <div style={{border: '4px solid #777', margin: '20px', padding: '20px', backgroundColor: "#DAEDFB"}}>
+              <div style={{border: '4px solid #777', margin: '20px', padding: '20px', backgroundColor: "#D6E6C3"}}>
                 <Bar
                   data = {this.state.chartData}
                   width={50}

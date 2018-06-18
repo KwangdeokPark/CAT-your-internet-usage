@@ -60,7 +60,7 @@ class GroupJoinPage extends React.Component {
     return (
       <form>
       <h1>Join a group!</h1>
-      <div style={{border: '4px solid #777', padding: '10px', backgroundColor: "#EE8F67"}} >
+      <div style={{border: '4px solid #777', margin: '20px', padding: '20px', backgroundColor: "#CDCFB7"}} >
       <ul >
         { this.state.groups.map((group )=>{
           //console.log(group.id);

@@ -98,7 +98,7 @@ class StatsPage extends React.Component{
 
     return (
       <div>
-        <div style={{border: '4px solid #777', margin: '20px', padding: '20px' , backgroundColor: "#DAFBF8"}} className = "chart">
+        <div style={{border: '4px solid #777', margin: '20px', padding: '20px' , backgroundColor: "#E9FFE1"}} className = "chart">
           <Bar
             data={this.state.chartData}
             options={{
