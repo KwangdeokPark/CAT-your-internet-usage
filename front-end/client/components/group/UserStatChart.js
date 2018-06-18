@@ -48,7 +48,7 @@ class UserStatChart extends React.Component{
           { this.state.chartData != undefined
             ? (
               <div>
-                <div style={{border: '4px solid #777', margin: '20px', padding: '20px'}} >
+                <div style={{border: '4px solid #777', margin: '20px', padding: '20px', backgroundColor: "#DADDFB"}} >
                   <h1>Members ({this.state.members.length})</h1>
                   {this.state.members.map((member) => <p key={member}>- {member}</p> )}
                 </div>

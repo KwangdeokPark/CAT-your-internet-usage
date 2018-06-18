@@ -58,6 +58,7 @@ class SettingsEdit extends React.Component{
     const { errors }=this.state;
     return(
       <form onSubmit={this.onSubmit}>
+      <div style={{border: '4px solid #777', margin: '1px', padding: '1px',width:'1000', height:'500', backgroundColor: "#F8DAFB"}} >
         <h1>Edit Settings</h1>
 
         <div className={classnames("form-group", {'has-error':errors.alert_start_time})}>
@@ -95,6 +96,7 @@ class SettingsEdit extends React.Component{
             Submit
           </button>
         </div>
+      </div>
       </form>
     );
   }

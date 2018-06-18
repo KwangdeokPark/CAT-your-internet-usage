@@ -8,7 +8,7 @@ class GroupStats extends React.Component {
       chartData: undefined
     }
   }
-    
+
   componentWillMount() {
     let hourMs = 3600000;
     let minn = this.props.statsData.min / hourMs;
@@ -20,9 +20,9 @@ class GroupStats extends React.Component {
     else if(maxx < 10) fn = 2;
     else if(maxx < 100) fn = 1;
     else fn = 0;
-    
+
     let newData = {
-      labels: [ 
+      labels: [
         '~'+`${(minn + interv*1).toFixed(fn)}`+'h',
         '~'+`${(minn + interv*2).toFixed(fn)}`+'h',
         '~'+`${(minn + interv*3).toFixed(fn)}`+'h',
@@ -78,7 +78,7 @@ class GroupStats extends React.Component {
       <div>
         { this.state.chartData != undefined
           ? (
-              <div style={{border: '4px solid #777', margin: '20px', padding: '20px'}}>
+              <div style={{border: '4px solid #777', margin: '20px', padding: '20px', backgroundColor: "#DAEDFB"}}>
                 <Bar
                   data = {this.state.chartData}
                   width={50}
