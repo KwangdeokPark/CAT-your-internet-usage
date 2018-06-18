@@ -44,7 +44,7 @@ class SettingsForm extends React.Component{
 
     return(
       <form>
-      <div style={{border: '4px solid #777', margin: '1px', padding: '1px',width:'1000', height:'500', backgroundColor: "#E8DAFB"}} >
+      <div style={{border: '4px solid #777', margin: '1px', padding: '1px',backgroundColor: "#E8DAFB", textAlign: 'center'}} >
         <h1>Current Settings</h1>
 
         <div >

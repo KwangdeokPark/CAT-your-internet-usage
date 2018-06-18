@@ -48,7 +48,7 @@ class GroupForm extends React.Component {
       <div>
       <h1>Your Group List</h1>
 
-      <div style={{border: '4px solid #777', height:'1000',width:'1000', padding: '10px', backgroundColor: "#E8DAFB"}} >
+      <div style={{border: '4px solid #777', padding: '10px', backgroundColor: "#E8DAFB"}} >
       <ul >
         { this.state.groups.map((group )=>{
           //console.log(group.id);
