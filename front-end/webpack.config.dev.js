@@ -25,7 +25,11 @@ export default{
           path.join(__dirname, 'server/shared')
         ],
         loaders:[ 'react-hot','babel' ]
-      }
+      },
+      {
+        test: /\.(gif|svg|jpg|png)$/,
+        loader: "file-loader",
+      },
     ]
   },
   resolve: {

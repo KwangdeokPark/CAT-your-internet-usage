@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import axios from 'axios';
 
+import cat from './cat.png';
+
 
 class NavigationBarForm extends React.Component {
   constructor(props) {
@@ -220,7 +222,7 @@ class NavigationBarForm extends React.Component {
       <nav className="navbar navbar-default">
         <div style={{backgroundColor: this.colorString(bCol)}} className="container-fluid">
           <div className="navbar-header">
-            <Link to="/main" className="navbar-brand">CAT</Link>
+            <Link to="/" className="navbar-brand"><img src={cat} alt="cat" width="100" height="50" /></Link>
           </div>
 
           <div className="collapse navbar-collapse">

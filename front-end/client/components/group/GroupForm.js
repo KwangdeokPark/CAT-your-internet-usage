@@ -2,6 +2,14 @@ import React from 'react';
 import axios from 'axios';
 
 import {Router, browserHistory} from 'react-router';
+/*
+import styled from 'styled-components';
+
+const button = styled.button`
+  background: red;
+  border-radius: 8px;
+  color: white;
+`;*/
 
 class GroupForm extends React.Component {
   constructor(props) {
@@ -35,15 +43,17 @@ class GroupForm extends React.Component {
 
   render() {
     //var thisGroup = this.state.groups.map(group =>
-    return (
+    return (      
       <form>
       <h1>Your Group List</h1>
+      <div style={{border: '4px solid #777', height:'1000',width:'1000', padding: '10px', backgroundColor: "#EE8F67"}} >
       <ul >
         { this.state.groups.map((group )=>{
           //console.log(group.id);
           return <div key={group.id}><button key={group.id} onClick={() =>this.onClickButton(group)}>{group.name}</button></div>
         })}
       </ul>
+      </div>
       </form>
     );
   }

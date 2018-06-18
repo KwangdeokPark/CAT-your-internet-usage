@@ -3,7 +3,6 @@ import {Bar, Line, Pie} from 'react-chartjs-2';
 import axios from 'axios';
 import GroupStats from '../stats/GroupStats';
 
-
 class UserStatChart extends React.Component{
   constructor(props){
     super(props);

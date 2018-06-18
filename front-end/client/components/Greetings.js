@@ -1,10 +1,14 @@
 import React from 'react';
+import main from './main.png'
+
 
 class Greetings extends React.Component{
   render() {
     return (
       <div className = "jumbotron">
-        <h1> Hi</h1>
+        <ul>
+        <img src={main} alt="main" width="1000" height="1500" />
+        </ul>
       </div>
     );
   }

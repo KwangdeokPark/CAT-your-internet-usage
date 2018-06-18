@@ -60,12 +60,14 @@ class GroupJoinPage extends React.Component {
     return (
       <form>
       <h1>Join a group!</h1>
+      <div style={{border: '4px solid #777', height:'1000',width:'1000', padding: '10px', backgroundColor: "#EE8F67"}} >
       <ul >
         { this.state.groups.map((group )=>{
           //console.log(group.id);
           return <div key={group.id}><button key= {group.id} onClick={() =>this.onClickButton(group)}>{group.name}</button></div>
         })}
       </ul>
+      </div>
       </form>
     );
   }
