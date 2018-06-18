@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import axios from 'axios';
 
 import cat from './cat.png';
+import back from './back.png';
 
 
 class NavigationBarForm extends React.Component {
@@ -203,19 +204,19 @@ class NavigationBarForm extends React.Component {
 
     const groupJoinLinks = (
       <ul className="nav navbar-nav navbar-right">
-        <li><Link to="/group" >Back</Link></li>
+        <li><Link to="/group" ><img src={back} alt="back" width="100" height="50" /></Link></li>
       </ul>
     );
 
     const groupCreateLinks = (
       <ul className="nav navbar-nav navbar-right">
-        <li><Link to="/group" >Back</Link></li>
+        <li><Link to="/group" ><img src={back} alt="back" width="100" height="50" /></Link></li>
       </ul>
     );
 
     const groupDetailLinks = (
       <ul className="nav navbar-nav navbar-right">
-        <li><Link to="/group" >Back</Link></li>
+        <li><Link to="/group" ><img src={back} alt="back" width="100" height="50" /></Link></li>
       </ul>
     );
 
